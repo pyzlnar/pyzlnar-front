@@ -1,0 +1,9 @@
+{
+  "name": "pyzlnar",
+  "version": "1.0.0",
+  "description": "pyzlnar.com front end",
+  "main": "index.js",
+  "repository": "git@gitlab.com:pyzlnar/pyzlnar-front.git",
+  "author": "pyzlnar@Monochrome <pyzlnar@gmail.com>",
+  "license": "MIT"
+}
