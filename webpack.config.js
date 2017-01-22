@@ -10,6 +10,7 @@ const TARGET    = process.env.npm_lifecycle_event;
 // Env configs
 const getCommon = require('./build/getWebpackCommon');
 const getDevServerConfig = require('./build/getDevServerConfig');
+const css = require('./build/css')
 
 var config;
 switch(TARGET) {
@@ -38,6 +39,7 @@ function getDevConfig() {
       hot: true
     },
   },
+  css(false),
   getDevServerConfig(PORT)
   );
 }
