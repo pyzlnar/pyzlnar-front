@@ -1,0 +1,26 @@
+.c-header {
+  background: $secondary-color;
+  padding: 0.5rem;
+  border-top:   solid 1px $black;
+  border-left:  solid 1px $black;
+  border-right: solid 1px $black;
+  border-radius: 4px;
+}
+
+.c-header__logo {
+  max-height: 100px;
+}
+
+.c-header__body {
+  padding-top: 1rem;
+}
+
+.c-header__title {
+  display: block;
+  font-size: x-large;
+}
+
+.c-header__subtitle {
+  display: block;
+  color: $primary-light-color;
+}

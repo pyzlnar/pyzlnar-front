@@ -4,7 +4,7 @@ const validate = require('webpack-validator');
 
 // ENV variables
 const localhost = 'http://127.0.0.1';
-const PORT      = 8080
+const PORT      = 8080;
 const TARGET    = process.env.npm_lifecycle_event;
 
 // Env configs
@@ -40,7 +40,7 @@ function getDevConfig() {
     },
   },
   css(false),
-  getDevServerConfig(PORT)
+  getDevServerConfig(localhost, PORT)
   );
 }
 
