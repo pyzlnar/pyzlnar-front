@@ -6,7 +6,7 @@ module.exports = function() {
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'html/index.html',
-        template: path.join(__dirname, '../src', 'index.hbs')
+        template: path.join(__dirname, '../src', 'index.html')
       })
     ]
   }
