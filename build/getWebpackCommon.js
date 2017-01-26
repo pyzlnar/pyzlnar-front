@@ -33,21 +33,8 @@ module.exports = function() {
           test: /\.json$/,
           exclude: /(node_modules)/,
           loader: 'json'
-        },
-
-        {
-          test: /\.(handlebars|hbs)$/,
-          exclude: /(node_modules)/,
-          loader: 'handlebars-loader',
-          query: { helperDirs: path.resolve(__dirname, 'handlebars') }
         }
       ]
-    },
-    resolve: {
-      alias: {
-        // https://github.com/wycats/handlebars.js/issues/953
-        'handlebars': 'handlebars/runtime.js'
-      }
     },
     stats: {
       assets:   true,
