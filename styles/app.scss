@@ -85,25 +85,25 @@
 // OBJECTS
 //
 // Uncomment and add to this section as necessary.
-@import "~inuitcss/objects/objects.block";
+@import "~inuitcss/objects/objects.list-inline";
 @import "~inuitcss/objects/objects.media";
 
-
-//@import "~inuitcss/objects/objects.wrapper";
-//@import "~inuitcss/objects/objects.layout";
-//@import "~inuitcss/objects/objects.flag";
-//@import "~inuitcss/objects/objects.list-bare";
-//@import "~inuitcss/objects/objects.list-inline";
+//@import "~inuitcss/objects/objects.block";
 //@import "~inuitcss/objects/objects.box";
-//@import "~inuitcss/objects/objects.ratio";
 //@import "~inuitcss/objects/objects.crop";
-//@import "~inuitcss/objects/objects.tables";
+//@import "~inuitcss/objects/objects.flag";
+//@import "~inuitcss/objects/objects.layout";
+//@import "~inuitcss/objects/objects.list-bare";
 //@import "~inuitcss/objects/objects.pack";
+//@import "~inuitcss/objects/objects.ratio";
+//@import "~inuitcss/objects/objects.tables";
+//@import "~inuitcss/objects/objects.wrapper";
 
 // COMPONENTS
 //
 // Build and include your project’s UI Compoments here.
 @import "06-components/components.header";
+@import "06-components/components.navbar";
 
 // UTILITIES
 @import "~inuitcss/utilities/utilities.clearfix";

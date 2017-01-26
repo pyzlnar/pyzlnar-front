@@ -10,7 +10,6 @@ export class Header extends React.Component {
           <span className="c-header__subtitle">Systems engineer, Anime junkie, Dedicated gamer</span>
         </div>
       </div>
-      // TODO Add navbar
     );
   }
 }
