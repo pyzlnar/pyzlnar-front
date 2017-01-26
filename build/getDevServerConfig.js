@@ -1,6 +1,6 @@
 const API_PORT = 3000;
 
-module.exports = function(PORT, localhost) {
+module.exports = function(localhost, PORT) {
   return {
     devServer: {
       port: PORT,
@@ -9,6 +9,14 @@ module.exports = function(PORT, localhost) {
         index: '/html'
       },
       inline: true,
+      proxy: {
+        '/static/img/*': {
+          target: `${localhost}:${PORT}`,
+          pathRewrite: {
+            '/static/img/': 'images/'
+          }
+        }
+      }
     }
   }
 }
