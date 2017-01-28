@@ -2,7 +2,8 @@ const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
-module.exports = function(isProd) {
+// Helps load the CSS correctly, extract it into a separate file when building
+module.exports = function(isBuild) {
   const baseCss = {
     postcss: (webpack) => {
       return {
@@ -15,7 +16,10 @@ module.exports = function(isProd) {
     }
   }
 
-  const prodCss = {
+  const buildCss = {
+    plugins: [
+      new ExtractTextPlugin(`css/[name].[chunkhash].css`)
+    ],
     module: {
       loaders: [
         {
@@ -37,5 +41,5 @@ module.exports = function(isProd) {
     }
   }
 
-  return merge(baseCss, isProd ? prodCss : devCss)
+  return merge(baseCss, isBuild ? buildCss : devCss)
 }
