@@ -1,2 +1,48 @@
+// Asciidoctor Source
+// Pyzlnar Front README
+//
+// Original author:
+// - Pyzlnar
+//
+// Notes:
+//  Compile with: $ asciidoctor README.adoc
+
 = Pyzlnar Front
-Front end for pyzlnar.com
+[Front end for pyzlnar.com]
+:toc:
+:showtitle:
+
+== Introduction
+
+This the front end repo for link:https://pyzlnar.com[pyzlnar.com] +
+Currently the front end is running in React and Redux, written in ES6 using
+babel as a transpiler, and using inuit for the CSS.
+
+This indeed sounds very fancy, but the truth is that I'm not exactly a front end
+guy, so chaces are that you will find stuff that is very very dirty. Hell, even
+the design is kinda ugly.
+
+== Installation
+
+=== Requirements
+You will need the following installed to be able to run the front end:
+
+* node.js v5.4.1+ +
+  I recommend you install it via link:https://github.com/creationix/nvm[nvm].
+* yarn +
+  Installation instructions can be found
+  link:https://yarnpkg.com/en/docs/install[here].
+* pyzlnar-back +
+  [WIP] You'll need the backend to be running to be able to serve local
+  requests.
+
+=== Running
+
+[source, bash]
+----
+# This installs all the dependencies.
+$ yarn
+
+# This runs the webserver in localhost:8080
+$ yarn run dev
+----
