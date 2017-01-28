@@ -21,10 +21,10 @@ const uglify = require('./build/uglify');
 var config;
 switch(TARGET) {
   case 'build':
-    config = validate(getProdConfig());
+    config = validate(getBuildConfig());
     break;
   case 'dev:build':
-    config = validate(getDevBuild());
+    config = validate(getDevBuildConfig());
     break;
   default:
     config = validate(getDevConfig());
@@ -33,7 +33,8 @@ module.exports = config;
 
 // Config by ENV
 
-function getProdConfig() {
+// Builds the app, production ready
+function getBuildConfig() {
   return merge(getCommon(), {
     entry: [
       'babel-polyfill',
@@ -61,9 +62,25 @@ function getProdConfig() {
   );
 }
 
-function getDevBuild() {
+// Builds the app, serves it locally
+function getDevBuildConfig() {
+  return merge(getCommon(), {
+    entry: [
+      'babel-polyfill',
+      path.join(__dirname, 'src', 'index.js')
+    ],
+    output: {
+      path: 'static',
+      publicPath: '/'
+    }
+  },
+  getDevServerConfig(localhost, PORT),
+  css(isBuild = true),
+  uglify()
+  );
 }
 
+// Serves the app locally, hot serves so changes are applied automatically
 function getDevConfig() {
   return merge(getCommon(), {
     entry: [
@@ -82,8 +99,8 @@ function getDevConfig() {
       hot: true
     },
   },
-  css(isBuild = false),
-  getDevServerConfig(localhost, PORT)
+  getDevServerConfig(localhost, PORT),
+  css(isBuild = false)
   );
 }
 
