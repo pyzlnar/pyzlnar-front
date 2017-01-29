@@ -1,4 +1,5 @@
-const path = require('path');
+const path     = require('path');
+const webpack  = require('webpack');
 const merge    = require('webpack-merge');
 const validate = require('webpack-validator');
 
@@ -10,10 +11,21 @@ const TARGET    = process.env.npm_lifecycle_event;
 // Env configs
 const getCommon = require('./build/getWebpackCommon');
 const getDevServerConfig = require('./build/getDevServerConfig');
-const css = require('./build/css')
+
+// Helpers
+const clean  = require('./build/clean');
+const copy   = require('./build/copy');
+const css    = require('./build/css');
+const uglify = require('./build/uglify');
 
 var config;
 switch(TARGET) {
+  case 'build':
+    config = validate(getBuildConfig());
+    break;
+  case 'dev:build':
+    config = validate(getDevBuildConfig());
+    break;
   default:
     config = validate(getDevConfig());
 }
@@ -21,6 +33,54 @@ module.exports = config;
 
 // Config by ENV
 
+// Builds the app, production ready
+function getBuildConfig() {
+  return merge(getCommon(), {
+    entry: [
+      'babel-polyfill',
+      path.join(__dirname, 'src', 'index.js')
+    ],
+    output: {
+      path: 'static',
+      publicPath: 'static/'
+    },
+    devtool: 'cheap-module-source-map',
+    resolve: {
+      alias: {
+        'react': path.resolve(__dirname, 'node_modules', 'react', 'dist', 'react.js'),
+        'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom', 'dist', 'react-dom.js')
+      }
+    },
+    plugins: [
+      new webpack.optimize.DedupePlugin()
+    ]
+  },
+  css(isBuild = true),
+  uglify(),
+  copy(),
+  clean()
+  );
+}
+
+// Builds the app, serves it locally
+function getDevBuildConfig() {
+  return merge(getCommon(), {
+    entry: [
+      'babel-polyfill',
+      path.join(__dirname, 'src', 'index.js')
+    ],
+    output: {
+      path: 'static',
+      publicPath: '/'
+    }
+  },
+  getDevServerConfig(localhost, PORT),
+  css(isBuild = true),
+  uglify()
+  );
+}
+
+// Serves the app locally, hot serves so changes are applied automatically
 function getDevConfig() {
   return merge(getCommon(), {
     entry: [
@@ -39,8 +99,8 @@ function getDevConfig() {
       hot: true
     },
   },
-  css(false),
-  getDevServerConfig(localhost, PORT)
+  getDevServerConfig(localhost, PORT),
+  css(isBuild = false)
   );
 }
 
