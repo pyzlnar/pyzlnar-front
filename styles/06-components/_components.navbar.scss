@@ -1,26 +1,23 @@
 .c-navbar {
   margin-bottom: 0;
-  background: $secondary-color;
-  border-color: $black;
-  border-style: solid;
-  border-width: 0 1px;
-  padding: 0.3rem;
 }
 
 .c-navbar__container {
-  border: solid 1px $black;
+  border: solid 1px $white;
   width: 100%;
-  background: $primary-dark-color;
+  background: $primary-color;;
   border-radius: 3px;
 }
 
 .c-navbar__btn {
   padding: 0.4rem;
   cursor: pointer;
-  border-right: solid 1px $black;
+  border-right: solid 1px $white;
   user-select: none;
+  color: $tertiary-color;
 
   &:hover {
-    background: $primary-color;
+    background: $primary-light-color;
+    color: $white;
   }
 }
