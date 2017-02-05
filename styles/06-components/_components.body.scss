@@ -1,0 +1,8 @@
+.c-body {
+  @include mq($until: site) {
+    padding: 1rem 0.5rem;
+  }
+  @include mq($from: site) {
+    padding: 1rem 0;
+  }
+}

@@ -1,13 +1,17 @@
 import React from 'react';
+import { Navbar } from './Navbar'
 
 export class Header extends React.Component {
   render(){
     return (
-      <div className="c-header o-media">
-        <img src={'/static/img/logo.png'} className="c-header__logo o-media__img" />
-        <div className ="c-header__body o-media__body text--center">
-          <span className="c-header__title text--bold">Pyzlnar</span>
-          <span className="c-header__subtitle">Systems engineer, Anime junkie, Dedicated gamer</span>
+      <div className="c-header">
+        <div className="content">
+          <div className ="c-header__body text--center">
+            <img  className="c-header__logo" src={'/static/img/logo.png'} />
+            <span className="c-header__title text--bold">Pyzlnar</span>
+            <span className="c-header__subtitle">Systems engineer, Anime junkie, Dedicated gamer</span>
+          </div>
+          <Navbar />
         </div>
       </div>
     );

@@ -59,7 +59,8 @@
 // SETTINGS
 @import "01-settings/settings.config";
 @import "~inuitcss/settings/settings.core";
-@import "01-settings/settings.page";
+@import "01-settings/settings.colors";
+@import "01-settings/settings.media-queries";
 
 // TOOLS
 @import "~inuitcss/tools/tools.rem";
@@ -68,6 +69,7 @@
 @import "~inuitcss/tools/tools.hidden";
 @import "~sass-mq/mq";
 @import "02-tools/tools.text";
+@import "02-tools/tools.page";
 
 // GENERIC
 @import "~inuitcss/generic/generic.box-sizing";
@@ -86,7 +88,6 @@
 //
 // Uncomment and add to this section as necessary.
 @import "~inuitcss/objects/objects.list-inline";
-@import "~inuitcss/objects/objects.media";
 
 //@import "~inuitcss/objects/objects.block";
 //@import "~inuitcss/objects/objects.box";
@@ -94,6 +95,7 @@
 //@import "~inuitcss/objects/objects.flag";
 //@import "~inuitcss/objects/objects.layout";
 //@import "~inuitcss/objects/objects.list-bare";
+//@import "~inuitcss/objects/objects.media";
 //@import "~inuitcss/objects/objects.pack";
 //@import "~inuitcss/objects/objects.ratio";
 //@import "~inuitcss/objects/objects.tables";
@@ -104,6 +106,7 @@
 // Build and include your project’s UI Compoments here.
 @import "06-components/components.header";
 @import "06-components/components.navbar";
+@import "06-components/components.body";
 
 // UTILITIES
 @import "~inuitcss/utilities/utilities.clearfix";
