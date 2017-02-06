@@ -11,7 +11,8 @@ export const appRoutes = () => {
   return (
     <Route path="/" component={App}>
       <IndexRoute name='Home' component={Home} />
-      <Route name='NotFound' path="*" component={NotFound}/>
+      <Route name='Home'     path='/home' component={Home} />
+      <Route name='NotFound' path='*' component={NotFound} />
     </Route>
   );
 }
