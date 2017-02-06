@@ -6,4 +6,10 @@ import ReactDOM from 'react-dom';
 import { App } from './components/App';
 import './../styles/app.scss';
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+// Root render
+const rootRender = () => {
+  return (
+    <App/>
+  );
+}
+ReactDOM.render(rootRender(), document.getElementById('app'));
