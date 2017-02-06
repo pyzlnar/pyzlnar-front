@@ -10,8 +10,12 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-rou
 import { appRoutes } from './routes';
 import './../styles/app.scss';
 
+// Reducer Imports
+import navbarReducer from './reducers/navbar';
+
 // Reducers initialization
 const rootReducer = combineReducers({
+  navbar:  navbarReducer,
   routing: routerReducer
 });
 

@@ -1,19 +1,11 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { onClick, onMouseEnter, onMouseLeave } from './../action-creators/navbar';
 
 class Navbar extends React.Component {
-  onClick(path){
-    this.props.dispatch(push(path));
-  }
-
   render() {
-    const items = [
-      {name: 'Home', path: '/'},
-      {name: 'About', links: [{name: 'Me', path: '/about/me'}, {name: 'Pyzlnar', path: '/about/site'}]},
-      {name: 'Sites', path: '/sites'},
-      {name: 'Projects', path: '/projects'}
-    ]
+    const { items } = this.props;
     return(
       <ul className="o-list-inline c-navbar">
         <div className="c-navbar__container">
@@ -32,21 +24,34 @@ class Navbar extends React.Component {
   }
 
   renderMenu(menu){
+    const { onMouseEnter, onMouseLeave } = this.props;
     return (
-      <li key={menu.name} className="o-list-inline__item c-navbar__item c-navbar__item--menu">
+      <li
+        key={menu.name}
+        onMouseEnter={()=> onMouseEnter(menu.name)}
+        onMouseLeave={()=> onMouseLeave(menu.name)}
+        className="o-list-inline__item c-navbar__item c-navbar__item--menu"
+      >
         <div>{menu.name}</div>
-        <ul className="o-list-bare c-navbar__dropdown">
-          {menu.links.map(link => this.renderLink(link, 'c-navbar__dropdown__item'))}
-        </ul>
+        { menu.hover ? this.renderMenuDropdown(menu.links) : null }
       </li>
     )
   }
 
+  renderMenuDropdown(links) {
+    return (
+      <ul className="o-list-bare c-navbar__dropdown">
+        {links.map(link => this.renderLink(link, 'c-navbar__dropdown__item'))}
+      </ul>
+    );
+  }
+
   renderLink(link, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
+    const { onClick } = this.props;
     return (
       <li
         key={link.name}
-        onClick={() => this.onClick(link.path)}
+        onClick={() => onClick(link.path)}
         className={className}
       >
       {link.name}
@@ -55,4 +60,16 @@ class Navbar extends React.Component {
   }
 }
 
-export const NavbarContainer = connect()(Navbar);
+const mapStateToProps = (state) => {
+  return { items: state.navbar }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    onClick,
+    onMouseEnter,
+    onMouseLeave
+  }, dispatch);
+}
+
+export const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
