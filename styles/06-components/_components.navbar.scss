@@ -1,23 +1,48 @@
+$navbar__item-padding: 0.4rem;
 .c-navbar {
   margin-bottom: 0;
-}
 
-.c-navbar__container {
-  border: solid 1px $white;
-  width: 100%;
-  background: $primary-color;;
-  border-radius: 3px;
-}
+  &__container {
+    border: solid 1px $white;
+    width: 100%;
+    background: $primary-color;;
+    border-radius: 3px;
+  }
 
-.c-navbar__btn {
-  padding: 0.4rem;
-  cursor: pointer;
-  border-right: solid 1px $white;
-  user-select: none;
-  color: $tertiary-color;
+  &__item {
+    padding: $navbar__item-padding;
+    cursor: pointer;
+    border-right: solid 1px $white;
+    user-select: none;
+    color: $tertiary-color;
 
-  &:hover {
-    background: $primary-light-color;
-    color: $white;
+    &--clickable {
+      &:hover {
+        background: $primary-light-color;
+        color: $white;
+      }
+    }
+
+    &--menu {
+      position: relative;
+    }
+  }
+
+  &__dropdown {
+    margin-top: $navbar__item-padding;
+    background: $secondary-color;
+    border:     1px solid $tertiary-color;
+    left: 0;
+    position: absolute;
+    min-width: 100px;
+
+    &__item {
+      color: $white;
+      padding: $navbar__item-padding;
+
+      &:hover {
+        background: $secondary-light-color;
+      }
+    }
   }
 }

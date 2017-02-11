@@ -1,22 +1,27 @@
 // Core Imports
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 
 // Local Imports
 import { appRoutes } from './routes';
 import './../styles/app.scss';
 
+// Reducer Imports
+import navbarReducer from './reducers/navbar';
+
 // Reducers initialization
 const rootReducer = combineReducers({
+  navbar:  navbarReducer,
   routing: routerReducer
 });
 
 // Store creation
-const store = createStore(rootReducer);
+const middleware = routerMiddleware(browserHistory);
+const store = createStore(rootReducer, applyMiddleware(middleware));
 const history = syncHistoryWithStore(browserHistory, store);
 
 // Root render
