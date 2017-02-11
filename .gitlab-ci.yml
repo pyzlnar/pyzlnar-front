@@ -1,0 +1,17 @@
+# Docker image
+# https://hub.docker.com/r/kkarczmarczyk/node-yarn/tags/
+image: "kkarczmarczyk/node-yarn:latest"
+
+# This folder is cached between builds
+# # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+# Install any missing dependencies
+before_script:
+  - yarn
+
+test:
+  script:
+    - yarn test
