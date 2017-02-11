@@ -68,8 +68,6 @@
 @import "~inuitcss/tools/tools.clearfix";
 @import "~inuitcss/tools/tools.hidden";
 @import "~sass-mq/mq";
-@import "02-tools/tools.text";
-@import "02-tools/tools.page";
 
 // GENERIC
 @import "~inuitcss/generic/generic.box-sizing";
@@ -89,6 +87,8 @@
 // Uncomment and add to this section as necessary.
 @import "~inuitcss/objects/objects.list-bare";
 @import "~inuitcss/objects/objects.list-inline";
+@import "05-objects/objects.body";
+@import "05-objects/objects.content";
 
 //@import "~inuitcss/objects/objects.block";
 //@import "~inuitcss/objects/objects.box";
@@ -106,7 +106,6 @@
 // Build and include your project’s UI Compoments here.
 @import "06-components/components.header";
 @import "06-components/components.navbar";
-@import "06-components/components.body";
 
 // UTILITIES
 @import "~inuitcss/utilities/utilities.clearfix";
@@ -117,3 +116,4 @@ $inuit-offsets: true;
 @import "~inuitcss/utilities/utilities.spacing";
 @import "~inuitcss/utilities/utilities.print";
 @import "~inuitcss/utilities/utilities.hide";
+@import "07-utilities/utilities.text";

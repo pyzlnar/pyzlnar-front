@@ -6,8 +6,8 @@ export class App extends React.Component {
     return (
       <div>
         <Header />
-        <div className="content">
-          <div className="c-body">
+        <div className="o-content">
+          <div className="o-body">
             { this.props.children }
           </div>
         </div>
