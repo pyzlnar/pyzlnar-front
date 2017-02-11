@@ -6,7 +6,7 @@ const initialState = [
   {
     name: 'About',
     hover: false,
-    links: [
+    items: [
       {
         name: 'Me',
         path: '/about/me'

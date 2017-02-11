@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { onClick, onMouseEnter, onMouseLeave } from './../action-creators/navbar';
+import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from './../action-creators/navbar';
 
 class Navbar extends React.Component {
   render() {
@@ -16,45 +16,45 @@ class Navbar extends React.Component {
   }
 
   renderItems(item) {
-    if (item.links) {
+    if (item.items) {
       return this.renderMenu(item);
     } else {
-      return this.renderLink(item);
+      return this.renderItem(item);
     }
   }
 
   renderMenu(menu){
-    const { onMouseEnter, onMouseLeave } = this.props;
+    const { onMenuMouseEnter, onMenuMouseLeave } = this.props;
     return (
       <li
         key={menu.name}
-        onMouseEnter={()=> onMouseEnter(menu.name)}
-        onMouseLeave={()=> onMouseLeave(menu.name)}
+        onMouseEnter={()=> onMenuMouseEnter(menu.name)}
+        onMouseLeave={()=> onMenuMouseLeave(menu.name)}
         className="o-list-inline__item c-navbar__item c-navbar__item--menu"
       >
         <div>{menu.name}</div>
-        { menu.hover ? this.renderMenuDropdown(menu.links) : null }
+        { menu.hover ? this.renderMenuDropdown(menu.items) : null }
       </li>
     )
   }
 
-  renderMenuDropdown(links) {
+  renderMenuDropdown(items) {
     return (
       <ul className="o-list-bare c-navbar__dropdown">
-        {links.map(link => this.renderLink(link, 'c-navbar__dropdown__item'))}
+        {items.map(item => this.renderItem(item, 'c-navbar__dropdown__item'))}
       </ul>
     );
   }
 
-  renderLink(link, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
-    const { onClick } = this.props;
+  renderItem(item, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
+    const { onItemClick } = this.props;
     return (
       <li
-        key={link.name}
-        onClick={() => onClick(link.path)}
+        key={item.name}
+        onClick={() => onItemClick(item.path)}
         className={className}
       >
-      {link.name}
+      {item.name}
       </li>
     );
   }
@@ -66,9 +66,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    onClick,
-    onMouseEnter,
-    onMouseLeave
+    onItemClick,
+    onMenuMouseEnter,
+    onMenuMouseLeave
   }, dispatch);
 }
 
