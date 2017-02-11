@@ -1,38 +1,37 @@
 $logo-max-height: 120px;
 
 .c-header {
+  @include palette-dark;
   padding: 0.5rem;
   border-top:    5px solid $black;
   border-bottom: 1px solid $tertiary-color;
-  background: $secondary-color;
-  color: $white;
-}
 
-.c-header__body {
-  height: $logo-max-height;
-  @include mq($from: tablet) {
-    position: relative;
+  &__body {
+    height: $logo-max-height;
+    @include mq($from: tablet) {
+      position: relative;
+    }
   }
-}
 
-.c-header__logo {
-  max-height: $logo-max-height;
+  &__logo {
+    max-height: $logo-max-height;
 
-  @include mq($until: tablet) {
-    float: right;
+    @include mq($until: tablet) {
+      float: right;
+    }
+    @include mq($from: tablet) {
+      position: absolute;
+      right: 0;
+    }
   }
-  @include mq($from: tablet) {
-    position: absolute;
-    right: 0;
+
+  &__title {
+    padding-top: 1.2rem;
+    display: block;
+    font-size: x-large;
   }
-}
 
-.c-header__title {
-  padding-top: 1.2rem;
-  display: block;
-  font-size: x-large;
-}
-
-.c-header__subtitle {
-  display: block;
+  &__subtitle {
+    display: block;
+  }
 }
