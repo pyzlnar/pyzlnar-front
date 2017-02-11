@@ -1,4 +1,3 @@
 body {
-  background: $primary-color;
-  color: $tertiary-color;
+  @include palette-light;
 }
