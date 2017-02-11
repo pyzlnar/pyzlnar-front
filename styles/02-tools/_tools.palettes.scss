@@ -1,0 +1,11 @@
+// Palletes mixins for the more general themes
+
+@mixin palette-light {
+  background: $primary-color;
+  color:      $tertiary-color;
+}
+
+@mixin palette-dark {
+  background: $secondary-color;
+  color:      $white;
+}
