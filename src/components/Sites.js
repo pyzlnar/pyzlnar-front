@@ -77,9 +77,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    fetchSites
-  }, dispatch)
+  return bindActionCreators({ fetchSites }, dispatch)
 }
 
 export const SitesContainer = connect(mapStateToProps, mapDispatchToProps)(Sites)

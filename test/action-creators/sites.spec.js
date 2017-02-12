@@ -16,7 +16,7 @@ describe('ActionCreator: sites', () => {
   })
 
   describe('fetchSuccess(json)', () => {
-    it(`returns ${types.fetched} action with the recieved argument`, () => {
+    it(`returns ${types.fetched} action with the received argument`, () => {
       const arg = 'something'
       const expected = {
         type:  types.fetched,

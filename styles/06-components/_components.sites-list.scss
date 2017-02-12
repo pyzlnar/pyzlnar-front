@@ -1,12 +1,22 @@
 $sites-list-logo-size: 8rem;
 $sites-list-vspace: 0.3rem;
+$sites-list-border: 1px solid $tertiary-color;
 
 .c-sites-list {
-  border: 1px solid $tertiary-color;
+  border: $sites-list-border;
 
   &__selector {
-    border-bottom: 1px solid $tertiary-color;
+    border-bottom: $sites-list-border;
     margin-bottom: $sites-list-vspace;
+    text-align: right;
+
+    span {
+      padding: 0 0.2rem;
+      display: inline-block;
+      border-left: $sites-list-border;
+      cursor: pointer;
+      user-select: none;
+    }
   }
 
   &__item {

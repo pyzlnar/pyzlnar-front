@@ -13,14 +13,16 @@ import { appRoutes } from './routes'
 import './../styles/app.scss'
 
 // Reducer Imports
-import navbarReducer from './reducers/navbar'
-import sitesReducer  from './reducers/sites'
+import navbarReducer    from './reducers/navbar'
+import sitesReducer     from './reducers/sites'
+import sitesListReducer from './reducers/sitesList'
 
 // Reducers initialization
 const rootReducer = combineReducers({
-  navbar:  navbarReducer,
-  routing: routerReducer,
-  sites:   sitesReducer
+  navbar:    navbarReducer,
+  routing:   routerReducer,
+  sites:     sitesReducer,
+  sitesList: sitesListReducer
 })
 
 // Store creation
