@@ -1,9 +1,10 @@
 import React from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchSites } from './../api/sites';
+import { fetchSites } from '../api/sites';
+import { SitesListContainer } from './SitesList'
 
-export class Sites extends React.Component {
+class Sites extends React.Component {
   componentDidMount() {
     this.props.fetchSites()
   }
@@ -13,11 +14,15 @@ export class Sites extends React.Component {
     return !isFetching && sites.length !== 0
   }
 
+  shouldRenderError() {
+    return this.props.sites.fetchFailed
+  }
+
   render() {
     return (
       <div>
         { this.renderIntro() }
-        { this.shouldRenderSites() ? this.renderSites() : this.renderLoading() }
+        { this.renderBody()  }
       </div>
     )
   }
@@ -34,17 +39,27 @@ export class Sites extends React.Component {
     )
   }
 
+  renderBody() {
+    if (this.shouldRenderSites()) {
+      return this.renderSites()
+    } else if (this.shouldRenderError()) {
+      return this.renderError()
+    } else {
+      return this.renderLoading()
+    }
+  }
+
+  renderError() {
+    return <h3> Error! </h3>
+  }
+
   renderLoading() {
     return <h3>Loading...</h3>
   }
 
   renderSites() {
-    const { sites } = this.props.sites
-    return (
-      <ul>
-        { sites.map(site => this.renderSite(site)) }
-      </ul>
-    )
+    const sites = this.props.sites.sites
+    return <SitesListContainer sites={sites} />
   }
 
   renderSite(site) {

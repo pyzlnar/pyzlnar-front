@@ -1,0 +1,21 @@
+$sites-list-logo-size: 8rem;
+$sites-list-vspace: 0.3rem;
+
+.c-sites-list {
+  border: 1px solid $tertiary-color;
+
+  &__selector {
+    border-bottom: 1px solid $tertiary-color;
+    margin-bottom: $sites-list-vspace;
+  }
+
+  &__item {
+    img {
+      display: block;
+      margin: auto;
+      margin-bottom: $sites-list-vspace;
+      height: $sites-list-logo-size;
+      width:  $sites-list-logo-size;
+    }
+  }
+}
