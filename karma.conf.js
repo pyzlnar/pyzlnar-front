@@ -45,6 +45,8 @@ module.exports = (config) => {
     },
     browsers: ['PhantomJS'],
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
+      'node_modules/sinon-stub-promise/index.js',
       'test/**/*.spec.js'
     ],
     webpack: webpackConfig,

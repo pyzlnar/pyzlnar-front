@@ -1,28 +1,37 @@
 // Core Imports
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 // Local Imports
-import { appRoutes } from './routes';
-import './../styles/app.scss';
+import { appRoutes } from './routes'
+import './../styles/app.scss'
 
 // Reducer Imports
-import navbarReducer from './reducers/navbar';
+import navbarReducer from './reducers/navbar'
+import sitesReducer  from './reducers/sites'
 
 // Reducers initialization
 const rootReducer = combineReducers({
   navbar:  navbarReducer,
-  routing: routerReducer
-});
+  routing: routerReducer,
+  sites:   sitesReducer
+})
 
 // Store creation
-const middleware = routerMiddleware(browserHistory);
-const store = createStore(rootReducer, applyMiddleware(middleware));
-const history = syncHistoryWithStore(browserHistory, store);
+const loggerMiddleware = createLogger()
+const middleware = [
+  routerMiddleware(browserHistory),
+  thunkMiddleware,
+  loggerMiddleware
+]
+const store = createStore(rootReducer, applyMiddleware(...middleware))
+const history = syncHistoryWithStore(browserHistory, store)
 
 // Root render
 const rootRender = () => {
@@ -32,6 +41,6 @@ const rootRender = () => {
         { appRoutes() }
       </Router>
     </Provider>
-  );
+  )
 }
-ReactDOM.render(rootRender(), document.getElementById('app'));
+ReactDOM.render(rootRender(), document.getElementById('app'))

@@ -3,16 +3,18 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router'
 
 // Pages
-import { App }      from './components/App';
-import { Home }     from './components/Home';
-import { NotFound } from './components/NotFound';
+import { App }            from './components/App';
+import { Home }           from './components/Home';
+import { SitesContainer } from './components/Sites';
+import { NotFound }       from './components/NotFound';
 
 export const appRoutes = () => {
   return (
-    <Route path="/" component={App}>
-      <IndexRoute name='Home' component={Home} />
-      <Route name='Home'     path='/home' component={Home} />
-      <Route name='NotFound' path='*' component={NotFound} />
+    <Route component={App} path='/'>
+      <IndexRoute component={Home} />
+      <Route component={Home}           path='/home'          />
+      <Route component={SitesContainer} path='/sites(/:site)' />
+      <Route component={NotFound}       path='*'              />
     </Route>
   );
 }
