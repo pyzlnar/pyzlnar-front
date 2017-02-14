@@ -1,26 +1,37 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { SiteContainer }   from './Site'
 import { onSelectorClick } from '../action-creators/sitesList'
 
 class SitesList extends React.Component {
   render() {
     return (
       <div className='c-sites-list'>
-        <div className='c-sites-list__selector'>
+        <div className='c-sites-list__toolbar'>
            { this.renderSelector() }
         </div>
-        { this.renderSites() }
+        <div className='c-sites-list__sites'>
+          { this.renderSites() }
+        </div>
       </div>
     )
   }
 
   renderSelector() {
-    const { onSelectorClick } = this.props
+    const { display, onSelectorClick } = this.props
+    const gridMuted    = display === 'grid'    ? 'c-sites-list__selector--muted' : ''
+    const detailsMuted = display === 'details' ? 'c-sites-list__selector--muted' : ''
     return (
       <div>
-        <span onClick={ ()=> onSelectorClick('grid') }>Grid</span>
-        <span onClick={ ()=> onSelectorClick('details') }>Details</span>
+        <i
+          className={ `c-sites-list__selector ${gridMuted} fa fa-th` }
+          onClick={ ()=> onSelectorClick('grid') }
+        />
+        <i
+          className={ `c-sites-list__selector ${detailsMuted} fa fa-th-list` }
+          onClick={ ()=> onSelectorClick('details') }
+        />
       </div>
     )
   }
@@ -41,9 +52,9 @@ class SitesList extends React.Component {
 
   renderGridSite(site) {
     return (
-      <div key={ site.code } className='c-sites-list__item o-layout__item u-1/2 u-1/5@tablet'>
-        <a href={ site.url } target="_blank">
-          <img src={ `/static/img/sites/${site.code}` } alt={ site.name }/>
+      <div key={ site.code } className='o-layout__item c-sites-list__item u-1/2 u-1/5@tablet'>
+        <a className='c-sites-list__link' href={ site.url } target='_blank'>
+          <img src={ `/static/img/sites/${site.code}.png` } alt={ site.name } title={ site.name } />
         </a>
       </div>
     )
@@ -51,7 +62,7 @@ class SitesList extends React.Component {
 
   renderDetails() {
     const { sites } = this.props
-    return null
+    return sites.map(site => <SiteContainer key={ site.code } site={ site } />)
   }
 }
 

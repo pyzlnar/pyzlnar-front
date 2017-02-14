@@ -1,0 +1,24 @@
+$site-logo-size: 50px;
+
+.c-site {
+  border-bottom: 1px solid $tertiary-light-color;
+  padding: 0.4rem;
+
+  &__logo {
+    float: left;
+    margin-right: 0.5rem;
+    height: $site-logo-size;
+  }
+
+  &__title {
+    display: block;
+  }
+
+  &__controls {
+    height: 100%;
+    &__item {
+      display: inline-block;
+      height: 100%
+    }
+  }
+}
