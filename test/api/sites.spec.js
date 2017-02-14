@@ -46,7 +46,7 @@ describe('Api: sites', () => {
         f(dispatch, getState)
 
         expect(dispatch).calledWith(fetchingSites())
-        const requestArgs = ['api/sites', { success: fetchSuccess, error: fetchError }]
+        const requestArgs = ['/api/sites', { success: fetchSuccess, error: fetchError }]
         expect(request).calledWith(...requestArgs)
         expect(dispatch).calledWith('PROMISE_RESPONSE')
       })

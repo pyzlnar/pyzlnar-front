@@ -61,8 +61,9 @@ class Sites extends React.Component {
   }
 
   renderSites() {
-    const sites = this.props.sites.sites
-    return <SitesListContainer sites={sites} />
+    const { selected } = this.props
+    const sites        = this.props.sites.sites
+    return <SitesListContainer sites={sites} selected={selected} />
   }
 
   renderSite(site) {
@@ -75,8 +76,8 @@ class Sites extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { sites: state.sites }
+const mapStateToProps = (state, ownState) => {
+  return { sites: state.sites, selected: ownState.params.site }
 }
 
 const mapDispatchToProps = dispatch => {

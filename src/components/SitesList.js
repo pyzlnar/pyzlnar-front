@@ -2,14 +2,21 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { SiteContainer }   from './Site'
-import { onSelectorClick } from '../action-creators/sitesList'
+import { setInitialState, onSelectorClick, onFoldClick } from '../action-creators/sitesList'
 
 class SitesList extends React.Component {
+  constructor(props) {
+    super(props)
+    const { sites, selected, route, setInitialState } = this.props
+    const display = selected ? 'details' : 'grid'
+    setInitialState(display, sites, selected)
+  }
+
   render() {
     return (
       <div className='c-sites-list'>
         <div className='c-sites-list__toolbar'>
-           { this.renderSelector() }
+          { this.renderSelector() }
         </div>
         <div className='c-sites-list__sites'>
           { this.renderSites() }
@@ -61,17 +68,25 @@ class SitesList extends React.Component {
   }
 
   renderDetails() {
-    const { sites } = this.props
-    return sites.map(site => <SiteContainer key={ site.code } site={ site } />)
+    const { sites, foldedSites, onFoldClick } = this.props
+    return sites.map(site => {
+      return <SiteContainer
+        key      = { site.code }
+        site     = { site }
+        foldable = { true }
+        fold     = { foldedSites[site.code] }
+        onFoldClick = { onFoldClick }
+      />
+    })
   }
 }
 
 const mapStateToProps = (state, ownState) => {
-  return { sites: ownState.sites, ...state.sitesList }
+  return { ...ownState, ...state.sitesList }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ onSelectorClick }, dispatch)
+  return bindActionCreators({ setInitialState, onSelectorClick, onFoldClick }, dispatch)
 }
 
 export const SitesListContainer = connect(mapStateToProps, mapDispatchToProps)(SitesList)

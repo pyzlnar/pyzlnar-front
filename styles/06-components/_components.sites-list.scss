@@ -20,15 +20,13 @@ $sites-list-border: 1px solid $tertiary-color;
     display: inline-block;
     cursor: pointer;
     user-select: none;
+    color: $primary-dark-color;
     &:hover {
-      color: $tertiary-color;
+      color: $white;
     }
 
     &--muted {
-      color: $primary-dark-color;
-      &:hover {
-        color: $primary-dark-color;
-      }
+      color: $white;
     }
   }
 

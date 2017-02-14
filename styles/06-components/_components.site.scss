@@ -10,15 +10,21 @@ $site-logo-size: 50px;
     height: $site-logo-size;
   }
 
-  &__title {
-    display: block;
+  &__link {
+    color: $white;
+    vertical-align: super;
+    &:hover {
+      color: $secondary-color;
+    }
   }
 
-  &__controls {
-    height: 100%;
-    &__item {
-      display: inline-block;
-      height: 100%
+  &__chevron {
+    @include clickable
+    float: right;
+    color: $primary-light-color;
+    padding: $site-logo-size / 3;
+    &:hover {
+      color: $white;
     }
   }
 }
