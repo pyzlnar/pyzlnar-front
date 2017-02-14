@@ -2,7 +2,8 @@ import React from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchSites } from '../api/sites';
-import { SitesListContainer } from './SitesList'
+import { NetworkErrorContainer } from './NetworkError'
+import { SitesListContainer }    from './SitesList'
 
 class Sites extends React.Component {
   componentDidMount() {
@@ -43,18 +44,20 @@ class Sites extends React.Component {
     if (this.shouldRenderSites()) {
       return this.renderSites()
     } else if (this.shouldRenderError()) {
-      return this.renderError()
+      return <NetworkErrorContainer retryAction={ fetchSites }/>
     } else {
       return this.renderLoading()
     }
   }
 
-  renderError() {
-    return <h3> Error! </h3>
-  }
-
   renderLoading() {
-    return <h3>Loading...</h3>
+    return (
+      <div className='text--center'>
+        <i className='fa fa-cog fa-2x fa-spin' />
+        &nbsp;
+        <span className='u-h3'>Loading...</span>
+      </div>
+    )
   }
 
   renderSites() {

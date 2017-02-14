@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze'
-import { types } from './../../src/action-creators/sitesList'
-import reducer   from './../../src/reducers/sitesList'
+import { types } from '../../src/action-creators/sitesList'
+import reducer   from '../../src/reducers/sitesList'
 
 describe('Reducer: sitesList', () => {
   describe(`when receiving action ${types.selectorClicked}`, () => {

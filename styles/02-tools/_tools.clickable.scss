@@ -1,0 +1,6 @@
+// For when you need text to be clickable
+
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+}
