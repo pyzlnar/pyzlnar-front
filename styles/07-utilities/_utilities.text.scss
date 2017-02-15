@@ -19,3 +19,20 @@
 .text--capitalize {
   text-transform: capitalize;
 }
+
+// Text size
+$text-sizes: 'tiny' 'small' 'normal' 'large' 'huge';
+
+@each $text-size in $text-sizes {
+  .text--#{$text-size} {
+    @include font-size($text-size);
+  }
+
+  @each $inuit-bp-name, $inuit-bp-value in $mq-breakpoints {
+    .text--#{$text-size}#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+      @include mq($from: $inuit-bp-name) {
+        @include font-size($text-size);
+      }
+    }
+  }
+}

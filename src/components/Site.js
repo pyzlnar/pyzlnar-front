@@ -61,8 +61,8 @@ class Site extends React.Component {
   renderTitle(site) {
     return (
       <div>
-        <span className='u-h3'> { site.name } </span>
-        <a className='c-site__link' href={ site.url } target='_blank'>
+        <span className='u-h4 u-h3@tablet'> { site.name } </span>
+        <a className='c-site__link text--small text--normal@tablet' href={ site.url } target='_blank'>
           <i className='fa fa-external-link' />
         </a>
       </div>
@@ -77,7 +77,7 @@ class Site extends React.Component {
       iconClass = 'fa fa-times'
     }
     return (
-      <div>
+      <div className='text--tiny text--small@tablet'>
         <i className={ iconClass } />
         <span className='text--capitalize u-padding-left-tiny'>{ site.status }</span>
       </div>
@@ -87,8 +87,8 @@ class Site extends React.Component {
 
   renderTags(site) {
     return (
-      <div>
-        <i className="fa fa-tags u-padding-right-tiny" />
+      <div className='text--tiny text--small@tablet'>
+        <i className='fa fa-tags u-padding-right-tiny' />
         { site.topics.map(tag => this.renderTag(tag)) }
       </div>
     )

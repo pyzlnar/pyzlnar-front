@@ -69,6 +69,7 @@
 @import "~inuitcss/tools/tools.hidden";
 @import "~sass-mq/mq";
 @import "02-tools/tools.clickable";
+@import "02-tools/tools.font";
 @import "02-tools/tools.palettes";
 
 // GENERIC
@@ -122,4 +123,5 @@ $inuit-offsets: true;
 @import "~inuitcss/utilities/utilities.spacing";
 @import "~inuitcss/utilities/utilities.print";
 @import "~inuitcss/utilities/utilities.hide";
+@import "07-utilities/utilities.headers";
 @import "07-utilities/utilities.text";

@@ -1,0 +1,34 @@
+// Media Bounded Headers
+
+@each $inuit-bp-name, $inuit-bp-value in $mq-breakpoints {
+  .u-h1#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h1, $important: true);
+    }
+  }
+  .u-h2#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h2, $important: true);
+    }
+  }
+  .u-h3#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h3, $important: true);
+    }
+  }
+  .u-h4#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h4, $important: true);
+    }
+  }
+  .u-h5#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h5, $important: true);
+    }
+  }
+  .u-h6#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+    @include mq($from: $inuit-bp-name) {
+      @include inuit-font-size($inuit-font-size-h6, $important: true);
+    }
+  }
+}
