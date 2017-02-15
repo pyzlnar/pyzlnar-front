@@ -10,6 +10,7 @@ module.exports = function(localhost, PORT) {
       },
       inline: true,
       proxy: {
+        '/api/*': `${localhost}:${API_PORT}`,
         '/static/img/*': {
           target: `${localhost}:${PORT}`,
           pathRewrite: {

@@ -1,5 +1,6 @@
 $navbar__item-padding: 0.4rem;
 .c-navbar {
+  @include font-size-small;
   margin-bottom: 0;
 
   &__container {

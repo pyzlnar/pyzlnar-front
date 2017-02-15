@@ -9,3 +9,9 @@
   background: $secondary-color;
   color:      $white;
 }
+
+@mixin palette-light-shade {
+  background:   $primary-dark-color;
+  color:        $tertiary-dark-color;
+  border-color: $tertiary-light-color;
+}

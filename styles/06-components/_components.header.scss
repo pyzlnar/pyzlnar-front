@@ -1,6 +1,7 @@
 $logo-max-height: 120px;
 
 .c-header {
+  @include font-size-small;
   @include palette-dark;
   padding: 0.5rem;
   border-top:    5px solid $black;
