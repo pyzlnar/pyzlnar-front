@@ -27,4 +27,15 @@ $site-logo-size: 50px;
       color: $white;
     }
   }
+
+  &__desc {
+    padding: 0.5rem;
+  }
+
+  &--extended {
+    .c-site__logo {
+      height: $site-logo-size * 1.5;
+      float: none;
+    }
+  }
 }

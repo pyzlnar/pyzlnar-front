@@ -12,23 +12,37 @@ class Site extends React.Component {
     return (
       <div className="c-site">
         { foldable ? this.renderFolder() : null }
-        <img className="c-site__logo" src={ `/static/img/sites/${site.code}.png` } alt={ site.name }/>
-        <div>
-          <span className='u-h3'> { site.name } </span>
-          <a className='c-site__link' href={ site.url } target='_blank'>
-            <i className='fa fa-external-link' />
-          </a>
-        </div>
-        <div>
-          { this.renderStatus(site) }
-          { this.renderTags(site) }
-        </div>
+        { this.renderLogo(site) }
+        { this.renderTitle(site) }
+        { this.renderStatus(site) }
+        { this.renderTags(site) }
       </div>
     )
   }
 
   renderExtended() {
-    return this.renderFolded()
+    const { site, foldable } = this.props
+    return (
+      <div className='c-site c-site--extended'>
+        { foldable ? this.renderFolder() : null }
+
+        <div className='o-media o-media--tiny'>
+          <div className='o-media__img'>
+            { this.renderLogo(site) }
+          </div>
+          <div className='o-media__body'>
+            { this.renderTitle(site) }
+            { this.renderStatus(site) }
+            { this.renderTags(site) }
+          </div>
+        </div>
+        <div className='c-site__desc'>
+          <p>
+            { site.description }
+          </p>
+        </div>
+      </div>
+    )
   }
 
   renderFolder() {
@@ -38,6 +52,21 @@ class Site extends React.Component {
     } else {
       return <i onClick={ () => onFoldClick(site.code) } className='c-site__chevron fa fa-chevron-up fa-2x' />
     }
+  }
+
+  renderLogo(site) {
+    return <img className="c-site__logo" src={ `/static/img/sites/${site.code}.png` } alt={ site.name }/>
+  }
+
+  renderTitle(site) {
+    return (
+      <div>
+        <span className='u-h3'> { site.name } </span>
+        <a className='c-site__link' href={ site.url } target='_blank'>
+          <i className='fa fa-external-link' />
+        </a>
+      </div>
+    )
   }
 
   renderStatus(site) {
