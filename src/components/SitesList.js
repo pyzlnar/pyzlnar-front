@@ -1,18 +1,35 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { SiteContainer }   from './Site'
-import { setInitialState, onSelectorClick, onFoldClick } from '../action-creators/sitesList'
+import sample from 'lodash.sample'
+import { SiteContainer }        from './Site'
+import { DismissableContainer } from './Dismissable'
+import { setInitialState, onSelectorClick, onFoldClick, onDismiss } from '../action-creators/sitesList'
 
 class SitesList extends React.Component {
   constructor(props) {
     super(props)
     const { sites, selected, route, setInitialState } = this.props
-    const display = selected ? 'details' : 'grid'
-    setInitialState(display, sites, selected)
+    const display  = selected ? 'details' : 'grid'
+    const featured = this.shouldRenderFeatured ? sample(sites) : null
+    setInitialState(display, sites, selected, featured)
+  }
+
+  shouldRenderFeatured() {
+    const { selected, dismissed } = this.props
+    return !(selected || dismissed)
   }
 
   render() {
+    return (
+      <div>
+        { this.renderFeatured() }
+        { this.renderContainer() }
+      </div>
+    )
+  }
+
+  renderContainer() {
     return (
       <div className='c-sites-list'>
         <div className='c-sites-list__toolbar'>
@@ -51,8 +68,24 @@ class SitesList extends React.Component {
   renderGrid() {
     const { sites } = this.props
     return (
-      <div className='o-layout'>
-        { sites.map(site => this.renderGridSite(site)) }
+      <div>
+        <div className='o-layout'>
+          { sites.map(site => this.renderGridSite(site)) }
+        </div>
+      </div>
+    )
+  }
+
+  renderFeatured() {
+    const { featured, onDismiss } = this.props
+    if (!featured || !this.shouldRenderFeatured()) {
+      return null
+    }
+    const title   = `More about ${featured.name}...`
+    const content = <SiteContainer site={featured} foldable={false} fold={false} />
+    return (
+      <div className='u-margin-bottom'>
+        <DismissableContainer title={title} content={content} onDismiss={onDismiss} />
       </div>
     )
   }
@@ -86,7 +119,14 @@ const mapStateToProps = (state, ownState) => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setInitialState, onSelectorClick, onFoldClick }, dispatch)
+  return bindActionCreators(
+    {
+      setInitialState,
+      onSelectorClick,
+      onFoldClick,
+      onDismiss
+    },
+    dispatch)
 }
 
 export const SitesListContainer = connect(mapStateToProps, mapDispatchToProps)(SitesList)

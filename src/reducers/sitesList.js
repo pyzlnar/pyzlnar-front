@@ -2,7 +2,9 @@ import { types } from '../action-creators/sitesList'
 
 const initialState = {
   display: 'grid',
-  foldedSites: {}
+  foldedSites: {},
+  featured: null,
+  dimissed: false
 }
 
 export default (state = initialState, action = {}) => {
@@ -13,6 +15,8 @@ export default (state = initialState, action = {}) => {
       return {...state, display: action.selector }
     case types.foldClick:
       return toggleFold(state, action)
+    case types.dismissed:
+      return {...state, featured: null, dismissed: true }
     default:
       return state
   }
@@ -26,6 +30,7 @@ const setInitialState = (state,  action) => {
   return {
     ...state,
     display:     action.display,
+    featured:    action.featured,
     foldedSites: foldedSites
   }
 }

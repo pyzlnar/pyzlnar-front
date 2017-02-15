@@ -10,12 +10,14 @@ describe('Reducer: sitesList', () => {
         type: types.setInitialState,
         display: 'interesting',
         sites: [ {code: 'one'}, {code: 'two'} ],
-        selected: 'two'
+        selected: 'two',
+        featured: undefined,
       }
       deepFreeze(state)
 
       const expected = {
         display: 'interesting',
+        featured: undefined,
         foldedSites: { one: true, two: false }
       }
 
@@ -29,12 +31,14 @@ describe('Reducer: sitesList', () => {
       const action = {
         type: types.setInitialState,
         display: 'something',
-        sites: [ {code: 'one'}, {code: 'two'} ]
+        sites: [ {code: 'one'}, {code: 'two'} ],
+        featured: 'two'
       }
       deepFreeze(state)
 
       const expected = {
         display: 'something',
+        featured: 'two',
         foldedSites: { one: true, two: true }
       }
 
@@ -65,6 +69,20 @@ describe('Reducer: sitesList', () => {
       deepFreeze(state)
 
       const expected = { foldedSites: { toggle: false, other: true } }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe(`when receiving action ${types.dismissed}`, () => {
+    it('sets dismissed to true, and featured to null', () => {
+      const state  = { dismissed: false, featured: 'some' }
+      const action = { type: types.dismissed }
+      deepFreeze(state)
+
+      const expected = { dismissed: true, featured: null }
 
       const result = reducer(state, action)
 
