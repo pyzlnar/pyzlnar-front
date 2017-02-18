@@ -1,3 +1,5 @@
+import { types } from '../action-creators/navbar'
+
 const initialState = [
   {
     name: 'Home',
@@ -33,9 +35,9 @@ const initialState = [
 
 export default (state = initialState, action = {}) => {
   switch(action.type) {
-    case 'IS_ENTERING_MENU':
+    case types.enteringMenu:
       return state.map((item) => toggleMenuHover(item, action));
-    case 'IS_LEAVING_MENU':
+    case types.leavingMenu:
       return state.map((item) => toggleMenuHover(item, action));
     default:
       return state;

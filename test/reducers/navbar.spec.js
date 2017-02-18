@@ -1,11 +1,12 @@
 import deepFreeze from 'deep-freeze'
-import reducer from './../../src/reducers/navbar'
+import { types } from '../../src/action-creators/navbar'
+import reducer   from '../../src/reducers/navbar'
 
 describe('Reducer: navbar', () => {
-  describe('when receiving IS_ENTERING_MENU action', () => {
+  describe(`when receiving action ${types.enteringMenu}`, () => {
     it('returns a new state with hover active', () => {
       const action = {
-        type: 'IS_ENTERING_MENU',
+        type: types.enteringMenu,
         name: 'dummy'
       }
 
@@ -26,10 +27,10 @@ describe('Reducer: navbar', () => {
     })
   })
 
-  describe('when receiving IS_LEAVING_MENU action', () => {
+  describe(`when receiving action ${types.leavingMenu}`, () => {
     it('returns a new state with hover not active', () => {
       const action = {
-        type: 'IS_LEAVING_MENU',
+        type: types.leavingMenu,
         name: 'dummy'
       }
 

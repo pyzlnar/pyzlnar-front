@@ -1,19 +1,18 @@
 import { push } from 'react-router-redux';
 
+export const types = {
+  enteringMenu: 'navbar/ENTERING_MENU',
+  leavingMenu:  'navbar/LEAVING_MENU'
+}
+
 export const onItemClick = (path) => {
   return push(path);
 }
 
 export const onMenuMouseEnter = (name) => {
-  return {
-    type: 'IS_ENTERING_MENU',
-    name: name
-  }
+  return { type: types.enteringMenu, name: name }
 }
 
 export const onMenuMouseLeave = (name) => {
-  return {
-    type: 'IS_LEAVING_MENU',
-    name: name
-  }
+  return { type: types.leavingMenu, name: name }
 }
