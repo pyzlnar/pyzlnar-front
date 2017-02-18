@@ -1,9 +1,10 @@
-import { push } from 'react-router-redux'
+import { push }  from 'react-router-redux'
 import {
+  types,
   onItemClick,
   onMenuMouseEnter,
   onMenuMouseLeave
-} from './../../src/action-creators/navbar'
+} from '../../src/action-creators/navbar'
 
 describe('ActionCreator: navbar', () => {
   describe('onItemClick(path)', () => {
@@ -17,10 +18,10 @@ describe('ActionCreator: navbar', () => {
   })
 
   describe('onMenuMouseEnter(name)', () => {
-    it('returns IS_ENTERING_MENU action', () => {
+    it(`returns ${types.enteringMenu} action`, () => {
       const name = 'dummy'
       const expected = {
-        type: 'IS_ENTERING_MENU',
+        type: types.enteringMenu,
         name: name
       }
 
@@ -30,10 +31,10 @@ describe('ActionCreator: navbar', () => {
   })
 
   describe('onMenuMouseLeave(name)', () => {
-    it('returns IS_LEAVING_MENU action', () => {
+    it(`returns ${types.leavingMenu} action`, () => {
       const name = 'dummy'
       const expected = {
-        type: 'IS_LEAVING_MENU',
+        type: types.leavingMenu,
         name: name
       }
 
