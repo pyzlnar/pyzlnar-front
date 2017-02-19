@@ -4,7 +4,7 @@ import sample from 'lodash.sample'
 export class About extends React.Component {
   selectImage() {
     return sample(
-      ['atari', 'de', 'gasp', 'hello', 'maji', 'qmaji', 'sorena']
+      ['atari', 'de', 'hello', 'maji', 'qmaji', 'sorena']
     )
   }
 
@@ -58,22 +58,22 @@ export class About extends React.Component {
         <p>
           I would be lying if I'd say that I don't take some kind of pride in the quantity of series
           I've seen. What started just out of plain curiosity while I was in high school around 10
-          years ago become rapidly quite the addiction. The fact that I'm not that interested in
+          years ago rapidly became quite the addiction. The fact that I'm not that interested in
           traditional series for the most part probably had to do a lot to it, but here I am anyway.
         </p>
         <p>
           If you're interested on seeing how deep the rabbit hole I am, feel free to check my
-          Anime Planet profile.
+          Anime-Planet profile.
         </p>
 
         <h3>Gaming</h3>
         <p>
-          When I was six days old I got Super Mario Bros 3 for NES as a Christmas present. Gaming
-          has always been a part of my life, and now that I'm older I'm also part of the PC master
-          race.
+          When I was just six days old I got Super Mario Bros 3 for NES as a Christmas present.
+          Games have always been a part of my life. It's hard to admit, but I do play more games
+          than I watch anime.
         </p>
         <p>
-          If you want to check more of my gaming profile, feel free to check my Steam profile. Mind
+          If you want to check more of my gaming habits, feel free to check my Steam profile. Mind
           you that if you wan't to add me as a friend you better let me know beforehand as I reject
           all invites from people I don't know.
         </p>
@@ -82,14 +82,14 @@ export class About extends React.Component {
         <p>
           I did put programming last, but it would be a lie to say I don't enjoy programming as much
           as I love watching anime or playing games. I mean, this site as a whole is pretty much a
-          programming playground, and I wouldn't have dedicated so much time to building it if I
-          didn't have fun doing it.
+          programming playground, and I wouldn't have dedicated so much time into building it if I
+          wasn't having fun doing it.
         </p>
         <p>
-          I'm a systems engineer by career, but nowadays I concentrate mostly on Ruby on Rails.
-          Ruby is an awesome language to work with, and it's metaprogramming and open class make it
+          I'm a systems engineer by career, and nowadays I concentrate mostly on Ruby on Rails.
+          Ruby is an awesome language to work with, and its metaprogramming and open class make it
           such a powerful tool despite the obvious downside of being a slow language. I've even made
-          a (in my opinion) pretty decent gem which you can check over here.
+          a (in my opinion) pretty decent gem which you can find over projects.
         </p>
         <p>
           If you want to check more about my programming skills, check out my Github profile, and
