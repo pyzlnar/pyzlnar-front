@@ -20,6 +20,10 @@
   text-transform: capitalize;
 }
 
+.text--super {
+  vertical-align: super;
+}
+
 // Text size
 $text-sizes: 'tiny' 'small' 'normal' 'large' 'huge';
 
