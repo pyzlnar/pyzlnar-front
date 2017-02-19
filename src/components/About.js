@@ -147,10 +147,12 @@ export class About extends React.Component {
           Fun fact: I've wanted to have my own site probably since high school. The sole fact that I
           can pay off my own domain and VPS makes me really really happy.
         </p>
-        <h3>Backend</h3>
-        <p>
-          The public backend repo can be found here.
-        </p>
+        <h3>
+          <span>Backend </span>
+          <a href='https://github.com/pyzlnar/pyzlnar-back' target='_blank'>
+            <i className='fa fa-external-link text--super text--tiny' />
+          </a>
+        </h3>
         <p>
           The backend is running an API that returns information from a database. There's honestly
           nothing that exciting on the backend as of yet, but I do feel like adding cooler stuff
@@ -161,10 +163,12 @@ export class About extends React.Component {
           <li>Rails 5.0.1</li>
           <li>Postgresql</li>
         </ul>
-        <h3>Frontend</h3>
-        <p>
-          The public frontend repo can be found here.
-        </p>
+        <h3>
+          <span>Frontend </span>
+          <a href='https://github.com/pyzlnar/pyzlnar-front' target='_blank'>
+            <i className='fa fa-external-link text--super text--tiny' />
+          </a>
+        </h3>
         <p>
           I'm not a front end guy, so you'll probably find stuff here and there that will more than
           likely make you raise an eyebrow. Nevertheless I think this ended up being pretty well.
