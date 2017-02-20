@@ -1,30 +1,11 @@
 $sites-list-logo-size: 80px;
 $sites-list-vspace: 0.3rem;
-$sites-list-border: 1px solid $tertiary-color;
 
 .c-sites-list {
-
-  &__toolbar {
-    @include palette-dark;
-    text-align: right;
-  }
-
-  &__sites {
-    @include palette-light-shade;
-    padding-top:    $sites-list-vspace;
-    padding-bottom: $sites-list-vspace;
-  }
-
   &__selector {
-    padding: 0.1rem 0.3rem;
-    display: inline-block;
-    cursor: pointer;
-    user-select: none;
-    color: $primary-dark-color;
-    &:hover {
-      color: $white;
-    }
-
+    @include font-size-small;
+    @include clickable-dark;
+    margin-left: 0.3rem;
     &--muted {
       color: $white;
     }

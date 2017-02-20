@@ -1,22 +1,29 @@
-.c-dismiss {
+.c-coolbox {
   @include palette-light-shade;
 
   &__toolbar {
     @include palette-dark;
     padding: 0.2rem 0.4rem;
+
+    &--small {
+      padding: 0 0.4rem;
+    }
+
+    &--tiny {
+      padding: 0;
+    }
   }
 
   &__title {
     @extend .u-h5;
   }
 
-  &__dismiss {
+  &__controls {
     @include clickable;
-    @include font-size-large;
     float: right;
-    color: $primary-light-color;
-    &:hover {
-      color: $white;
-    }
+  }
+
+  &__clear {
+    clear: both;
   }
 }

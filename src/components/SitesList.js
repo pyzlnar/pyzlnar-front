@@ -2,8 +2,9 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import sample from 'lodash.sample'
-import { SiteContainer }        from './Site'
-import { DismissableContainer } from './Dismissable'
+import { CoolBox }       from './CoolBox'
+import { Dismissable }   from './Dismissable'
+import { SiteContainer } from './Site'
 import { setInitialState, onSelectorClick, onFoldClick, onDismiss } from '../action-creators/sitesList'
 
 class SitesList extends React.Component {
@@ -31,14 +32,9 @@ class SitesList extends React.Component {
 
   renderContainer() {
     return (
-      <div className='c-sites-list'>
-        <div className='c-sites-list__toolbar'>
-          { this.renderSelector() }
-        </div>
-        <div className='c-sites-list__sites'>
-          { this.renderSites() }
-        </div>
-      </div>
+      <CoolBox controls={ this.renderSelector() } toolbarSize='small'>
+        { this.renderSites() }
+      </CoolBox>
     )
   }
 
@@ -82,10 +78,11 @@ class SitesList extends React.Component {
       return null
     }
     const title   = `More about ${featured.name}...`
-    const content = <SiteContainer site={featured} foldable={false} fold={false} />
     return (
       <div className='u-margin-bottom'>
-        <DismissableContainer title={title} content={content} onDismiss={onDismiss} />
+        <Dismissable title={title} onDismiss={onDismiss} >
+          <SiteContainer site={featured} foldable={false} fold={false} />
+        </Dismissable>
       </div>
     )
   }
