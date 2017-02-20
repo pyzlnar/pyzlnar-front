@@ -1,15 +1,15 @@
 import deepFreeze from 'deep-freeze'
-import { types } from '../../src/action-creators/sites'
-import reducer   from '../../src/reducers/sites'
+import { types } from '../../src/action-creators/projects'
+import reducer   from '../../src/reducers/projects'
 
-describe('Reducer: sites', () => {
+describe('Reducer: projects', () => {
   describe(`when receiving action ${types.fetching}`, () => {
-    it('sets the isFetching boolean to true, and empties sites', () => {
+    it('sets the isFetching boolean to true, and empties projects', () => {
       const action = { type: types.fetching }
-      const state  = { isFetching: false, sites: ['Maybe not empty']}
+      const state  = { isFetching: false, projects: ['Maybe not empty']}
       deepFreeze(state)
 
-      const expected = { isFetching: true, sites: [] }
+      const expected = { isFetching: true, projects: [] }
 
       const result = reducer(state, action)
 
@@ -18,12 +18,12 @@ describe('Reducer: sites', () => {
   })
 
   describe(`when receiving action ${types.fetched}`, () => {
-    it('sets the isFetching boolean to false, and assigns sites', () => {
-      const action = { type: types.fetched, sites: ['Something new!'] }
-      const state  = { isFetching: true, sites: []}
+    it('sets the isFetching boolean to false, and assigns projects', () => {
+      const action = { type: types.fetched, projects: ['Something new!'] }
+      const state  = { isFetching: true, projects: []}
       deepFreeze(state)
 
-      const expected = { isFetching: false, sites: ['Something new!'] }
+      const expected = { isFetching: false, projects: ['Something new!'] }
 
       const result = reducer(state, action)
 
@@ -37,7 +37,7 @@ describe('Reducer: sites', () => {
       const state  = { something: 'awful' }
       deepFreeze(state)
 
-      const expected = { isFetching: false, fetchFailed: true, sites: [] }
+      const expected = { isFetching: false, fetchFailed: true, projects: [] }
 
       const result = reducer(state, action)
 
@@ -58,3 +58,4 @@ describe('Reducer: sites', () => {
     })
   })
 })
+

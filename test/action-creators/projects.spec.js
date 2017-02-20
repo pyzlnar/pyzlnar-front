@@ -1,15 +1,15 @@
 import {
   types,
-  fetchingSites,
+  fetchingProjects,
   fetchSuccess,
   fetchError
-} from '../../src/action-creators/sites'
+} from '../../src/action-creators/projects'
 
-describe('ActionCreator: sites', () => {
-  describe('fetchingSites()', () => {
+describe('ActionCreator: projects', () => {
+  describe('fetchingProjects()', () => {
     it(`returns ${types.fetching} action`, () => {
       const expected = { type: types.fetching }
-      const result = fetchingSites()
+      const result = fetchingProjects()
 
       expect(result).to.deep.equal(expected)
     })
@@ -19,8 +19,8 @@ describe('ActionCreator: sites', () => {
     it(`returns ${types.fetched} action with the received argument`, () => {
       const arg = 'something'
       const expected = {
-        type:  types.fetched,
-        sites: arg
+        type:     types.fetched,
+        projects: arg
       }
       const result = fetchSuccess(arg)
 
@@ -37,3 +37,4 @@ describe('ActionCreator: sites', () => {
     })
   })
 })
+
