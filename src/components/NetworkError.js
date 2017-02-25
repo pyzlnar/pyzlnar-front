@@ -11,7 +11,7 @@ class NetworkError extends React.Component {
     return (
       <div className='o-layout text--center'>
         <div className='o-layout__item u-1/1'>
-          <img src={ 'static/img/stickers/sorry.png' } />
+          <img src={ '/static/img/stickers/sorry.png' } />
         </div>
         <div className='o-layout__item u-1/1'>
           <span className='u-h4'>
