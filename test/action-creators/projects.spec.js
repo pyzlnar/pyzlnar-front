@@ -3,7 +3,9 @@ import {
   fetchingProjects,
   fetchSuccess,
   fetchError,
-  toggleFold
+  toggleFold,
+  setFeatured,
+  dismissFeatured
 } from '../../src/action-creators/projects'
 
 describe('ActionCreator: projects', () => {
@@ -46,5 +48,22 @@ describe('ActionCreator: projects', () => {
       expect(result).to.deep.equal(expected)
     })
   })
-})
 
+  describe('setFeatured(selected)', () => {
+    it(`return ${types.setFeatured} action`, () => {
+      const expected = { type: types.setFeatured, selected: 'this' }
+      const result = setFeatured('this')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('dismissFeatured()', () => {
+    it(`return ${types.dismissFeatured} action`, () => {
+      const expected = { type: types.dismissFeatured }
+      const result = dismissFeatured()
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+})

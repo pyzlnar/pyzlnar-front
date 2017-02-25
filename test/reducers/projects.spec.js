@@ -44,7 +44,94 @@ describe('Reducer: projects', () => {
       const state  = { something: 'awful' }
       deepFreeze(state)
 
-      const expected = { isFetching: false, fetchFailed: true, projects: [] }
+      const expected = {
+        isFetching: false,
+        fetchFailed: true,
+        projects: [],
+        featured: { dismissed: false }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe(`when receiving action ${types.setFeatured}`, () => {
+    it('sets the featured project to null if theres no projects', () => {
+      const action = { type: types.setFeatured }
+      const state  = { projects: [], featured: {} }
+      deepFreeze(state)
+
+      const expected = { projects: [], featured: { project: null } }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+
+    it('sets the featured project to null if featured was dimissed', () => {
+      const action = { type: types.setFeatured }
+      const state  = {
+        projects: [ { code: 'one' } ],
+        featured: { dismissed: true }
+      }
+      deepFreeze(state)
+
+      const expected = {
+        projects: [ { code: 'one' } ],
+        featured: { dismissed: true, project: null }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+
+    it('finds the project if it the action contains a selected', () => {
+      const action = { type: types.setFeatured, selected: 'this' }
+      const state  = {
+        projects: [ { code: 'one' }, { code: 'this' } ],
+        featured: { dismissed: false }
+      }
+      deepFreeze(state)
+
+      const expected = {
+        projects: [ { code: 'one' }, { code: 'this' } ],
+        featured: { dismissed: false, project: { code: 'this' } }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+
+    it('features a random project if neither of the above applies', () => {
+      const action = { type: types.setFeatured }
+      const state  = {
+        projects: [ { code: 'one' } ],
+        featured: { dismissed: false }
+      }
+      deepFreeze(state)
+
+      const expected = {
+        projects: [ { code: 'one' } ],
+        featured: { dismissed: false, project: { code: 'one' } }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe(`when receiving action ${types.dismissFeatured}`, () => {
+    it('cleans the featured object and sets dismissed to true', () => {
+      const action = { type: types.dismissFeatured }
+      const state  = { featured: { project: {}, dismissed: false } }
+      deepFreeze(state)
+
+      const expected = { featured: { dismissed: true } }
 
       const result = reducer(state, action)
 

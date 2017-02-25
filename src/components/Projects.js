@@ -1,16 +1,28 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { toggleFold }    from '../action-creators/projects'
-import { fetchProjects } from '../api/projects'
+
+import {
+  toggleFold,
+  setFeatured,
+  dismissFeatured
+} from '../action-creators/projects'
+import { fetchProjects }           from '../api/projects'
+
 import { CoolBox }               from './CoolBox'
+import { Dismissable }           from './Dismissable'
 import { Loading }               from './Loading'
 import { NetworkErrorContainer } from './NetworkError'
 import { Project }               from './Project'
 
 class ProjectsP extends React.Component {
+  constructor(props) {
+    super(props)
+    this.props.setFeatured(this.props.selected)
+  }
+
   componentDidMount () {
-    this.props.fetchProjects()
+    this.props.fetchProjects(this.props.selected)
   }
 
   shouldRenderProjects() {
@@ -56,6 +68,41 @@ class ProjectsP extends React.Component {
   }
 
   renderProjects() {
+    return (
+      <div>
+        { this.renderFeatured() }
+        { this.renderProjectsList() }
+      </div>
+    )
+  }
+
+  renderFeatured() {
+    const { featured, selected, dismissFeatured } = this.props
+    if (featured.dimissed || !featured.project) {
+      return null
+    }
+
+    let title
+    if (selected === featured.project.code) {
+      title = ''
+    } else {
+      title = 'For example...'
+    }
+
+    return (
+      <div className='u-margin-bottom'>
+        <Dismissable title={ title } onDismiss={ dismissFeatured }>
+          <Project
+            project  = { featured.project }
+            foldable = { false }
+            fold     = { false }
+          />
+        </Dismissable>
+      </div>
+    )
+  }
+
+  renderProjectsList() {
     const { projects, foldedProjects, toggleFold } = this.props
     return (
       <CoolBox>
@@ -75,12 +122,17 @@ class ProjectsP extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { ...state.projects }
+const mapStateToProps = (state, ownState) => {
+  return { ...state.projects, selected: ownState.params.project }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchProjects, toggleFold }, dispatch)
+  return bindActionCreators({
+    fetchProjects,
+    toggleFold,
+    setFeatured,
+    dismissFeatured
+  }, dispatch)
 }
 
 export const Projects = connect(mapStateToProps, mapDispatchToProps)(ProjectsP)

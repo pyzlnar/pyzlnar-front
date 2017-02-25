@@ -3,7 +3,8 @@ import { fetchProjects } from '../../src/api/projects'
 import {
   fetchingProjects,
   fetchSuccess,
-  fetchError
+  fetchError,
+  setFeatured
 } from '../../src/action-creators/projects'
 
 describe('Api: projects', () => {
@@ -49,6 +50,7 @@ describe('Api: projects', () => {
         const requestArgs = ['/api/projects', { success: fetchSuccess, error: fetchError }]
         expect(request).calledWith(...requestArgs)
         expect(dispatch).calledWith('PROMISE_RESPONSE')
+        expect(dispatch).calledWith(setFeatured())
       })
     })
   })
