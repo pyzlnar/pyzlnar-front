@@ -1,4 +1,4 @@
-import { types } from './../action-creators/projects'
+import { types } from '../action-creators/projects'
 
 const initialState = {
   isFetching:  false,
@@ -11,10 +11,35 @@ export default (state = initialState, action = {}) => {
     case types.fetching:
       return {...state, isFetching: true,  projects: [] }
     case types.fetched:
-      return {...state, isFetching: false, projects: action.projects }
+      return setFetchedState(state, action)
     case types.fetchError:
       return {...initialState, fetchFailed: true }
+    case types.toggleFold:
+      return toggleFold(state, action)
     default:
       return state
+  }
+}
+
+const setFetchedState = (state, action) => {
+  let foldedProjects = {}
+  action.projects.forEach(project => foldedProjects[project.code] = true)
+  return {
+    ...state,
+    isFetching:     false,
+    projects:       action.projects,
+    foldedProjects: foldedProjects
+  }
+}
+
+const toggleFold = (state, action) => {
+  const code = action.code
+  const foldedProjects = state.foldedProjects
+  return {
+    ...state,
+    foldedProjects: {
+      ...foldedProjects,
+      [code]: !foldedProjects[code]
+    }
   }
 }

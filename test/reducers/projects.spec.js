@@ -19,11 +19,18 @@ describe('Reducer: projects', () => {
 
   describe(`when receiving action ${types.fetched}`, () => {
     it('sets the isFetching boolean to false, and assigns projects', () => {
-      const action = { type: types.fetched, projects: ['Something new!'] }
+      const action = {
+        type: types.fetched,
+        projects: [ {code: 'myproject'}, {code: 'other'} ],
+      }
       const state  = { isFetching: true, projects: []}
       deepFreeze(state)
 
-      const expected = { isFetching: false, projects: ['Something new!'] }
+      const expected = {
+        isFetching: false,
+        projects: [ {code: 'myproject'}, {code: 'other'} ],
+        foldedProjects: { myproject: true, other: true }
+      }
 
       const result = reducer(state, action)
 
@@ -38,6 +45,20 @@ describe('Reducer: projects', () => {
       deepFreeze(state)
 
       const expected = { isFetching: false, fetchFailed: true, projects: [] }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe(`when receiving action ${types.toggleFold}`, () => {
+    it('toggles the fold variable for the respective project', () => {
+      const action = { type: types.toggleFold, code: 'myproject' }
+      const state  = { foldedProjects: { myproject: true, other: true } }
+      deepFreeze(state)
+
+      const expected  = { foldedProjects: { myproject: false, other: true } }
 
       const result = reducer(state, action)
 

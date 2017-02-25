@@ -2,7 +2,8 @@ import {
   types,
   fetchingProjects,
   fetchSuccess,
-  fetchError
+  fetchError,
+  toggleFold
 } from '../../src/action-creators/projects'
 
 describe('ActionCreator: projects', () => {
@@ -32,6 +33,15 @@ describe('ActionCreator: projects', () => {
     it(`returns ${types.fetchError} action`, () => {
       const expected = { type: types.fetchError, response: 'irrelevant' }
       const result = fetchError('irrelevant')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('toggleFold(code)', () => {
+    it(`returns ${types.toggleFold} action`, () => {
+      const expected = { type: types.toggleFold, code: 'acode' }
+      const result = toggleFold('acode')
 
       expect(result).to.deep.equal(expected)
     })

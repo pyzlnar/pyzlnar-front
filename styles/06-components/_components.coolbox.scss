@@ -26,4 +26,10 @@
   &__clear {
     clear: both;
   }
+
+  &__item {
+    &--bordered {
+      border-bottom: solid 1px $tertiary_color;
+    }
+  }
 }

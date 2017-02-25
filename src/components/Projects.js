@@ -1,11 +1,14 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { toggleFold }    from '../action-creators/projects'
 import { fetchProjects } from '../api/projects'
+import { CoolBox }               from './CoolBox'
 import { Loading }               from './Loading'
 import { NetworkErrorContainer } from './NetworkError'
+import { Project }               from './Project'
 
-class Projects extends React.Component {
+class ProjectsP extends React.Component {
   componentDidMount () {
     this.props.fetchProjects()
   }
@@ -53,11 +56,21 @@ class Projects extends React.Component {
   }
 
   renderProjects() {
-    const { projects } = this.props
+    const { projects, foldedProjects, toggleFold } = this.props
     return (
-      <ul>
-        { projects.map(project => <li key={project.code}>{ project.name }</li>) }
-      </ul>
+      <CoolBox>
+        {
+          projects.map(project => {
+            return <Project
+              key         = { project.code }
+              project     = { project }
+              foldable    = { true }
+              fold        = { foldedProjects[project.code] }
+              onFoldClick = { toggleFold }
+            />
+          })
+        }
+      </CoolBox>
     )
   }
 }
@@ -67,7 +80,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchProjects }, dispatch)
+  return bindActionCreators({ fetchProjects, toggleFold }, dispatch)
 }
 
-export const ProjectsContainer = connect(mapStateToProps, mapDispatchToProps)(Projects)
+export const Projects = connect(mapStateToProps, mapDispatchToProps)(ProjectsP)

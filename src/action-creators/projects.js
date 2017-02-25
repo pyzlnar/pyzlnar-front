@@ -3,7 +3,8 @@
 export const types = {
   fetching:   'projects/FETCHING',
   fetched:    'projects/FETCHED',
-  fetchError: 'projects/FETCH_ERROR'
+  fetchError: 'projects/FETCH_ERROR',
+  toggleFold: 'projects/TOGGLE_FOLD'
 }
 
 export const fetchingProjects = () => {
@@ -16,4 +17,8 @@ export const fetchSuccess = json => {
 
 export const fetchError = response => {
   return { type: types.fetchError, response: response }
+}
+
+export const toggleFold = code => {
+  return { type: types.toggleFold, code: code }
 }

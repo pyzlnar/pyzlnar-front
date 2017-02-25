@@ -22,7 +22,7 @@ export default (state = initialState, action = {}) => {
   }
 }
 
-const setInitialState = (state,  action) => {
+const setInitialState = (state, action) => {
   let foldedSites = {}
   action.sites.map(site => {
     foldedSites[site.code] = site.code !== action.selected
