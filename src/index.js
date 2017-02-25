@@ -16,6 +16,7 @@ import './../styles/app.scss'
 // Reducer Imports
 import navbarReducer       from './reducers/navbar'
 import networkErrorReducer from './reducers/networkError'
+import projectsReducer     from './reducers/projects'
 import sitesReducer        from './reducers/sites'
 import sitesListReducer    from './reducers/sitesList'
 
@@ -23,6 +24,7 @@ import sitesListReducer    from './reducers/sitesList'
 const rootReducer = combineReducers({
   navbar:       navbarReducer,
   networkError: networkErrorReducer,
+  projects:     projectsReducer,
   routing:      routerReducer,
   sites:        sitesReducer,
   sitesList:    sitesListReducer

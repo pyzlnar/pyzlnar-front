@@ -1,13 +1,11 @@
 .u-clickable {
   @include clickable;
 
-  &--subtle {
+  &--light {
+    @include clickable-light
   }
 
-  &--light {
-    color: $white;
-    &:hover {
-      color: $secondary-color;
-    }
+  &--dark {
+    @include clickable-dark
   }
 }

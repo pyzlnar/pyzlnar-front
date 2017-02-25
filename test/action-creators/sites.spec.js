@@ -3,7 +3,7 @@ import {
   fetchingSites,
   fetchSuccess,
   fetchError
-} from './../../src/action-creators/sites'
+} from '../../src/action-creators/sites'
 
 describe('ActionCreator: sites', () => {
   describe('fetchingSites()', () => {

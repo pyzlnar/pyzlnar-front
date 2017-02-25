@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze'
-import { types } from './../../src/action-creators/sites'
-import reducer   from './../../src/reducers/sites'
+import { types } from '../../src/action-creators/sites'
+import reducer   from '../../src/reducers/sites'
 
 describe('Reducer: sites', () => {
   describe(`when receiving action ${types.fetching}`, () => {

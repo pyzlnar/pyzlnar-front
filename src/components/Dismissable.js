@@ -1,21 +1,21 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { CoolBox } from './CoolBox'
 
-class Dismissable extends React.Component {
+class DismissableP extends React.Component {
   render() {
-    const { title, content, onDismiss } = this.props
+    const { title, children } = this.props
     return (
-      <div className='c-dismiss'>
-        <div className='c-dismiss__toolbar'>
-         <i className='c-dismiss__dismiss fa fa-window-close' onClick={ ()=> onDismiss() }/>
-         <span className='c-dismiss__title'>{ title }</span>
-        </div>
-        <div className='c-dismiss__content'>
-         { content }
-        </div>
-      </div>
+      <CoolBox title={title} controls={this.renderControls()}>
+        { children }
+      </CoolBox>
     )
+  }
+
+  renderControls() {
+    const { onDismiss } = this.props
+    return <i className='fa fa-window-close text--large' onClick={ ()=> onDismiss() }/>
   }
 }
 
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch, ownState) => {
   return bindActionCreators({ onDimiss: ownState.onDimiss }, dispatch)
 }
 
-export const DismissableContainer = connect(mapStateToProps, mapDispatchToProps)(Dismissable)
+export const Dismissable = connect(mapStateToProps, mapDispatchToProps)(DismissableP)
