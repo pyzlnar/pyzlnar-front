@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from './../action-creators/navbar';
 
-class Navbar extends React.Component {
+class NavbarP extends React.Component {
   render() {
     const { items } = this.props;
     return(
@@ -72,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch);
 }
 
-export const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export const Navbar = connect(mapStateToProps, mapDispatchToProps)(NavbarP);

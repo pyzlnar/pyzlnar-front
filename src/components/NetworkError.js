@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { startSpin, stopSpin } from '../action-creators/networkError'
 
-class NetworkError extends React.Component {
+class NetworkErrorP extends React.Component {
   render() {
     const { retryAction, startSpin, stopSpin, spin } = this.props
     const spinClass = spin ? 'fa-spin' : null
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch, ownState) => {
   )
 }
 
-export const NetworkErrorContainer = connect(mapStateToProps, mapDispatchToProps)(NetworkError)
+export const NetworkError = connect(mapStateToProps, mapDispatchToProps)(NetworkErrorP)

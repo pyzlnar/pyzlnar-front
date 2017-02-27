@@ -10,13 +10,13 @@ import {
 } from '../action-creators/sites'
 import { fetchSites } from '../api/sites'
 
-import { CoolBox }               from './CoolBox'
-import { Dismissable }           from './Dismissable'
-import { Loading }               from './Loading'
-import { NetworkErrorContainer } from './NetworkError'
-import { Site }                  from './Site'
+import { CoolBox }      from './CoolBox'
+import { Dismissable }  from './Dismissable'
+import { Loading }      from './Loading'
+import { NetworkError } from './NetworkError'
+import { Site }         from './Site'
 
-class Sites extends React.Component {
+class SitesP extends React.Component {
   constructor(props) {
     super(props)
     this.props.setFeatured(this.props.selected)
@@ -32,7 +32,7 @@ class Sites extends React.Component {
   }
 
   shouldRenderError() {
-    return this.props.sites.fetchFailed
+    return this.props.fetchFailed
   }
 
   render() {
@@ -60,7 +60,7 @@ class Sites extends React.Component {
     if (this.shouldRenderSites()) {
       return this.renderSites()
     } else if (this.shouldRenderError()) {
-      return <NetworkErrorContainer retryAction={ fetchSites }/>
+      return <NetworkError retryAction={ fetchSites }/>
     } else {
       return <Loading />
     }
@@ -170,4 +170,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export const SitesContainer = connect(mapStateToProps, mapDispatchToProps)(Sites)
+export const Sites = connect(mapStateToProps, mapDispatchToProps)(SitesP)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavbarContainer } from './Navbar'
+import { Navbar } from './Navbar'
 
 export class Header extends React.Component {
   render(){
@@ -11,7 +11,7 @@ export class Header extends React.Component {
             <span className="c-header__title text--bold">Pyzlnar</span>
             <span className="c-header__subtitle">Systems engineer, Anime junkie, Dedicated gamer</span>
           </div>
-          <NavbarContainer />
+          <Navbar />
         </div>
       </div>
     );
