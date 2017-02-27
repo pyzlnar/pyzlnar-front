@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Navbar } from './Navbar'
 
 export class Header extends React.Component {
@@ -14,6 +14,6 @@ export class Header extends React.Component {
           <Navbar />
         </div>
       </div>
-    );
+    )
   }
 }

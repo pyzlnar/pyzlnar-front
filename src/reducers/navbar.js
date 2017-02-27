@@ -31,23 +31,23 @@ const initialState = [
     name: 'Projects',
     path: '/projects'
   }
-];
+]
 
 export default (state = initialState, action = {}) => {
   switch(action.type) {
     case types.enteringMenu:
-      return state.map((item) => toggleMenuHover(item, action));
+      return state.map(item => toggleMenuHover(item, action))
     case types.leavingMenu:
-      return state.map((item) => toggleMenuHover(item, action));
+      return state.map(item => toggleMenuHover(item, action))
     default:
-      return state;
+      return state
   }
 }
 
 const toggleMenuHover = (item, action) => {
   if (action.name === item.name) {
-    return {...item, hover: !item.hover};
+    return {...item, hover: !item.hover}
   } else {
-    return item;
+    return item
   }
 }

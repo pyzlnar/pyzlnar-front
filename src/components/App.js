@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Header } from './Header'
 
 export class App extends React.Component {
@@ -12,6 +12,6 @@ export class App extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
