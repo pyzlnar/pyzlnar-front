@@ -9,11 +9,11 @@ import {
 } from '../action-creators/projects'
 import { fetchProjects }           from '../api/projects'
 
-import { CoolBox }               from './CoolBox'
-import { Dismissable }           from './Dismissable'
-import { Loading }               from './Loading'
-import { NetworkErrorContainer } from './NetworkError'
-import { Project }               from './Project'
+import { CoolBox }      from './CoolBox'
+import { Dismissable }  from './Dismissable'
+import { Loading }      from './Loading'
+import { NetworkError } from './NetworkError'
+import { Project }      from './Project'
 
 class ProjectsP extends React.Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class ProjectsP extends React.Component {
     if (this.shouldRenderProjects()) {
       return this.renderProjects()
     } else if (this.shouldRenderError()) {
-      return <NetworkErrorContainer retryAction={ fetchProjects } />
+      return <NetworkError retryAction={ fetchProjects } />
     } else {
       return <Loading />
     }
@@ -78,7 +78,7 @@ class ProjectsP extends React.Component {
 
   renderFeatured() {
     const { featured, selected, dismissFeatured } = this.props
-    if (featured.dimissed || !featured.project) {
+    if (featured.dismissed || !featured.project) {
       return null
     }
 

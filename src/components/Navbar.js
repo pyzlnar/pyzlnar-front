@@ -1,30 +1,30 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from './../action-creators/navbar';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from '../action-creators/navbar'
 
-class Navbar extends React.Component {
+class NavbarP extends React.Component {
   render() {
-    const { items } = this.props;
+    const { items } = this.props
     return(
       <ul className="o-list-inline c-navbar">
         <div className="c-navbar__container">
           { items.map(item => this.renderItems(item)) }
         </div>
       </ul>
-    );
+    )
   }
 
   renderItems(item) {
     if (item.items) {
-      return this.renderMenu(item);
+      return this.renderMenu(item)
     } else {
-      return this.renderItem(item);
+      return this.renderItem(item)
     }
   }
 
   renderMenu(menu){
-    const { onMenuMouseEnter, onMenuMouseLeave } = this.props;
+    const { onMenuMouseEnter, onMenuMouseLeave } = this.props
     return (
       <li
         key={menu.name}
@@ -43,11 +43,11 @@ class Navbar extends React.Component {
       <ul className="o-list-bare c-navbar__dropdown">
         {items.map(item => this.renderItem(item, 'c-navbar__dropdown__item'))}
       </ul>
-    );
+    )
   }
 
   renderItem(item, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
-    const { onItemClick } = this.props;
+    const { onItemClick } = this.props
     return (
       <li
         key={item.name}
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
       >
       {item.name}
       </li>
-    );
+    )
   }
 }
 
@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch) => {
     onItemClick,
     onMenuMouseEnter,
     onMenuMouseLeave
-  }, dispatch);
+  }, dispatch)
 }
 
-export const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export const Navbar = connect(mapStateToProps, mapDispatchToProps)(NavbarP)

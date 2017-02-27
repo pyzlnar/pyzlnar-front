@@ -18,7 +18,6 @@ import navbarReducer       from './reducers/navbar'
 import networkErrorReducer from './reducers/networkError'
 import projectsReducer     from './reducers/projects'
 import sitesReducer        from './reducers/sites'
-import sitesListReducer    from './reducers/sitesList'
 
 // Reducers initialization
 const rootReducer = combineReducers({
@@ -27,7 +26,6 @@ const rootReducer = combineReducers({
   projects:     projectsReducer,
   routing:      routerReducer,
   sites:        sitesReducer,
-  sitesList:    sitesListReducer
 })
 
 // Store creation

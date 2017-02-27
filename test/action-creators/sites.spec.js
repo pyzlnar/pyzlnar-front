@@ -2,7 +2,11 @@ import {
   types,
   fetchingSites,
   fetchSuccess,
-  fetchError
+  fetchError,
+  setFeatured,
+  dismissFeatured,
+  toggleDisplay,
+  toggleFold
 } from '../../src/action-creators/sites'
 
 describe('ActionCreator: sites', () => {
@@ -32,6 +36,42 @@ describe('ActionCreator: sites', () => {
     it(`returns ${types.fetchError} action`, () => {
       const expected = { type: types.fetchError, response: 'irrelevant' }
       const result = fetchError('irrelevant')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('setFeatured(selected)', () => {
+    it(`returns ${types.setFeatured} action with the received argument`, () => {
+      const expected = { type: types.setFeatured, selected: 'thisone' }
+      const result = setFeatured('thisone')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('dismissFeatured()', () => {
+    it(`returns ${types.dismissFeatured} action`, () => {
+      const expected = { type: types.dismissFeatured }
+      const result = dismissFeatured()
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('toggleDisplay(display)', () => {
+    it(`returns ${types.toggleDisplay} action with the received argument`, () => {
+      const expected = { type: types.toggleDisplay, display: 'grid' }
+      const result = toggleDisplay('grid')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('toggleFold(code)', () => {
+    it(`returns ${types.toggleFold} action with the received argument`, () => {
+      const expected = { type: types.toggleFold, code: 'fold' }
+      const result = toggleFold('fold')
 
       expect(result).to.deep.equal(expected)
     })
