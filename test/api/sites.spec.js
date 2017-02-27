@@ -3,7 +3,8 @@ import { fetchSites } from '../../src/api/sites'
 import {
   fetchingSites,
   fetchSuccess,
-  fetchError
+  fetchError,
+  setFeatured
 } from '../../src/action-creators/sites'
 
 describe('Api: sites', () => {
@@ -49,6 +50,7 @@ describe('Api: sites', () => {
         const requestArgs = ['/api/sites', { success: fetchSuccess, error: fetchError }]
         expect(request).calledWith(...requestArgs)
         expect(dispatch).calledWith('PROMISE_RESPONSE')
+        expect(dispatch).calledWith(setFeatured())
       })
     })
   })

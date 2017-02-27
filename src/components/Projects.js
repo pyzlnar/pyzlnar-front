@@ -78,7 +78,7 @@ class ProjectsP extends React.Component {
 
   renderFeatured() {
     const { featured, selected, dismissFeatured } = this.props
-    if (featured.dimissed || !featured.project) {
+    if (featured.dismissed || !featured.project) {
       return null
     }
 

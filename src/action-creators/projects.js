@@ -13,20 +13,20 @@ export const fetchingProjects = () => {
   return { type: types.fetching }
 }
 
-export const fetchSuccess = json => {
-  return { type: types.fetched, projects: json }
+export const fetchSuccess = projects => {
+  return { type: types.fetched, projects }
 }
 
 export const fetchError = response => {
-  return { type: types.fetchError, response: response }
+  return { type: types.fetchError, response }
 }
 
 export const toggleFold = code => {
-  return { type: types.toggleFold, code: code }
+  return { type: types.toggleFold, code }
 }
 
 export const setFeatured = selected => {
-  return { type: types.setFeatured, selected: selected }
+  return { type: types.setFeatured, selected }
 }
 
 export const dismissFeatured = () => {

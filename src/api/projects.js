@@ -6,7 +6,7 @@ import {
   setFeatured
 } from '../action-creators/projects'
 
-export const fetchProjects = (selected) => {
+export const fetchProjects = selected => {
   return (dispatch, getState) => {
     const projects = getState().projects.projects
     if (projects.length === 0) {

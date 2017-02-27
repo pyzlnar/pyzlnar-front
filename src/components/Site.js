@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class Site extends React.Component {
+class SiteP extends React.Component {
   render() {
     const { fold } = this.props
     return fold ? this.renderFolded() : this.renderExtended()
@@ -111,4 +111,4 @@ const mapDispatchToProps = (dispatch, ownState) => {
   return bindActionCreators({ onFoldClick: ownState.onFoldClick }, dispatch)
 }
 
-export const SiteContainer = connect(mapStateToProps)(Site)
+export const Site = connect(mapStateToProps)(SiteP)

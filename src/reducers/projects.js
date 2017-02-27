@@ -51,7 +51,7 @@ const setFeatured = (state, action) => {
     ...state,
     featured: {
       ...state.featured,
-      project:  project
+      project: project
     }
   }
 }
