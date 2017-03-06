@@ -66,11 +66,11 @@ export class Project extends React.Component {
 
   renderLink(project) {
     if (!project.url) {
-      return <i className='fa fa-external-link-square text--small text--super u-clickable' />
+      return <i className='fa fa-external-link-square text--tiny text--super u-clickable' />
     }
     return (
       <a href={ project.url } target='_blank'>
-        <i className='fa fa-external-link text--small text--super u-clickable--light' />
+        <i className='fa fa-external-link text--tiny text--super u-clickable--light' />
       </a>
     )
   }

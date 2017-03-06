@@ -63,7 +63,7 @@ class SiteP extends React.Component {
       <div>
         <span className='u-h4 u-h3@tablet'> { site.name } </span>
         <a className='c-site__link text--small text--normal@tablet' href={ site.url } target='_blank'>
-          <i className='fa fa-external-link' />
+          <i className='fa fa-external-link text--tiny text--small@tablet' />
         </a>
       </div>
     )
