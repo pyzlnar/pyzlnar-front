@@ -7,7 +7,7 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-rou
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import 'font-awesome-webpack'
+import 'font-awesome/css/font-awesome.css'
 
 // Local Imports
 import { appRoutes } from './routes'
