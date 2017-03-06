@@ -28,13 +28,19 @@ const rootReducer = combineReducers({
   sites:        sitesReducer,
 })
 
-// Store creation
-const loggerMiddleware = createLogger()
+// Middleware initialization
+let devMiddleware = []
+if (process.env.NODE_ENV !== 'production') {
+  const loggerMiddleware = createLogger()
+  devMiddleware = [loggerMiddleware]
+}
 const middleware = [
   routerMiddleware(browserHistory),
   thunkMiddleware,
-  loggerMiddleware
+  ...devMiddleware
 ]
+
+// Store creation
 const store = createStore(rootReducer, applyMiddleware(...middleware))
 const history = syncHistoryWithStore(browserHistory, store)
 
