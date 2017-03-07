@@ -1,7 +1,15 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import {
+  prevImage,
+  nextImage
+} from '../action-creators/rem'
+
 import { CoolBox } from './CoolBox'
 
-export class Rem extends React.Component {
+class RemP extends React.Component {
   render() {
     return (
       <div>
@@ -45,22 +53,37 @@ export class Rem extends React.Component {
   }
 
   renderCarrousel() {
+    const { prevImage, nextImage } = this.props
+    const { image } = this.props.current
+    const imageUrl = `/static/img/rem/${image}`
     return (
       <CoolBox>
         <div className='c-carrousel'>
-          <div className='c-carrousel__float c-carrousel__float--left'>
+          <div className='c-carrousel__float c-carrousel__float--left' onClick={ () => prevImage() }>
             <div className='c-carrousel__control'>
               <i className='fa fa-chevron-left fa-3x' />
             </div>
           </div>
-          <div className='c-carrousel__float c-carrousel__float--right'>
+          <div className='c-carrousel__float c-carrousel__float--right' onClick={ () => nextImage() }>
             <div className='c-carrousel__control'>
               <i className='fa fa-chevron-right fa-3x' />
             </div>
           </div>
-          <img className='c-carrousel__image' src={'static/img/rem/remaids.jpg'} />
+          <a href={ imageUrl } target='_blank'>
+            <img className='c-carrousel__image' src={imageUrl} />
+          </a>
         </div>
       </CoolBox>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return { ...state.rem }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ prevImage, nextImage }, dispatch)
+}
+
+export const Rem = connect(mapStateToProps, mapDispatchToProps)(RemP)
