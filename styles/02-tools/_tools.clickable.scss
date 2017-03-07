@@ -14,6 +14,7 @@
 }
 
 @mixin clickable-dark {
+  @include clickable
   color: $primary-dark-color;
   &:hover {
     color: $white;
