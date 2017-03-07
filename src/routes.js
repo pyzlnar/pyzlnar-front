@@ -8,6 +8,7 @@ import { Home }     from './components/Home'
 import { About }    from './components/About'
 import { Sites }    from './components/Sites'
 import { Projects } from './components/Projects'
+import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
 
 export const appRoutes = () => {
@@ -18,6 +19,7 @@ export const appRoutes = () => {
       <Route component={ About }    path='/about(/:who)'        />
       <Route component={ Sites }    path='/sites(/:site)'       />
       <Route component={ Projects } path='/projects(/:project)' />
+      <Route component={ Rem }      path='/rem'                 />
       <Route component={ NotFound } path='*'                    />
     </Route>
   )
