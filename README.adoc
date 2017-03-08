@@ -25,24 +25,138 @@ the design is kinda ugly.
 == Installation
 
 === Requirements
+
 You will need the following installed to be able to run the front end:
 
+* git +
+  Should go without saying. Get yourself git
+  link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[installed].
 * node.js v5.4.1+ +
   I recommend you install it via link:https://github.com/creationix/nvm[nvm].
 * yarn +
   Installation instructions can be found
   link:https://yarnpkg.com/en/docs/install[here].
 * pyzlnar-back +
-  [WIP] You'll need the backend to be running to be able to serve local
-  requests.
+  You'll need the back end up and running to be able to get the API responses. +
+  Installation instructions can be found
+  link:https://github.com/pyzlnar/pyzlnar-back[here].
 
-=== Running
+=== Source Code
+
+Clone the repo into your machine, and then change to the directory before you
+run anything else.
 
 [source, bash]
 ----
-# This installs all the dependencies.
-$ yarn
+# Create a root directory first if you haven't already.
+# The directory structure is not needed, but I like working this way.
+$ mkdir pyzlnar
 
-# This runs the webserver in localhost:8080
-$ yarn run dev
+# Clone the repo into front
+$ git clone git@github.com:pyzlnar/pyzlnar-front.git pyzlnar/front
+
+# Change to front directory
+$ cd pyzlnar/front
 ----
+
+With the back repo, directories will look like this.
+
+[source, bash]
+----
+$ tree pyzlnar/ -L 1
+pyzlnar/
+├── back
+└── front
+----
+
+=== Dependencies
+
+Now you need to install all the dependencies. Fortunately this is done quite
+easily with the help of yarn.
+
+[source, bash]
+----
+$ yarn install
+
+# Or if you're feeling fancy, simply
+$ yarn
+----
+
+== Running
+
+* Development +
+  Runs the server in development mode. Everything will be non obfuscated, and
+  changes will cause an automatic reload. Default port is `8080`.
+
+[source, bash]
+----
+# http://localhost:8080
+$ yarn dev
+----
+
+* Development Build +
+  Runs the server in a build mode for development. This emulates production, but
+  also serves the files. JS and CSS will be compiled and obfuscated. Hot reload
+  will also be available but it's obviously slower. Also uses port `8080`.
+
+[source, bash]
+----
+# http://localhost:8080
+$ yarn dev:build
+----
+
+* Production Build +
+  Builds all the assets, obfuscating them. Also copies all the images into the
+  public folder. Since this just compiles files and expects something else to
+  serve them (nginx) it doesn't need a port. It takes a couple of seconds so be
+  patient.
+
+[source, bash]
+----
+$ yarn build
+----
+
+== Tests
+
+Running the tests is very easy! You just need to do:
+
+[source, bash]
+----
+$ yarn test
+----
+
+And enjoy the nice output! Have that sense of relief that you have not killed
+anything.
+
+Fair warning though, I don't have component tests as of yet.
+It feels weird to test them when they're super volatile, but maybe that's
+exactly why I should. At some point I'll probably add some minimalistic tests
+to ensure that at least I don't get weird errors.
+
+== TODO
+
+image:https://i1.wp.com/pyzlnar.files.wordpress.com/2012/06/todo.jpg[Todo,200]
+
+Small list of features that may be coming in the future.
+
+* Update to Webpack 2
+* Better responsive design
+* Better way to load static content (Eg. text)
+
+== License
+
+=== Source Code
+
+Source Code is released under the
+https://opensource.org/licenses/MIT[MIT License].
+
+=== Images
+
+If you believe an image infringes upon your copyright, please send an email
+through github with the following pieces of information:
+
+Keep in mind we only respect requests from original artists or copyright owners,
+not derivative works.
+
+* The URL of the infringing image.
+* Proof that you own the copyright.
