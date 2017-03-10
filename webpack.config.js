@@ -42,7 +42,7 @@ function getBuildConfig() {
     ],
     output: {
       path: 'static',
-      publicPath: 'static/'
+      publicPath: '/static/'
     },
     devtool: 'cheap-module-source-map',
     resolve: {
