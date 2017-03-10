@@ -1,0 +1,22 @@
+// For when you need text to be clickable
+
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+@mixin clickable-light {
+  @include clickable
+  color: $white;
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+@mixin clickable-dark {
+  @include clickable
+  color: $primary-dark-color;
+  &:hover {
+    color: $white;
+  }
+}

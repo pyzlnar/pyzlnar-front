@@ -1,0 +1,46 @@
+// Text align
+.text--center {
+  text-align: center !important;
+}
+
+.text--left {
+  text-align: left !important;
+}
+
+.text--right {
+  text-align: right !important;
+}
+
+// Text modifiers
+.text--bold {
+  font-weight: bold !important;
+}
+
+.text--capitalize {
+  text-transform: capitalize !important;
+}
+
+.text--italic {
+  font-style: italic !important;
+}
+
+.text--super {
+  vertical-align: super !important;
+}
+
+// Text size
+$text-sizes: 'tiny' 'small' 'normal' 'large' 'huge';
+
+@each $text-size in $text-sizes {
+  .text--#{$text-size} {
+    @include font-size($text-size, true);
+  }
+
+  @each $inuit-bp-name, $inuit-bp-value in $mq-breakpoints {
+    .text--#{$text-size}#{$inuit-widths-breakpoint-separator}#{$inuit-bp-name} {
+      @include mq($from: $inuit-bp-name) {
+        @include font-size($text-size, true);
+      }
+    }
+  }
+}

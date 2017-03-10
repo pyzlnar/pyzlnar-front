@@ -1,0 +1,11 @@
+.u-clickable {
+  @include clickable;
+
+  &--light {
+    @include clickable-light
+  }
+
+  &--dark {
+    @include clickable-dark
+  }
+}

@@ -1,0 +1,48 @@
+$carrousel-height: 480px;
+
+.c-carrousel {
+  position: relative;
+
+  &__float {
+    height: 100%;
+    width:  15%;
+
+    position: absolute;
+    top:  0;
+    z-index: 1;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  &__control {
+    @include clickable-dark
+    background: $black;
+    height: 100%;
+    text-align: center;
+    opacity: 0;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -0.25em;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__image {
+    display: block;
+    margin: 0 auto;
+    max-height: $carrousel-height;
+  }
+}

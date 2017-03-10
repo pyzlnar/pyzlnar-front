@@ -1,0 +1,24 @@
+$sites-list-logo-size: 80px;
+$sites-list-vspace: 0.3rem;
+
+.c-sites-list {
+  &__selector {
+    @include font-size-small;
+    @include clickable-dark;
+    margin-left: 0.3rem;
+    &--muted {
+      color: $white;
+    }
+  }
+
+  &__item {
+    padding-top: $sites-list-vspace;
+  }
+
+  &__link {
+    display: block;
+    margin: auto;
+    height: $sites-list-logo-size;
+    width:  $sites-list-logo-size;
+  }
+}

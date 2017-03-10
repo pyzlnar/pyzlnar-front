@@ -1,0 +1,41 @@
+$site-logo-size: 50px;
+
+.c-site {
+  border-bottom: 1px solid $tertiary-light-color;
+  padding: 0.4rem;
+
+  &__logo {
+    float: left;
+    margin-right: 0.5rem;
+    height: $site-logo-size;
+  }
+
+  &__link {
+    color: $white;
+    vertical-align: super;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  &__chevron {
+    @include clickable
+    float: right;
+    color: $primary-light-color;
+    padding: $site-logo-size / 3;
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__desc {
+    padding: 0.5rem;
+  }
+
+  &--extended {
+    .c-site__logo {
+      height: $site-logo-size * 1.5;
+      float: none;
+    }
+  }
+}

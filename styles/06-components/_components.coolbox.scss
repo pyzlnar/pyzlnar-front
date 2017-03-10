@@ -1,0 +1,35 @@
+.c-coolbox {
+  @include palette-light-shade;
+
+  &__toolbar {
+    @include palette-dark;
+    padding: 0.2rem 0.4rem;
+
+    &--small {
+      padding: 0 0.4rem;
+    }
+
+    &--tiny {
+      padding: 0;
+    }
+  }
+
+  &__title {
+    @extend .u-h5;
+  }
+
+  &__controls {
+    @include clickable;
+    float: right;
+  }
+
+  &__clear {
+    clear: both;
+  }
+
+  &__item {
+    &--bordered {
+      border-bottom: solid 1px $tertiary_color;
+    }
+  }
+}

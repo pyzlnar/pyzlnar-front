@@ -1,0 +1,39 @@
+// Helpers for font size
+
+@mixin font-size($size, $important: false) {
+  @if ($size == 'tiny') {
+    @include inuit-font-size($inuit-global-font-size - 4, auto, $important)
+  }
+  @else if ($size == 'small') {
+    @include inuit-font-size($inuit-global-font-size - 2, auto, $important)
+  }
+  @else if ($size == 'normal') {
+    @include inuit-font-size($inuit-global-font-size, auto, $important)
+  }
+  @else if ($size == 'large') {
+    @include inuit-font-size($inuit-global-font-size + 2, auto, $important)
+  }
+  @else if ($size == 'huge') {
+    @include inuit-font-size($inuit-global-font-size + 4, auto, $important)
+  }
+}
+
+@mixin font-size-tiny {
+  @include font-size('tiny')
+}
+
+@mixin font-size-small {
+  @include font-size('small')
+}
+
+@mixin font-size-normal {
+  @include font-size('normal')
+}
+
+@mixin font-size-large {
+  @include font-size('large')
+}
+
+@mixin font-size-huge {
+  @include font-size('huge')
+}
