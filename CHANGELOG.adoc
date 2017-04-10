@@ -9,6 +9,12 @@
 
 = Changelog
 
+== v1.0.1
+2017-04-09
+
+- :green_book: Changed "Systems Engineer" to "Software Engineer"
+- :green_book: Fixed clone instructions in README
+
 == v1.0.0
 2017-03-10
 
