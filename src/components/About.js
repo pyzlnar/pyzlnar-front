@@ -51,7 +51,7 @@ export class About extends React.Component {
         <p>
           It's actually a bit hard for me to write about myself, since I do shy away from doing so
           in the internet. Long story short, I'm a 20+ y.o. mexican, anime junkie and gamer that
-          also happens to be a systems engineer.
+          also happens to be a software engineer.
         </p>
 
         <h3>Anime</h3>
@@ -86,7 +86,7 @@ export class About extends React.Component {
           wasn't having fun doing it.
         </p>
         <p>
-          I'm a systems engineer by career, and nowadays I concentrate mostly on Ruby on Rails.
+          I'm a software engineer by career, and nowadays I concentrate mostly on Ruby on Rails.
           Ruby is an awesome language to work with, and its metaprogramming and open class make it
           such a powerful tool despite the obvious downside of being a slow language. I've even made
           a (in my opinion) pretty decent gem which you can find over projects.
