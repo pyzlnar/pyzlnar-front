@@ -1,14 +1,13 @@
 const webpack = require('webpack');
 
 const webpackConfig = {
-  colors: true,
   devtool: 'inline-source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|jspm_packages)/,
-        loader: 'babel',
+        loader: 'babel-loader',
       }
     ],
     noParse: [
@@ -43,7 +42,7 @@ module.exports = (config) => {
       '/test/': './test/',
       '/node_modules/': './node_modules/'
     },
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
       'node_modules/sinon-stub-promise/index.js',
