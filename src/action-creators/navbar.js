@@ -1,18 +1,50 @@
-import { push } from 'react-router-redux'
+// Action Creators for navbar
 
-export const types = {
-  enteringMenu: 'navbar/ENTERING_MENU',
-  leavingMenu:  'navbar/LEAVING_MENU'
+export const getInitialState = () => {
+  return {
+    items: [
+      {
+        name: 'Home',
+        path: '/'
+      },
+      {
+        name: 'About',
+        hover: false,
+        items: [
+          {
+            name: 'Me',
+            path: '/about/me'
+          },
+          {
+            name: 'Pyzlnar',
+            path: '/about/pyzlnar'
+          },
+          {
+            name: 'Site',
+            path: '/about/site'
+          }
+        ]
+      },
+      {
+        name: 'Sites',
+        path: '/sites'
+      },
+      {
+        name: 'Projects',
+        path: '/projects'
+      }
+    ]
+  }
 }
 
-export const onItemClick = path => {
-  return push(path)
-}
-
-export const onMenuMouseEnter = name => {
-  return { type: types.enteringMenu, name }
-}
-
-export const onMenuMouseLeave = name => {
-  return { type: types.leavingMenu, name }
+export const toggleHover = (state, which) => {
+  const { items } = state
+  const newItems  = items.map( item => {
+    if (which === item.name) {
+      return {...item, hover: !item.hover}
+    } else {
+      return item
+    }
+  })
+  return { items: newItems }
 }

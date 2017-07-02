@@ -1,11 +1,20 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from '../action-creators/navbar'
+import { push } from 'react-router-redux'
 
-class NavbarP extends React.Component {
+import {
+  getInitialState,
+  toggleHover
+} from '../action-creators/navbar'
+
+export class NavbarP extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = getInitialState()
+  }
+
   render() {
-    const { items } = this.props
+    const { items } = this.state
     return(
       <ul className="o-list-inline c-navbar">
         <div className="c-navbar__container">
@@ -28,8 +37,8 @@ class NavbarP extends React.Component {
     return (
       <li
         key={menu.name}
-        onMouseEnter={()=> onMenuMouseEnter(menu.name)}
-        onMouseLeave={()=> onMenuMouseLeave(menu.name)}
+        onMouseEnter={()=> this.setState(prevState => toggleHover(prevState, menu.name))}
+        onMouseLeave={()=> this.setState(prevState => toggleHover(prevState, menu.name))}
         className="o-list-inline__item c-navbar__item c-navbar__item--menu"
       >
         <div>{menu.name}</div>
@@ -47,11 +56,11 @@ class NavbarP extends React.Component {
   }
 
   renderItem(item, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
-    const { onItemClick } = this.props
+    const { dispatch } = this.props
     return (
       <li
         key={item.name}
-        onClick={() => onItemClick(item.path)}
+        onClick={() => dispatch(push(item.path))}
         className={className}
       >
       {item.name}
@@ -60,16 +69,4 @@ class NavbarP extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { items: state.navbar }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    onItemClick,
-    onMenuMouseEnter,
-    onMenuMouseLeave
-  }, dispatch)
-}
-
-export const Navbar = connect(mapStateToProps, mapDispatchToProps)(NavbarP)
+export const Navbar = connect()(NavbarP)

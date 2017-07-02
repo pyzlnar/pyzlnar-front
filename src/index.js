@@ -14,13 +14,11 @@ import { appRoutes } from './routes'
 import './../styles/app.scss'
 
 // Reducer Imports
-import navbarReducer       from './reducers/navbar'
 import projectsReducer     from './reducers/projects'
 import sitesReducer        from './reducers/sites'
 
 // Reducers initialization
 const rootReducer = combineReducers({
-  navbar:       navbarReducer,
   projects:     projectsReducer,
   routing:      routerReducer,
   sites:        sitesReducer,
