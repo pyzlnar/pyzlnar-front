@@ -24,6 +24,15 @@ const webpackConfig = {
   }
 }
 
+let browser;
+switch(process.env.KARMA_BROWSER) {
+  case 'phantomjs':
+    browser = ['PhantomJS']
+    break;
+  default:
+    browser = ['Chrome']
+}
+
 module.exports = (config) => {
   config.set({
     basePath: './',
@@ -42,7 +51,7 @@ module.exports = (config) => {
       '/test/': './test/',
       '/node_modules/': './node_modules/'
     },
-    browsers: ['Chrome'],
+    browsers: browser,
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
       'node_modules/sinon-stub-promise/index.js',
