@@ -7,12 +7,11 @@ const getHtmlConfig = require('./getHtmlConfig');
 
 module.exports = function() {
   return merge(getHtmlConfig(), {
-    progress: true,
     output: {
       filename: "[name].[hash].bundle.js",
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.(png|gif|jpe?g|svg)$/i,
           loader: 'file-loader',
@@ -25,7 +24,7 @@ module.exports = function() {
           test: /\.js$/,
           exclude: /(node_modules)/,
           loaders: [
-            'babel'
+            'babel-loader'
           ]
         },
 
@@ -37,7 +36,11 @@ module.exports = function() {
 
         {
           test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          loader: "url-loader?limit=10000&minetype=application/font-woff"
+          loader: 'url-loader',
+          options: {
+            limit: 100000,
+            mimetype: 'application/font-woff'
+          }
         },
 
         {

@@ -1,7 +1,6 @@
 const path     = require('path');
 const webpack  = require('webpack');
 const merge    = require('webpack-merge');
-const validate = require('webpack-validator');
 
 // ENV variables
 const localhost = 'http://127.0.0.1';
@@ -21,13 +20,13 @@ const uglify = require('./build/uglify');
 var config;
 switch(TARGET) {
   case 'build':
-    config = validate(getBuildConfig());
+    config = getBuildConfig();
     break;
   case 'dev:build':
-    config = validate(getDevBuildConfig());
+    config = getDevBuildConfig();
     break;
   default:
-    config = validate(getDevConfig());
+    config = getDevConfig();
 }
 module.exports = config;
 
@@ -41,7 +40,7 @@ function getBuildConfig() {
       path.join(__dirname, 'src', 'index.js')
     ],
     output: {
-      path: 'static',
+      path: path.resolve(__dirname, 'static'),
       publicPath: '/static/'
     },
     devtool: 'cheap-module-source-map',
@@ -51,9 +50,6 @@ function getBuildConfig() {
         'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom', 'dist', 'react-dom.js')
       }
     },
-    plugins: [
-      new webpack.optimize.DedupePlugin()
-    ]
   },
   css(isBuild = true),
   uglify(),

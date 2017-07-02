@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -5,26 +6,33 @@ const autoprefixer = require('autoprefixer');
 // Helps load the CSS correctly, extract it into a separate file when building
 module.exports = function(isBuild) {
   const baseCss = {
-    postcss: (webpack) => {
-      return {
-        plugins: [
-          autoprefixer({
-            browsers: ['> 5%']
-          })
-        ]
-      }
-    }
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          postcss: [
+            autoprefixer({ browsers: ['> 5%'] })
+          ]
+        }
+      })
+    ]
   }
 
   const buildCss = {
     plugins: [
-      new ExtractTextPlugin(`css/[name].[chunkhash].css`)
+      new ExtractTextPlugin('css/[name].[contenthash].css')
     ],
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.(css|scss)$/,
-          loader: ExtractTextPlugin.extract('style-loader', '!css-loader!postcss-loader!sass-loader')
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader',
+              'postcss-loader',
+              'sass-loader'
+            ]
+          })
         }
       ]
     }
@@ -32,10 +40,15 @@ module.exports = function(isBuild) {
 
   const devCss = {
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.(css|scss)$/,
-          loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+          use: [
+            'style-loader',
+            'css-loader',
+            'postcss-loader',
+            'sass-loader'
+          ]
         }
       ]
     }
