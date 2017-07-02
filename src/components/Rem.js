@@ -1,15 +1,19 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
 import {
+  getInitialState,
   prevImage,
   nextImage
 } from '../action-creators/rem'
 
 import { CoolBox } from './CoolBox'
 
-class RemP extends React.Component {
+export class Rem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = getInitialState()
+  }
+
   render() {
     return (
       <div>
@@ -53,18 +57,23 @@ class RemP extends React.Component {
   }
 
   renderCarrousel() {
-    const { prevImage, nextImage } = this.props
-    const { image } = this.props.current
+    const { image } = this.state.current
     const imageUrl = `/static/img/rem/${image}`
     return (
       <CoolBox>
         <div className='c-carrousel'>
-          <div className='c-carrousel__float c-carrousel__float--left' onClick={ () => prevImage() }>
+          <div
+            className='c-carrousel__float c-carrousel__float--left'
+            onClick={ () => this.setState(prevImage(this.state)) }
+          >
             <div className='c-carrousel__control'>
               <i className='fa fa-chevron-left fa-3x' />
             </div>
           </div>
-          <div className='c-carrousel__float c-carrousel__float--right' onClick={ () => nextImage() }>
+          <div
+            className='c-carrousel__float c-carrousel__float--right'
+            onClick={ () => this.setState(nextImage(this.state)) }
+          >
             <div className='c-carrousel__control'>
               <i className='fa fa-chevron-right fa-3x' />
             </div>
@@ -77,13 +86,3 @@ class RemP extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  return { ...state.rem }
-}
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ prevImage, nextImage }, dispatch)
-}
-
-export const Rem = connect(mapStateToProps, mapDispatchToProps)(RemP)

@@ -16,14 +16,12 @@ import './../styles/app.scss'
 // Reducer Imports
 import navbarReducer       from './reducers/navbar'
 import projectsReducer     from './reducers/projects'
-import remReducer          from './reducers/rem'
 import sitesReducer        from './reducers/sites'
 
 // Reducers initialization
 const rootReducer = combineReducers({
   navbar:       navbarReducer,
   projects:     projectsReducer,
-  rem:          remReducer,
   routing:      routerReducer,
   sites:        sitesReducer,
 })
