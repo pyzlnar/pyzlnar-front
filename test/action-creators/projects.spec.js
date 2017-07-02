@@ -50,7 +50,7 @@ describe('ActionCreator: projects', () => {
   })
 
   describe('setFeatured(selected)', () => {
-    it(`return ${types.setFeatured} action`, () => {
+    it(`returns ${types.setFeatured} action`, () => {
       const expected = { type: types.setFeatured, selected: 'this' }
       const result = setFeatured('this')
 
@@ -59,7 +59,7 @@ describe('ActionCreator: projects', () => {
   })
 
   describe('dismissFeatured()', () => {
-    it(`return ${types.dismissFeatured} action`, () => {
+    it(`returns ${types.dismissFeatured} action`, () => {
       const expected = { type: types.dismissFeatured }
       const result = dismissFeatured()
 
