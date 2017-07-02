@@ -1,44 +1,55 @@
-import { push }  from 'react-router-redux'
+import deepFreeze from 'deep-freeze'
 import {
-  types,
-  onItemClick,
-  onMenuMouseEnter,
-  onMenuMouseLeave
+  getInitialState,
+  toggleHover
 } from '../../src/action-creators/navbar'
 
 describe('ActionCreator: navbar', () => {
-  describe('onItemClick(path)', () => {
-    it('calls push(path) and returns the result', () => {
-      const path = '/random'
-      const expected = push(path)
-      const result = onItemClick(path)
-
-      expect(result).to.deep.equal(expected)
+  describe('getInitialState()', () => {
+    it('returns the initialState of the component', () => {
+      const state = getInitialState()
+      expect(state).to.have.property('items')
     })
   })
 
-  describe('onMenuMouseEnter(name)', () => {
-    it(`returns ${types.enteringMenu} action`, () => {
-      const name = 'dummy'
+  describe('toggleHover(state, which)', () => {
+    it('returns a new state with hover active', () => {
+      const state = {
+        items: [
+          { name: 'other', hover: false },
+          { name: 'dummy', hover: false }
+        ]
+      }
+      deepFreeze(state)
+
       const expected = {
-        type: types.enteringMenu,
-        name: name
+        items: [
+          { name: 'other', hover: false },
+          { name: 'dummy', hover: true  }
+        ]
       }
 
-      const result = onMenuMouseEnter(name)
+      const result = toggleHover(state, 'dummy')
       expect(result).to.deep.equal(expected)
     })
-  })
 
-  describe('onMenuMouseLeave(name)', () => {
-    it(`returns ${types.leavingMenu} action`, () => {
-      const name = 'dummy'
+    it('returns a new state with hover not active', () => {
+      const state = {
+        items: [
+          { name: 'other', hover: true },
+          { name: 'dummy', hover: true }
+        ]
+      }
+      deepFreeze(state)
+
       const expected = {
-        type: types.leavingMenu,
-        name: name
+        items: [
+          { name: 'other', hover: true  },
+          { name: 'dummy', hover: false }
+        ]
       }
 
-      const result = onMenuMouseLeave(name)
+      const result = toggleHover(state, 'dummy')
       expect(result).to.deep.equal(expected)
     })
   })
