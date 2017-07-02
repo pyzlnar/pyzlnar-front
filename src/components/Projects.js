@@ -61,7 +61,7 @@ class ProjectsP extends React.Component {
     if (this.shouldRenderProjects()) {
       return this.renderProjects()
     } else if (this.shouldRenderError()) {
-      return <NetworkError retryAction={ fetchProjects } />
+      return <NetworkError retryAction={ this.props.fetchProjects } />
     } else {
       return <Loading />
     }

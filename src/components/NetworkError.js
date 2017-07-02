@@ -1,11 +1,14 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { startSpin, stopSpin } from '../action-creators/networkError'
 
-class NetworkErrorP extends React.Component {
+export class NetworkError extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { spin: false }
+  }
+
   render() {
-    const { retryAction, startSpin, stopSpin, spin } = this.props
+    const { spin } = this.state
+    const { retryAction } = this.props
     const spinClass = spin ? 'fa-spin' : null
 
     return (
@@ -22,8 +25,8 @@ class NetworkErrorP extends React.Component {
           <span
             className='u-clickable u-clickable--light'
             onClick={ () => retryAction() }
-            onMouseEnter={ () => startSpin() }
-            onMouseLeave={ () => stopSpin()  }
+            onMouseEnter={ () => this.setState({spin: true}) }
+            onMouseLeave={ () => this.setState({spin: false})  }
           >
             <i className={ `fa fa-refresh ${spinClass}` } />
             <span> Retry? </span>
@@ -33,16 +36,3 @@ class NetworkErrorP extends React.Component {
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return { ...state.networkError }
-}
-
-const mapDispatchToProps = (dispatch, ownState) => {
-  return bindActionCreators(
-    { retryAction: ownState.retryAction, startSpin, stopSpin },
-    dispatch
-  )
-}
-
-export const NetworkError = connect(mapStateToProps, mapDispatchToProps)(NetworkErrorP)
