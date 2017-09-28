@@ -21,14 +21,13 @@ describe('Api: projects', () => {
         dispatch = sinon.spy()
         request  = sinon.stub(helper, 'request')
         request.returnsPromise()
-        request.resolves('PROMISE_RESPONSE')
       })
 
       afterEach(() => {
         request.restore()
       })
 
-      it('doesnt call anything when projects is not empty', () => {
+      it('calls nothing when projects is not empty', () => {
         const getState = () => {
           return { projects: { projects: ['something'] } }
         }
@@ -39,18 +38,33 @@ describe('Api: projects', () => {
         expect(request).not.called
       })
 
-      it('calls several dispatches when projects is empty', () => {
+      it('calls needed dispatches when request succeeds', () => {
+        const json = { response: 'body' }
         const getState = () => {
           return { projects: { projects: [] } }
         }
 
+        request.resolves({ json })
         f(dispatch, getState)
 
         expect(dispatch).calledWith(fetchingProjects())
-        const requestArgs = ['/api/projects', { success: fetchSuccess, error: fetchError }]
-        expect(request).calledWith(...requestArgs)
-        expect(dispatch).calledWith('PROMISE_RESPONSE')
+        expect(request).calledWith('/api/projects')
+        expect(dispatch).calledWith(fetchSuccess(json))
         expect(dispatch).calledWith(setFeatured())
+      })
+
+      it('calls needed dispatches when request fails', () => {
+        const json = { response: 'body' }
+        const getState = () => {
+          return { projects: { projects: [] } }
+        }
+
+        request.rejects({ json })
+        f(dispatch, getState)
+
+        expect(dispatch).calledWith(fetchingProjects())
+        expect(request).calledWith('/api/projects')
+        expect(dispatch).calledWith(fetchError())
       })
     })
   })

@@ -18,8 +18,8 @@ export const fetchSuccess = sites => {
   return { type: types.fetched, sites }
 }
 
-export const fetchError = response => {
-  return { type: types.fetchError, response }
+export const fetchError = () => {
+  return { type: types.fetchError }
 }
 
 export const setFeatured = selected => {

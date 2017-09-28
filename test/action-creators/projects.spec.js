@@ -33,8 +33,8 @@ describe('ActionCreator: projects', () => {
 
   describe('fetchError(response)', () => {
     it(`returns ${types.fetchError} action`, () => {
-      const expected = { type: types.fetchError, response: 'irrelevant' }
-      const result = fetchError('irrelevant')
+      const expected = { type: types.fetchError }
+      const result = fetchError()
 
       expect(result).to.deep.equal(expected)
     })

@@ -11,11 +11,12 @@ export const fetchProjects = selected => {
     const projects = getState().projects.projects
     if (projects.length === 0) {
       dispatch(fetchingProjects())
-      request('/api/projects', { success: fetchSuccess, error: fetchError })
-        .then(action => {
-          dispatch(action)
+      request('/api/projects')
+        .then(result => {
+          dispatch(fetchSuccess(result.json))
           dispatch(setFeatured(selected))
         })
+        .catch(result => dispatch(fetchError()))
     }
   }
 }

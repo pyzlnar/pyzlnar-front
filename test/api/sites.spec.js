@@ -21,14 +21,13 @@ describe('Api: sites', () => {
         dispatch = sinon.spy()
         request  = sinon.stub(helper, 'request')
         request.returnsPromise()
-        request.resolves('PROMISE_RESPONSE')
       })
 
       afterEach(() => {
         request.restore()
       })
 
-      it('doesnt call anything when sites is not empty', () => {
+      it('calls nothing when sites is not empty', () => {
         const getState = () => {
           return { sites: { sites: ['something'] } }
         }
@@ -39,18 +38,33 @@ describe('Api: sites', () => {
         expect(request).not.called
       })
 
-      it('calls several dispatches when sites is empty', () => {
+      it('calls needed dispatches when request succeeds', () => {
+        const json = { response: 'body' }
         const getState = () => {
           return { sites: { sites: [] } }
         }
 
+        request.resolves({ json })
         f(dispatch, getState)
 
         expect(dispatch).calledWith(fetchingSites())
-        const requestArgs = ['/api/sites', { success: fetchSuccess, error: fetchError }]
-        expect(request).calledWith(...requestArgs)
-        expect(dispatch).calledWith('PROMISE_RESPONSE')
+        expect(request).calledWith('/api/sites')
+        expect(dispatch).calledWith(fetchSuccess(json))
         expect(dispatch).calledWith(setFeatured())
+      })
+
+      it('calls need dispatches when request fails', () => {
+        const json = { response: 'body' }
+        const getState = () => {
+          return { sites: { sites: [] } }
+        }
+
+        request.rejects({ json })
+        f(dispatch, getState)
+
+        expect(dispatch).calledWith(fetchingSites())
+        expect(request).calledWith('/api/sites')
+        expect(dispatch).calledWith(fetchError())
       })
     })
   })
