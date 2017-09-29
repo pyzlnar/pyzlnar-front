@@ -12,14 +12,16 @@ import 'font-awesome/css/font-awesome.css'
 
 // Local Imports
 import OldRoot from './Root'
-import './../styles/app.scss'
+import '../styles/app.scss'
 
 // Reducer Imports
+import authReducer     from './reducers/auth'
 import projectsReducer from './reducers/projects'
 import sitesReducer    from './reducers/sites'
 
 // Reducers initialization
 const rootReducer = combineReducers({
+  auth:         authReducer,
   projects:     projectsReducer,
   routing:      routerReducer,
   sites:        sitesReducer,
