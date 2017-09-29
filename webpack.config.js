@@ -68,7 +68,7 @@ function getDevBuildConfig() {
     output: {
       path: 'static',
       publicPath: '/'
-    }
+    },
   },
   getDevServerConfig(localhost, PORT),
   css(isBuild = true),
@@ -80,6 +80,7 @@ function getDevBuildConfig() {
 function getDevConfig() {
   return merge(getCommon(), {
     entry: [
+      'react-hot-loader/patch',
       `webpack-dev-server/client?${localhost}:${PORT}`,
       'webpack/hot/only-dev-server',
       'babel-polyfill',
@@ -91,9 +92,10 @@ function getDevConfig() {
       path: '/',
       publicPath: '/'
     },
-    devServer: {
-      hot: true
-    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin()
+    ],
   },
   getDevServerConfig(localhost, PORT),
   css(isBuild = false)

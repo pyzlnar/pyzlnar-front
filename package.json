@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --define process.env.NODE_ENV='\"production\"'",
-    "dev": "webpack-dev-server --hot --inline --progress --public pyzlnar.dev:8080",
+    "dev": "webpack-dev-server --inline --progress --public pyzlnar.dev:8080",
     "dev:build": "webpack-dev-server --public pyzlnar.dev:8080 --define process.env.NODE_ENV='\"production\"'",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:phantomjs": "KARMA_BROWSER=phantomjs ./node_modules/karma/bin/karma start karma.conf.js"
@@ -50,7 +50,7 @@
     "serialize-javascript": "^1.4.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.0",
+    "webpack": "2.2.1",
     "webpack-merge": "^2.4.0"
   },
   "devDependencies": {
