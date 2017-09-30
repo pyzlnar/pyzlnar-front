@@ -19,7 +19,7 @@ describe('ActionCreator: sites', () => {
     })
   })
 
-  describe('fetchSuccess(json)', () => {
+  describe('fetchSuccess(sites)', () => {
     it(`returns ${types.fetched} action with the received argument`, () => {
       const arg = 'something'
       const expected = {
@@ -32,7 +32,7 @@ describe('ActionCreator: sites', () => {
     })
   })
 
-  describe('fetchError(response)', () => {
+  describe('fetchError()', () => {
     it(`returns ${types.fetchError} action`, () => {
       const expected = { type: types.fetchError }
       const result = fetchError()

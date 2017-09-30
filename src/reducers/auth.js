@@ -14,9 +14,9 @@ export default (state = initialState, action = {}) => {
     case types.loggingIn:
       return { ...state, loggingIn: true }
     case types.loginSuccess:
-      return { ...initialState, loggedIn: true, user: action.user }
+      return { ...state, loggedIn: true, loggingIn: false, user: action.user }
     case types.loginFailure:
-      return { ...initialState, loginFailed: true }
+      return { ...initialState, loggingIn: false, loginFailed: true }
     default:
       return state
   }

@@ -11,17 +11,13 @@ export const clientId = '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.apps.goog
 export const loggedInRedirect = '/'
 
 export const onLoadLogin = () => {
-  return (dispatch, getState) => {
-    const { auth } = getState()
-    const { loggedIn, loggedInRedirect } = auth
-    if (!loggedIn) {
-      request('/api/me')
-        .then(result => {
-          dispatch(loginSuccess(result.json))
-          dispatch(push(loggedInRedirect))
-        })
-        .catch(() => dispatch(enableLogin()))
-    }
+  return dispatch => {
+    request('/api/me')
+      .then(result => {
+        dispatch(loginSuccess(result.json))
+        dispatch(push(loggedInRedirect))
+      })
+      .catch(() => dispatch(enableLogin()))
   }
 }
 
@@ -41,7 +37,7 @@ export const gmailLogin = response => {
 
 // Helpers
 
-const getGmailOptions = id_token => {
+export const getGmailOptions = id_token => {
   return {
     method: 'POST',
     body: {
