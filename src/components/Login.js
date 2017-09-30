@@ -12,8 +12,15 @@ import { Loading } from './Loading'
 
 class LoginP extends React.Component {
   componentWillMount() {
-    const { loggedIn, push } = this.props
-    if (loggedIn) push('/')
+     const { loggedIn, loggedInRed, push } = this.props
+     if (loggedIn) {
+       push(loggedInRed)
+     }
+  }
+
+  shouldRenderButton() {
+    const { loggedIn, loggingIn } = this.props
+    return !(loggingIn || loggedIn)
   }
 
   render() {
@@ -37,11 +44,10 @@ class LoginP extends React.Component {
   }
 
   renderLogins() {
-    const { loggingIn } = this.props
-    if (loggingIn) {
-      return <Loading />
-    } else {
+    if (this.shouldRenderButton()) {
       return this.renderGoogleLogin()
+    } else {
+      return <Loading />
     }
   }
 
