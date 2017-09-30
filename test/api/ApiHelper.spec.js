@@ -52,7 +52,7 @@ describe('ApiHelper', () => {
     })
 
     it('handles bad json', done => {
-      const json = { response: 'body' }
+      const json = '{'
       const resp = new Response(json)
 
       fetchMock.get(path, resp)
@@ -79,7 +79,7 @@ describe('ApiHelper', () => {
     })
 
     it('handles non success response status with bad json', done => {
-      const json = { response: 'body' }
+      const json = '{'
       const resp = new Response(json, { status: 500 })
 
       fetchMock.get(path, resp)
