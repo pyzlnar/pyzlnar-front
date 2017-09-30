@@ -7,15 +7,18 @@ import {
   loginFailure
 } from '../action-creators/auth'
 
+export const clientId = '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.apps.googleusercontent.com'
+export const loggedInRedirect = '/'
+
 export const onLoadLogin = () => {
   return (dispatch, getState) => {
     const { auth } = getState()
-    const { loggedIn, loggedInRed } = auth
+    const { loggedIn, loggedInRedirect } = auth
     if (!loggedIn) {
       request('/api/me')
         .then(result => {
           dispatch(loginSuccess(result.json))
-          dispatch(push(loggedInRed))
+          dispatch(push(loggedInRedirect))
         })
         .catch(() => dispatch(enableLogin()))
     }
@@ -25,13 +28,12 @@ export const onLoadLogin = () => {
 export const gmailLogin = response => {
   const { tokenObj } = response
   const { id_token } = tokenObj
-  return (dispatch, getState) => {
-    const loggedInRed = getState().auth.loggedInRed
+  return dispatch => {
     dispatch(loggingIn())
     request('/api/auth/login', getGmailOptions(id_token))
       .then(result => {
         dispatch(loginSuccess(result.json))
-        dispatch(push(loggedInRed))
+        dispatch(push(loggedInRedirect))
       })
       .catch(() => dispatch(loginFailure()))
   }

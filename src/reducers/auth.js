@@ -1,9 +1,7 @@
 import { types } from '../action-creators/auth'
 
 const initialState = {
-  clientId:    '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.apps.googleusercontent.com',
   loggedIn:    false,
-  loggedInRed: '/',
   loggingIn:   true,
   loginFailed: false,
   user:        null

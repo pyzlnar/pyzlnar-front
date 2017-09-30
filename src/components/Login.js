@@ -5,16 +5,21 @@ import { push }               from 'react-router-redux'
 import GoogleLogin            from 'react-google-login'
 import GoogleButton           from 'react-google-button'
 
-import { gmailLogin, loginFailure } from '../api/auth'
+import {
+  clientId,
+  gmailLogin,
+  loggedInRedirect,
+  loginFailure
+} from '../api/auth'
 
 import { CoolBox } from './CoolBox'
 import { Loading } from './Loading'
 
 class LoginP extends React.Component {
   componentWillMount() {
-     const { loggedIn, loggedInRed, push } = this.props
+     const { loggedIn, push } = this.props
      if (loggedIn) {
-       push(loggedInRed)
+       push(loggedInRedirect)
      }
   }
 
@@ -52,7 +57,7 @@ class LoginP extends React.Component {
   }
 
   renderGoogleLogin() {
-    const { clientId, gmailLogin, loginFailure } = this.props
+    const { gmailLogin, loginFailure } = this.props
     return (
       <GoogleLogin
         clientId={clientId}
