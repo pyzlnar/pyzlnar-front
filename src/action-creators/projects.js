@@ -17,8 +17,8 @@ export const fetchSuccess = projects => {
   return { type: types.fetched, projects }
 }
 
-export const fetchError = response => {
-  return { type: types.fetchError, response }
+export const fetchError = () => {
+  return { type: types.fetchError }
 }
 
 export const toggleFold = code => {
