@@ -1,4 +1,5 @@
 $navbar__item-padding: 0.4rem;
+$navbar__thumb-max_height: 37px;
 .c-navbar {
   @include font-size-small;
   margin-bottom: 0;
@@ -8,6 +9,15 @@ $navbar__item-padding: 0.4rem;
     border: solid 1px $white;
     width: 100%;
     border-radius: 3px;
+  }
+
+  &__user {
+    cursor: pointer;
+    float: right;
+
+    &__thumb {
+      max-height: $navbar__thumb-max_height;
+    }
   }
 
   &__item {
@@ -42,6 +52,12 @@ $navbar__item-padding: 0.4rem;
       &:hover {
         background: $secondary-light-color;
       }
+    }
+
+    &--right {
+      left: auto;
+      right: 0;
+      margin-top: 0;
     }
   }
 }

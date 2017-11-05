@@ -3,24 +3,43 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import {
-  getInitialState,
+  getUserItems,
+  initialState,
   toggleHover
 } from '../action-creators/navbar'
 
 export class NavbarP extends React.Component {
   constructor(props) {
     super(props)
-    this.state = getInitialState()
+    this.state = initialState
   }
 
   render() {
     const { items } = this.state
+    const { loggedIn } = this.props
     return(
       <ul className="o-list-inline c-navbar">
         <div className="c-navbar__container">
           { items.map(item => this.renderItems(item)) }
+          { loggedIn && this.renderUserMenu() }
         </div>
       </ul>
+    )
+  }
+
+  renderUserMenu() {
+    const { showUserMenu } = this.state
+    const { user }         = this.props
+    const { thumbnail }    = user
+    return (
+      <div
+        onMouseEnter={()=> this.setState({showUserMenu: true}) }
+        onMouseLeave={()=> this.setState({showUserMenu: false}) }
+        className='o-list-inline__item c-navbar__user c-navbar__item--clickable c-navbar__item--menu'
+      >
+        <img src={thumbnail} className='c-navbar__user__thumb'/>
+        { showUserMenu && this.renderMenuDropdown(getUserItems(user), false) }
+      </div>
     )
   }
 
@@ -33,7 +52,6 @@ export class NavbarP extends React.Component {
   }
 
   renderMenu(menu){
-    const { onMenuMouseEnter, onMenuMouseLeave } = this.props
     return (
       <li
         key={menu.name}
@@ -47,9 +65,11 @@ export class NavbarP extends React.Component {
     )
   }
 
-  renderMenuDropdown(items) {
+  renderMenuDropdown(items, alignLeft = true) {
+    const align = alignLeft ? '' : 'c-navbar__dropdown--right'
+    const className = `o-list-bare c-navbar__dropdown ${align}`
     return (
-      <ul className="o-list-bare c-navbar__dropdown">
+      <ul className={className}>
         {items.map(item => this.renderItem(item, 'c-navbar__dropdown__item'))}
       </ul>
     )
@@ -69,4 +89,8 @@ export class NavbarP extends React.Component {
   }
 }
 
-export const Navbar = connect()(NavbarP)
+const mapStateToProps = state => {
+  return { ...state.auth }
+}
+
+export const Navbar = connect(mapStateToProps)(NavbarP)
