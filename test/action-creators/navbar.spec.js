@@ -1,17 +1,9 @@
 import deepFreeze from 'deep-freeze'
 import {
-  getInitialState,
   toggleHover
 } from '../../src/action-creators/navbar'
 
 describe('ActionCreator: navbar', () => {
-  describe('getInitialState()', () => {
-    it('returns the initialState of the component', () => {
-      const state = getInitialState()
-      expect(state).to.have.property('items')
-    })
-  })
-
   describe('toggleHover(state, which)', () => {
     it('returns a new state with hover active', () => {
       const state = {
