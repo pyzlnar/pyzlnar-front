@@ -7,8 +7,9 @@ import {
   loginFailure
 } from '../action-creators/auth'
 
-export const clientId = '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.apps.googleusercontent.com'
-export const loggedInRedirect = '/'
+export const clientId          = '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.apps.googleusercontent.com'
+export const loggedInRedirect  = '/'
+export const loggedOutRedirect = '/login'
 
 export const onLoadLogin = () => {
   return dispatch => {
@@ -32,6 +33,17 @@ export const gmailLogin = response => {
         dispatch(push(loggedInRedirect))
       })
       .catch(() => dispatch(loginFailure()))
+  }
+}
+
+export const logOut = () => {
+  return dispatch => {
+    request('/api/auth/logout', { method: 'DELETE' })
+      .then(() => {
+        dispatch(enableLogin())
+        dispatch(push(loggedOutRedirect))
+      })
+      .catch(() => dispatch(push(loggedInRedirect)))
   }
 }
 
