@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --define process.env.NODE_ENV='\"production\"'",
-    "dev": "webpack-dev-server --inline --progress --public pyzlnar.dev:8080",
-    "dev:build": "webpack-dev-server --public pyzlnar.dev:8080 --define process.env.NODE_ENV='\"production\"'",
+    "dev": "webpack-dev-server --inline --progress --public pyzlnar.test:8080",
+    "dev:build": "webpack-dev-server --public pyzlnar.test:8080 --define process.env.NODE_ENV='\"production\"'",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:phantomjs": "KARMA_BROWSER=phantomjs ./node_modules/karma/bin/karma start karma.conf.js"
   },
