@@ -77,10 +77,17 @@ export class NavbarP extends React.Component {
 
   renderItem(item, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
     const { dispatch } = this.props
+    let action = null
+    if (item.path) {
+      action = () => dispatch(push(item.path))
+    } else if (item.action) {
+      action = () => item.action()(dispatch)
+    }
+
     return (
       <li
         key={item.name}
-        onClick={() => dispatch(push(item.path))}
+        onClick={action}
         className={className}
       >
       {item.name}

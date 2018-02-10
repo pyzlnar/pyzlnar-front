@@ -1,4 +1,5 @@
 // Action Creators for navbar
+import { logOut } from '../api/auth'
 
 export const initialState = {
   showUserMenu: false,
@@ -39,9 +40,9 @@ export const initialState = {
 export const getUserItems = user => {
   const { username } = user
   return [
-    { name: username,   path: '/me' },
-    { name: 'Settings', path: '/me/edit' },
-    { name: 'Logout',   path: '/logout' }
+    { name: username,   path:   '/me' },
+    { name: 'Settings', path:   '/me/edit' },
+    { name: 'Logout',   action: logOut }
   ]
 }
 

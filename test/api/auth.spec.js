@@ -2,9 +2,11 @@ import { push }    from 'react-router-redux'
 import * as helper from '../../src/api/ApiHelper'
 import {
   loggedInRedirect,
+  loggedOutRedirect,
   onLoadLogin,
   gmailLogin,
-  getGmailOptions
+  getGmailOptions,
+  logOut
 } from '../../src/api/auth'
 
 import {
@@ -98,6 +100,46 @@ describe('Api: auth', () => {
 
         expect(request).calledWith('/api/auth/login', getGmailOptions('token'))
         expect(dispatch).calledWith(loginFailure())
+      })
+    })
+  })
+
+  describe('logOut()', () => {
+    it('returns a function', () => {
+      expect(logOut()).to.be.a('function')
+    })
+
+    describe('returned function', () => {
+      let f, dispatch, request
+
+      beforeEach(() => {
+        f        = logOut()
+        dispatch = sinon.spy()
+        request  = sinon.stub(helper, 'request')
+        request.returnsPromise()
+      })
+
+      afterEach(() => {
+        request.restore()
+      })
+
+      it('calls needed dispatches when requests succeeds', () => {
+        const json = { response: 'body' }
+
+        request.resolves({ json })
+        f(dispatch)
+
+        expect(request).calledWith('/api/auth/logout', { method: 'DELETE' })
+        expect(dispatch).calledWith(enableLogin())
+        expect(dispatch).calledWith(push(loggedOutRedirect))
+      })
+
+      it('calls needed dispatches when request fails', () => {
+        request.rejects()
+        f(dispatch)
+
+        expect(request).calledWith('/api/auth/logout', { method: 'DELETE' })
+        expect(dispatch).calledWith(push(loggedInRedirect))
       })
     })
   })
