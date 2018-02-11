@@ -14,12 +14,12 @@ export const request = (path, opts = {}) => {
       .then(response => {
         if (200 <= response.status && response.status < 300) {
           return response.json()
-            .then(json => resolve({ response, json }))
-            .catch(()  => resolve({ response, json: {} }))
+            .then(json => resolve({ response, status: response.status, json }))
+            .catch(()  => resolve({ response, status: response.status, json: {} }))
         } else {
           return response.json()
-            .then(json => reject({ response, json }))
-            .catch(()  => reject({ response, json: {} }))
+            .then(json => reject({ response, status: response.status, json }))
+            .catch(()  => reject({ response, status: response.status, json: {} }))
         }
       })
   })

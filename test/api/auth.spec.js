@@ -1,4 +1,5 @@
-import { push }    from 'react-router-redux'
+import { push }            from 'react-router-redux'
+import { SubmissionError } from 'redux-form'
 import * as helper from '../../src/api/ApiHelper'
 import {
   loggedInRedirect,
@@ -6,7 +7,8 @@ import {
   onLoadLogin,
   gmailLogin,
   getGmailOptions,
-  logOut
+  logOut,
+  updateMe
 } from '../../src/api/auth'
 
 import {
@@ -36,7 +38,7 @@ describe('Api: auth', () => {
         request.restore()
       })
 
-      it('calls needed dispatches when requests succeeds', () => {
+      it('calls needed dispatches when request succeeds', () => {
         const json = { response: 'body' }
 
         request.resolves({ json })
@@ -82,7 +84,7 @@ describe('Api: auth', () => {
         request.restore()
       })
 
-      it('calls needed dispatches when requests succeeds', () => {
+      it('calls needed dispatches when request succeeds', () => {
         const json = { response: 'body' }
 
         request.resolves({ json })
@@ -123,7 +125,7 @@ describe('Api: auth', () => {
         request.restore()
       })
 
-      it('calls needed dispatches when requests succeeds', () => {
+      it('calls needed dispatches when request succeeds', () => {
         const json = { response: 'body' }
 
         request.resolves({ json })
@@ -140,6 +142,56 @@ describe('Api: auth', () => {
 
         expect(request).calledWith('/api/auth/logout', { method: 'DELETE' })
         expect(dispatch).calledWith(push(loggedInRedirect))
+      })
+    })
+  })
+
+  describe('updateMe(params)', () => {
+    it('returns a function', () => {
+      expect(updateMe()).to.be.a('function')
+    })
+
+    describe('returned function', () => {
+      let f, dispatch, request, params
+
+      beforeEach(() => {
+        params   = { some: 'params' }
+        f        = updateMe(params)
+        dispatch = sinon.spy()
+        request  = sinon.stub(helper, 'request')
+        request.returnsPromise()
+      })
+
+      afterEach(() => {
+        request.restore()
+      })
+
+      it('calls needed dispatches when request succeeds', () => {
+        const json = { response: 'body' }
+
+        request.resolves({ json })
+        f(dispatch)
+
+        expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
+        expect(dispatch).calledWith(loginSuccess(json))
+      })
+
+      it('calls needed dispatches when request fails with 422', () => {
+        const result = { response: 'body', status: 422, json: 'myerrors' }
+        request.rejects(result)
+        const r = f(dispatch)
+
+        expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
+        expect(r.rejectValue).to.eql(new SubmissionError('myerrors'))
+      })
+
+      it('calls needed dispatches when request fails with another error', () => {
+        const result = { response: 'body', status: 503, json: 'myerrors' }
+        request.rejects(result)
+        const r = f(dispatch)
+
+        expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
+        expect(r.rejectValue).to.not.eql(new SubmissionError('myerrors'))
       })
     })
   })

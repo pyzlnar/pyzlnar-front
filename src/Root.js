@@ -9,6 +9,7 @@ import { Login }    from './components/Login'
 import { About }    from './components/About'
 import { Sites }    from './components/Sites'
 import { Projects } from './components/Projects'
+import { MeEdit }   from './components/MeEdit'
 import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
 
@@ -24,6 +25,7 @@ export default class extends React.Component {
           <Route component={ About }    path='/about(/:who)'        />
           <Route component={ Sites }    path='/sites(/:site)'       />
           <Route component={ Projects } path='/projects(/:project)' />
+          <Route component={ MeEdit }   path='/me/edit'             />
           <Route component={ Rem }      path='/rem'                 />
           <Route component={ NotFound } path='*'                    />
         </Route>
