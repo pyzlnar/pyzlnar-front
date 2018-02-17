@@ -6,6 +6,7 @@ import { inputField } from './inputs'
 
 let UserForm = props => {
   const { handleSubmit, pristine, submitting, error } = props
+  const blocked = pristine || submitting
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -26,7 +27,9 @@ let UserForm = props => {
       />
 
       {error && <strong>{error}</strong>}
-      <button type="submit" disabled={pristine || submitting}>Submit</button>
+      <button type="submit" className={blocked || 'c-cool-input__button'} disabled={blocked}>
+        Submit
+      </button>
     </form>
   )
 }
