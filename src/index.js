@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import { AppContainer } from 'react-hot-loader';
@@ -19,9 +20,11 @@ import authReducer     from './reducers/auth'
 import projectsReducer from './reducers/projects'
 import sitesReducer    from './reducers/sites'
 
+
 // Reducers initialization
 const rootReducer = combineReducers({
   auth:         authReducer,
+  form:         formReducer,
   projects:     projectsReducer,
   routing:      routerReducer,
   sites:        sitesReducer,

@@ -1,0 +1,45 @@
+.c-cool-input {
+  @include palette-light;
+  margin: 10px 0;
+
+  &__input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid $secondary-color;
+    color: $grey-light-color;
+    width: 100%;
+
+    &:focus {
+      border-bottom-color: $tertiary-color;
+      outline-width: 0;
+    }
+  }
+
+  &__button {
+    @include palette-light;
+
+    &:hover {
+      @include palette-light-shade;
+    }
+  }
+
+  &__error {
+    color: $red;
+  }
+
+  &--disabled {
+    background: $primary-dark-color;
+    border: 0;
+    color: $grey-color;
+    opacity: 1;
+    padding: 3px 0;
+  }
+
+  &--error {
+    border-bottom-color: $red;
+
+    &::placeholder {
+      color: $red-dark;
+    }
+  }
+}

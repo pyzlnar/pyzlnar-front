@@ -2,16 +2,16 @@
 
 @mixin palette-light {
   background: $primary-color;
-  color:      $tertiary-color;
+  color: $tertiary-color;
 }
 
 @mixin palette-dark {
   background: $secondary-color;
-  color:      $white;
+  color: $white;
 }
 
 @mixin palette-light-shade {
-  background:   $primary-dark-color;
-  color:        $tertiary-dark-color;
+  background: $primary-dark-color;
+  color: $tertiary-dark-color;
   border-color: $tertiary-light-color;
 }
