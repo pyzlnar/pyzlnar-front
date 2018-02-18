@@ -1,6 +1,10 @@
 // Core Imports
-import React from 'react'
+import React                         from 'react'
+import { bindActionCreators }        from 'redux'
+import { connect }                   from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
+
+import { authenticate } from './api/auth'
 
 // Pages
 import { App }      from './components/App'
@@ -9,11 +13,12 @@ import { Login }    from './components/Login'
 import { About }    from './components/About'
 import { Sites }    from './components/Sites'
 import { Projects } from './components/Projects'
+import { Me }       from './components/Me'
 import { MeEdit }   from './components/MeEdit'
 import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
 
-export default class extends React.Component {
+class Routes extends React.Component {
   render() {
     const { history } = this.props
     return (
@@ -25,11 +30,29 @@ export default class extends React.Component {
           <Route component={ About }    path='/about(/:who)'        />
           <Route component={ Sites }    path='/sites(/:site)'       />
           <Route component={ Projects } path='/projects(/:project)' />
-          <Route component={ MeEdit }   path='/me/edit'             />
           <Route component={ Rem }      path='/rem'                 />
+          { this.renderAuthenticatedRoutes() }
           <Route component={ NotFound } path='*'                    />
         </Route>
       </Router>
     )
   }
+
+  renderAuthenticatedRoutes() {
+    const { authenticate } = this.props
+    return (
+      <Route onEnter={authenticate}>
+        <Route component={ Me }     path='/me'      />
+        <Route component={ MeEdit } path='/me/edit' />
+      </Route>
+    )
+  }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    authenticate
+  }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Routes)

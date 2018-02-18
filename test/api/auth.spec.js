@@ -2,9 +2,10 @@ import { push }            from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 import * as helper from '../../src/api/ApiHelper'
 import {
+  authenticate,
   loggedInRedirect,
   loggedOutRedirect,
-  onLoadLogin,
+  getMe,
   gmailLogin,
   getGmailOptions,
   logOut,
@@ -19,42 +20,29 @@ import {
 } from '../../src/action-creators/auth'
 
 describe('Api: auth', () => {
-  describe('onLoadLogin()', () => {
+  describe('authenticate()', () => {
     it('returns a function', () => {
-      expect(onLoadLogin()).to.be.a('function')
+      expect(authenticate()).to.be.a('function')
     })
 
     describe('returned function', () => {
-      let f, dispatch, request
+      let f, dispatch
 
       beforeEach(() => {
-        f        = onLoadLogin()
+        f        = authenticate()
         dispatch = sinon.spy()
-        request  = sinon.stub(helper, 'request')
-        request.returnsPromise()
       })
 
-      afterEach(() => {
-        request.restore()
+      it('does nothing if user is loggedIn', () => {
+        const getState = () => ({ auth: { loggedIn: true } })
+        f(dispatch, getState)
+        expect(dispatch).not.called
       })
 
-      it('calls needed dispatches when request succeeds', () => {
-        const json = { response: 'body' }
-
-        request.resolves({ json })
-        f(dispatch)
-
-        expect(request).calledWith('/api/me')
-        expect(dispatch).calledWith(loginSuccess(json))
-        expect(dispatch).calledWith(push(loggedInRedirect))
-      })
-
-      it('calls needed dispatches when request fails', () => {
-        request.rejects()
-        f(dispatch)
-
-        expect(request).calledWith('/api/me')
-        expect(dispatch).calledWith(enableLogin())
+      it('redirects if user is not loggedIn', () => {
+        const getState = () => ({ auth: { loggedIn: false } })
+        f(dispatch, getState)
+        expect(dispatch).calledWith(push(loggedOutRedirect))
       })
     })
   })
@@ -142,6 +130,46 @@ describe('Api: auth', () => {
 
         expect(request).calledWith('/api/auth/logout', { method: 'DELETE' })
         expect(dispatch).calledWith(push(loggedInRedirect))
+      })
+    })
+  })
+
+  describe('getMe()', () => {
+    it('returns a function', () => {
+      expect(getMe()).to.be.a('function')
+    })
+
+    describe('returned function', () => {
+      let f, dispatch, request
+
+      beforeEach(() => {
+        f        = getMe()
+        dispatch = sinon.spy()
+        request  = sinon.stub(helper, 'request')
+        request.returnsPromise()
+      })
+
+      afterEach(() => {
+        request.restore()
+      })
+
+      it('calls needed dispatches when request succeeds', () => {
+        const json = { response: 'body' }
+
+        request.resolves({ json })
+        f(dispatch)
+
+        expect(request).calledWith('/api/me')
+        expect(dispatch).calledWith(loginSuccess(json))
+        expect(dispatch).calledWith(push(loggedInRedirect))
+      })
+
+      it('calls needed dispatches when request fails', () => {
+        request.rejects()
+        f(dispatch)
+
+        expect(request).calledWith('/api/me')
+        expect(dispatch).calledWith(enableLogin())
       })
     })
   })

@@ -14,6 +14,14 @@ export const clientId          = '558071016672-176f4qq81d1vrm96gafm05se7t08iq2p.
 export const loggedInRedirect  = '/'
 export const loggedOutRedirect = '/login'
 
+export const authenticate = () => (
+  (dispatch, getState) => {
+    const { auth: { loggedIn } } = getState()
+    if (loggedIn) { return }
+    dispatch(push(loggedOutRedirect))
+  }
+)
+
 export const gmailLogin = response => {
   const { tokenObj } = response
   const { id_token } = tokenObj
@@ -39,7 +47,7 @@ export const logOut = () => {
   }
 }
 
-const getMe = () => {
+export const getMe = () => {
   return dispatch => {
     request('/api/me')
       .then(result => {
@@ -52,10 +60,11 @@ const getMe = () => {
 export const onLoadLogin = getMe
 
 export const updateMe = params => {
-  return dispatch => {
-    return request('/api/me', { method: 'PATCH', body: params })
+  return dispatch => (
+    request('/api/me', { method: 'PATCH', body: params })
       .then(result => {
         dispatch(loginSuccess(result.json))
+        dispatch(push('/me'))
       })
       .catch(result => {
         if (result.status == 422) {
@@ -64,7 +73,7 @@ export const updateMe = params => {
           throw new SubmissionError({ _error: 'There was an issue!' })
         }
       })
-  }
+  )
 }
 
 // Helpers
