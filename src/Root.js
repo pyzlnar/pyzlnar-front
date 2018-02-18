@@ -19,7 +19,8 @@ import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
 
 // Admin Pages
-import { Admin } from './components/admin'
+import { Admin }            from './components/admin'
+import { AdminProjectList } from './components/admin'
 
 class Routes extends React.Component {
   render() {
@@ -56,9 +57,9 @@ class Routes extends React.Component {
     const { authorize } = this.props
     return (
       <Route onEnter={authorize}>
-        <Route component={ Admin } path='/admin' />
-        <Route component={ Admin } path='/admin/projects' />
-        <Route component={ Admin } path='/admin/sites' />
+        <Route component={ Admin }            path='/admin' />
+        <Route component={ AdminProjectList } path='/admin/projects' />
+        <Route component={ Admin }            path='/admin/sites' />
       </Route>
     )
   }
