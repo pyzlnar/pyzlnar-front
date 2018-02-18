@@ -57,7 +57,6 @@ export const getMe = () => {
       .catch(() => dispatch(enableLogin()))
   }
 }
-export const onLoadLogin = getMe
 
 export const updateMe = params => {
   return dispatch => (

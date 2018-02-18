@@ -2,13 +2,13 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { onLoadLogin } from '../api/auth'
+import { getMe } from '../api/auth'
 
 import { Header } from './Header'
 
 class AppP extends React.Component {
   componentDidMount() {
-    this.props.onLoadLogin()
+    this.props.getMe()
   }
 
   render() {
@@ -26,7 +26,7 @@ class AppP extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ onLoadLogin }, dispatch)
+  return bindActionCreators({ getMe }, dispatch)
 }
 
 export const App = connect(null, mapDispatchToProps)(AppP)
