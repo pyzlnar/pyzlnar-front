@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form'
 import * as helper from '../../src/api/ApiHelper'
 import {
   authenticate,
+  authorize,
   loggedInRedirect,
   loggedOutRedirect,
   getMe,
@@ -43,6 +44,39 @@ describe('Api: auth', () => {
         const getState = () => ({ auth: { loggedIn: false } })
         f(dispatch, getState)
         expect(dispatch).calledWith(push(loggedOutRedirect))
+      })
+    })
+  })
+
+  describe('authorize()', () => {
+    it('returns a function', () => {
+      expect(authorize()).to.be.a('function')
+    })
+
+    describe('returned function', () => {
+      let f, dispatch
+
+      beforeEach(() => {
+        f        = authorize()
+        dispatch = sinon.spy()
+      })
+
+      it('does nothing if user is loggedIn and has roles', () => {
+        const getState = () => ({ auth: { loggedIn: true, user: { role: true } } })
+        f(dispatch, getState)
+        expect(dispatch).not.called
+      })
+
+      it('redirects if user is not loggedIn', () => {
+        const getState = () => ({ auth: { loggedIn: false } })
+        f(dispatch, getState)
+        expect(dispatch).calledWith(push(loggedOutRedirect))
+      })
+
+      it('redirects if user has no role', () => {
+        const getState = () => ({ auth: { loggedIn: true, user: {} } })
+        f(dispatch, getState)
+        expect(dispatch).calledWith(push(loggedInRedirect))
       })
     })
   })

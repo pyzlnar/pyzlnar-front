@@ -1,4 +1,5 @@
 // Action Creators for navbar
+import { push }   from 'react-router-redux'
 import { logOut } from '../api/auth'
 
 export const initialState = {
@@ -38,12 +39,13 @@ export const initialState = {
 }
 
 export const getUserItems = user => {
-  const { username } = user
+  const { username, role } = user
   return [
+    adminMenu(role),
     { name: username,   path:   '/me' },
     { name: 'Settings', path:   '/me/edit' },
     { name: 'Logout',   action: logOut }
-  ]
+  ].filter(Boolean)
 }
 
 export const toggleHover = (state, which) => {
@@ -56,4 +58,12 @@ export const toggleHover = (state, which) => {
     }
   })
   return { items: newItems }
+}
+
+// Helper methods
+
+const adminMenu = authorized => {
+  if(!authorized) { return null }
+  const toAdmin = () => ( dispatch => dispatch(push('/admin') ) )
+  return { name: 'Admin', action: toAdmin }
 }

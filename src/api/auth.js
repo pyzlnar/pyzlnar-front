@@ -22,6 +22,19 @@ export const authenticate = () => (
   }
 )
 
+export const authorize = () => (
+  (dispatch, getState) => {
+    const { auth: { loggedIn, user } } = getState()
+    if (!loggedIn) {
+      dispatch(push(loggedOutRedirect))
+      return
+    }
+    if (!user.role) {
+      dispatch(push(loggedInRedirect))
+    }
+  }
+)
+
 export const gmailLogin = response => {
   const { tokenObj } = response
   const { id_token } = tokenObj
