@@ -210,7 +210,8 @@ describe('Api: auth', () => {
         const r = f(dispatch)
 
         expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
-        expect(r.rejectValue).to.eql(new SubmissionError('myerrors'))
+        expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
+        expect(r.rejectValue.errors).to.eq('myerrors')
       })
 
       it('calls needed dispatches when request fails with another error', () => {
@@ -219,7 +220,8 @@ describe('Api: auth', () => {
         const r = f(dispatch)
 
         expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
-        expect(r.rejectValue).to.not.eql(new SubmissionError('myerrors'))
+        expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
+        expect(r.rejectValue.errors).to.not.eq('myerrors')
       })
     })
   })

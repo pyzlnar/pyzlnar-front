@@ -40,6 +40,9 @@ module.exports = (config) => {
     frameworks: ['mocha', 'chai-sinon'],
     keepAlive: true,
     reporters: ['mocha'],
+    mochaReporter: {
+      showDiff: true
+    },
     colors: true,
     preprocessors: {
       'src/**/*.js':  ['webpack', 'sourcemap'],
