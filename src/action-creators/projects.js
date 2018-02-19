@@ -6,7 +6,8 @@ export const types = {
   fetchError:      'projects/FETCH_ERROR',
   toggleFold:      'projects/TOGGLE_FOLD',
   setFeatured:     'projects/SET_FEATURED',
-  dismissFeatured: 'projects/DISMISS_FEATURED'
+  dismissFeatured: 'projects/DISMISS_FEATURED',
+  reset:           'projects/RESET'
 }
 
 export const fetchingProjects = () => {
@@ -31,4 +32,8 @@ export const setFeatured = selected => {
 
 export const dismissFeatured = () => {
   return { type: types.dismissFeatured }
+}
+
+export const resetProjects = () => {
+  return { type: types.reset }
 }

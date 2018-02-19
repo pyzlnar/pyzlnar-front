@@ -2,7 +2,10 @@ import React                  from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }            from 'react-redux'
 
-import { fetchProjects } from '../../api/projects'
+import {
+  fetchProjects,
+  reloadProjects
+} from '../../api/projects'
 
 import { Loading }      from '../Loading'
 import { NetworkError } from '../NetworkError'
@@ -32,38 +35,24 @@ class ProjectList extends React.Component {
   }
 
   renderBody() {
+    const { projects, reloadProjects } = this.props
     if (this.shouldRenderProjects()) {
-      return this.renderProjects()
+      return <AdminTable items={projects} path='/admin/projects' reload={reloadProjects}/>
     } else if (this.shouldRenderError()) {
       return <NetworkError retryAction={ this.props.fetchProjects } />
     } else {
       return <Loading />
     }
   }
-
-  renderProjects() {
-    const { projects } = this.props
-    return <AdminTable items={projects} />
-  }
-
-  renderProject(project) {
-    return (
-      <div>
-        <span>{project.name}</span>
-        <ul className='o-list-inline'>
-          <li className='o-list-inline__item'>View</li>
-          <li className='o-list-inline__item'>Edit</li>
-          <li className='o-list-inline__item'>Delete</li>
-        </ul>
-      </div>
-    )
-  }
 }
 
 const mapStateToProps = state => ( { ...state.projects } )
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ fetchProjects }, dispatch)
+  bindActionCreators({
+    fetchProjects,
+    reloadProjects
+  }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)

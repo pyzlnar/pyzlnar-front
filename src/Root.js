@@ -59,6 +59,9 @@ class Routes extends React.Component {
       <Route onEnter={authorize}>
         <Route component={ Admin }            path='/admin' />
         <Route component={ AdminProjectList } path='/admin/projects' />
+        <Route component={ AdminProjectList } path='/admin/projects/new' />
+        <Route component={ AdminProjectList } path='/admin/projects/:code' />
+        <Route component={ AdminProjectList } path='/admin/projects/:code/edit' />
         <Route component={ Admin }            path='/admin/sites' />
       </Route>
     )

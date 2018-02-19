@@ -153,6 +153,25 @@ describe('Reducer: projects', () => {
     })
   })
 
+  describe(`when receiving action ${types.reset}`, () => {
+    it('resets the state to the initial state', () => {
+      const action = { type: types.reset }
+      const state  = { foldedProjects: { myproject: true, other: true } }
+      deepFreeze(state)
+
+      const expected  = {
+        isFetching:  false,
+        fetchFailed: false,
+        projects:    [],
+        featured:    { dismissed: false }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
   describe(`when receiving an unknown action`, () => {
     it('returns the state as received', () => {
       const action = { type: 'WTF' }
