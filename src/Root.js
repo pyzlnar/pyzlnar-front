@@ -19,8 +19,12 @@ import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
 
 // Admin Pages
-import { Admin }            from './components/admin'
-import { AdminProjectList } from './components/admin'
+import {
+  Admin,
+  AdminProjectList,
+  AdminProjectNew,
+  AdminProjectEdit
+} from './components/admin'
 
 class Routes extends React.Component {
   render() {
@@ -59,9 +63,9 @@ class Routes extends React.Component {
       <Route onEnter={authorize}>
         <Route component={ Admin }            path='/admin' />
         <Route component={ AdminProjectList } path='/admin/projects' />
-        <Route component={ AdminProjectList } path='/admin/projects/new' />
+        <Route component={ AdminProjectNew }  path='/admin/projects/new' />
         <Route component={ AdminProjectList } path='/admin/projects/:code' />
-        <Route component={ AdminProjectList } path='/admin/projects/:code/edit' />
+        <Route component={ AdminProjectEdit } path='/admin/projects/:code/edit' />
         <Route component={ Admin }            path='/admin/sites' />
       </Route>
     )

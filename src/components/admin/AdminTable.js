@@ -30,7 +30,7 @@ class AdminTable extends React.Component {
   renderItem(item) {
     const { path, push } = this.props
     return (
-      <div className='o-layout__item'>
+      <div className='o-layout__item' key={item.name}>
         <span className='u-h4'>{item.name}</span>
         <ul className='o-list-inline'>
           <li className='o-list-inline__item'>
