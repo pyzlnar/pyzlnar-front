@@ -6,6 +6,13 @@ import { push }               from 'react-router-redux'
 import { CoolBox } from '../CoolBox'
 
 class AdminTable extends React.Component {
+  // TODO This one feels wrong. Look for better ways to handle this
+  handleDelete(code) {
+    if (!confirm(`Warning! You're about to delete ${code}.`)) { return }
+    const { dispatch, deleteItem } = this.props
+    deleteItem(code)(dispatch)
+  }
+
   render() {
     return (
       <CoolBox>
@@ -44,7 +51,7 @@ class AdminTable extends React.Component {
             </a>
           </li>
           <li className='o-list-inline__item'>
-            <button className='c-btn c-btn--danger'>
+            <button className='c-btn c-btn--danger' onClick={() => this.handleDelete(item.code)}>
               Delete
             </button>
           </li>
@@ -55,7 +62,7 @@ class AdminTable extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ push }, dispatch)
+  {...bindActionCreators({ push }, dispatch), dispatch }
 )
 
 export default connect(null, mapDispatchToProps)(AdminTable)

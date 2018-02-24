@@ -14,6 +14,7 @@ let ProjectForm = props => {
   const blocked = pristine || submitting
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p className='c-cool-input__error'>{error}</p>}
       <Field
         component={inputField}
         label='Code'
@@ -85,7 +86,6 @@ let ProjectForm = props => {
         placeholder='description'
       />
 
-      {error && <strong>{error}</strong>}
       <button type="submit" className={blocked || 'c-btn c-btn--warning'} disabled={blocked}>
         Submit
       </button>

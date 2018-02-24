@@ -5,7 +5,8 @@ import serialize from 'serialize-javascript'
 export const request = (path, opts = {}) => {
   opts = deepMerge(defaultOptions(), opts)
   if (opts.body) {
-    deepEscapeHtml(opts.body)
+    // Disabled for now, will come back on a later version
+    // deepEscapeHtml(opts.body)
     opts.body = serialize(opts.body)
   }
 
@@ -25,6 +26,19 @@ export const request = (path, opts = {}) => {
   })
 }
 
+export const formatError = result => {
+  switch(result.status) {
+    case 401:
+      return { _error: 'Your session has expired!' }
+    case 403:
+      return { _error: `You're not authorized to complete this request!` }
+    case 422:
+      return result.json
+    default:
+      return { _error: 'There was an issue!' }
+  }
+}
+
 // Helpers
 
 export const defaultOptions = () => {
@@ -40,6 +54,10 @@ const deepEscapeHtml = obj => {
     && obj.toString() === '[object Object]') {
     if (!Array.isArray(obj)) {
       Object.keys(obj).forEach(key => {
+        // This parameters need to go unsanitized, this check is bad as hell
+        // but does the work for now
+        if (key === 'url') { return }
+
         const param = obj[key]
         if (typeof param === 'object') {
           deepEscapeHtml(param)

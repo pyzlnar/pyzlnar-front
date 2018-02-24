@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect }            from 'react-redux'
 
 import {
+  deleteProject,
   fetchProjects,
   reloadProjects
 } from '../../api/projects'
@@ -37,7 +38,7 @@ class ProjectList extends React.Component {
   renderBody() {
     const { projects, reloadProjects } = this.props
     if (this.shouldRenderProjects()) {
-      return <AdminTable items={projects} path='/admin/projects' reload={reloadProjects}/>
+      return <AdminTable items={projects} path='/admin/projects' reload={reloadProjects} deleteItem={deleteProject}/>
     } else if (this.shouldRenderError()) {
       return <NetworkError retryAction={ this.props.fetchProjects } />
     } else {

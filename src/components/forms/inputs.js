@@ -38,6 +38,7 @@ export const selectField = ({input, label, options, disabled, meta: {touched, er
       <select {...input}
         className={`c-cool-input__input ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
       >
+        <option>-- SELECT ONE --</option>
         {options && options.map(option => selectOption(option))}
       </select>
     </div>
@@ -53,6 +54,8 @@ export const textareaField = ({input, label, options, disabled, rows, meta: {tou
     <div>
       <textarea {...input}
         className={`c-cool-input__input ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
+        disabled={disabled}
+        placeholder={label}
         rows={rows || 10}
       />
     </div>

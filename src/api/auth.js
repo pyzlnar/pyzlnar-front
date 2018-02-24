@@ -1,7 +1,7 @@
 import { push }            from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import { request } from './ApiHelper'
+import { formatError, request } from './ApiHelper'
 import {
   enableLogin,
   loggingIn,
@@ -49,8 +49,8 @@ export const gmailLogin = response => {
   }
 }
 
-export const logOut = () => {
-  return dispatch => {
+export const logOut = () => (
+  dispatch => {
     request('/api/auth/logout', { method: 'DELETE' })
       .then(() => {
         dispatch(enableLogin())
@@ -58,10 +58,10 @@ export const logOut = () => {
       })
       .catch(() => dispatch(push(loggedInRedirect)))
   }
-}
+)
 
-export const getMe = () => {
-  return dispatch => {
+export const getMe = () => (
+  dispatch => {
     request('/api/me')
       .then(result => {
         dispatch(loginSuccess(result.json))
@@ -69,24 +69,20 @@ export const getMe = () => {
       })
       .catch(() => dispatch(enableLogin()))
   }
-}
+)
 
-export const updateMe = params => {
-  return dispatch => (
+export const updateMe = params => (
+  dispatch => (
     request('/api/me', { method: 'PATCH', body: params })
       .then(result => {
         dispatch(loginSuccess(result.json))
         dispatch(push('/me'))
       })
       .catch(result => {
-        if (result.status == 422) {
-          throw new SubmissionError(result.json)
-        } else {
-          throw new SubmissionError({ _error: 'There was an issue!' })
-        }
+        throw new SubmissionError(formatError(result))
       })
   )
-}
+)
 
 // Helpers
 

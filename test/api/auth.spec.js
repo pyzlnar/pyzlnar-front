@@ -238,7 +238,7 @@ describe('Api: auth', () => {
         expect(dispatch).calledWith(loginSuccess(json))
       })
 
-      it('calls needed dispatches when request fails with 422', () => {
+      it('calls needed dispatches when the request fails', () => {
         const result = { response: 'body', status: 422, json: 'myerrors' }
         request.rejects(result)
         const r = f(dispatch)
@@ -246,16 +246,6 @@ describe('Api: auth', () => {
         expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
         expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
         expect(r.rejectValue.errors).to.eq('myerrors')
-      })
-
-      it('calls needed dispatches when request fails with another error', () => {
-        const result = { response: 'body', status: 503, json: 'myerrors' }
-        request.rejects(result)
-        const r = f(dispatch)
-
-        expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
-        expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
-        expect(r.rejectValue.errors).to.not.eq('myerrors')
       })
     })
   })
