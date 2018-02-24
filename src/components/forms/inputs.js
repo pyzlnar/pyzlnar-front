@@ -35,7 +35,9 @@ export const selectField = ({input, label, options, disabled, meta: {touched, er
       {label}
     </label>
     <div>
-      <select {...input}>
+      <select {...input}
+        className={`c-cool-input__input ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
+      >
         {options && options.map(option => selectOption(option))}
       </select>
     </div>
@@ -43,13 +45,16 @@ export const selectField = ({input, label, options, disabled, meta: {touched, er
   </div>
 )
 
-export const textareaField = ({input, label, options, disabled, meta: {touched, error}}) => (
+export const textareaField = ({input, label, options, disabled, rows, meta: {touched, error}}) => (
   <div className='c-cool-input text--small'>
     <label className={`c-cool-input__label ${error && 'c-cool-input__error'}`}>
       {label}
     </label>
     <div>
-      <textarea {...input} />
+      <textarea {...input}
+        className={`c-cool-input__input ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
+        rows={rows || 10}
+      />
     </div>
     {touched && error && <span className='c-cool-input__error text--tiny'>{error}</span>}
   </div>
@@ -73,17 +78,20 @@ const checkboxOption = (option, input, disabled, error) => {
   }
 
   return (
-    <div key={value}>
-      <input
-        checked={checked}
-        className={`c-cool-input__input ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
-        placeholder={label}
-        type='checkbox'
-        value={value}
-        disabled={disabled}
-        onChange={handleChange}
-      />
-      <label>{label}</label>
+    <div
+      key={value}
+      className={`c-cool-input__input c-cool-input--no-border ${disabled && 'c-cool-input--disabled'} ${error && 'c-cool-input--error'}`}
+    >
+      <label className='c-cool-input__checkbox-label'>
+        <input
+          className='c-cool-input__checkbox'
+          checked={checked}
+          type='checkbox'
+          value={value}
+          disabled={disabled}
+          onChange={handleChange}
+        />
+      {label}</label>
     </div>
   )
 }
@@ -91,7 +99,7 @@ const checkboxOption = (option, input, disabled, error) => {
 // Select Option
 const selectOption = option => {
   const { label, value } = optionToValue(option)
-  return <option key={value} value={value}>{label}</option>
+  return <option className='c-cool-input__input' key={value} value={value}>{label}</option>
 }
 
 const optionToValue = option => {

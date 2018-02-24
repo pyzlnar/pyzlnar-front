@@ -86,7 +86,7 @@ let ProjectForm = props => {
       />
 
       {error && <strong>{error}</strong>}
-      <button type="submit" className={blocked || 'btn btn--warning'} disabled={blocked}>
+      <button type="submit" className={blocked || 'c-btn c-btn--warning'} disabled={blocked}>
         Submit
       </button>
     </form>
