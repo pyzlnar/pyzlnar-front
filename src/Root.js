@@ -23,6 +23,7 @@ import {
   Admin,
   AdminProjectList,
   AdminProjectNew,
+  AdminProjectShow,
   AdminProjectEdit
 } from './components/admin'
 
@@ -64,7 +65,7 @@ class Routes extends React.Component {
         <Route component={ Admin }            path='/admin' />
         <Route component={ AdminProjectList } path='/admin/projects' />
         <Route component={ AdminProjectNew }  path='/admin/projects/new' />
-        <Route component={ AdminProjectList } path='/admin/projects/:code' />
+        <Route component={ AdminProjectShow } path='/admin/projects/:code' />
         <Route component={ AdminProjectEdit } path='/admin/projects/:code/edit' />
         <Route component={ Admin }            path='/admin/sites' />
       </Route>
