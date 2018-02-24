@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form'
 import * as helper from '../../src/api/ApiHelper'
 import {
   authenticate,
+  authorize,
   loggedInRedirect,
   loggedOutRedirect,
   getMe,
@@ -43,6 +44,39 @@ describe('Api: auth', () => {
         const getState = () => ({ auth: { loggedIn: false } })
         f(dispatch, getState)
         expect(dispatch).calledWith(push(loggedOutRedirect))
+      })
+    })
+  })
+
+  describe('authorize()', () => {
+    it('returns a function', () => {
+      expect(authorize()).to.be.a('function')
+    })
+
+    describe('returned function', () => {
+      let f, dispatch
+
+      beforeEach(() => {
+        f        = authorize()
+        dispatch = sinon.spy()
+      })
+
+      it('does nothing if user is loggedIn and has roles', () => {
+        const getState = () => ({ auth: { loggedIn: true, user: { role: true } } })
+        f(dispatch, getState)
+        expect(dispatch).not.called
+      })
+
+      it('redirects if user is not loggedIn', () => {
+        const getState = () => ({ auth: { loggedIn: false } })
+        f(dispatch, getState)
+        expect(dispatch).calledWith(push(loggedOutRedirect))
+      })
+
+      it('redirects if user has no role', () => {
+        const getState = () => ({ auth: { loggedIn: true, user: {} } })
+        f(dispatch, getState)
+        expect(dispatch).calledWith(push(loggedInRedirect))
       })
     })
   })
@@ -204,7 +238,7 @@ describe('Api: auth', () => {
         expect(dispatch).calledWith(loginSuccess(json))
       })
 
-      it('calls needed dispatches when request fails with 422', () => {
+      it('calls needed dispatches when the request fails', () => {
         const result = { response: 'body', status: 422, json: 'myerrors' }
         request.rejects(result)
         const r = f(dispatch)
@@ -212,16 +246,6 @@ describe('Api: auth', () => {
         expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
         expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
         expect(r.rejectValue.errors).to.eq('myerrors')
-      })
-
-      it('calls needed dispatches when request fails with another error', () => {
-        const result = { response: 'body', status: 503, json: 'myerrors' }
-        request.rejects(result)
-        const r = f(dispatch)
-
-        expect(request).calledWith('/api/me', { method: 'PATCH', body: params })
-        expect(r.rejectValue).to.be.an.instanceOf(SubmissionError)
-        expect(r.rejectValue.errors).to.not.eq('myerrors')
       })
     })
   })

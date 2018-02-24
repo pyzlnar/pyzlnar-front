@@ -5,7 +5,8 @@ import {
   fetchError,
   toggleFold,
   setFeatured,
-  dismissFeatured
+  dismissFeatured,
+  resetProjects,
 } from '../../src/action-creators/projects'
 
 describe('ActionCreator: projects', () => {
@@ -62,6 +63,15 @@ describe('ActionCreator: projects', () => {
     it(`returns ${types.dismissFeatured} action`, () => {
       const expected = { type: types.dismissFeatured }
       const result = dismissFeatured()
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('resetProjects()', () => {
+    it(`returns ${types.reset} action`, () => {
+      const expected = { type: types.reset }
+      const result = resetProjects()
 
       expect(result).to.deep.equal(expected)
     })

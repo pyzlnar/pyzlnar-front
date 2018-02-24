@@ -2,6 +2,29 @@
   @include palette-light;
   margin: 10px 0;
 
+  &__button {
+    @include palette-light;
+
+    &:hover {
+      @include palette-light-shade;
+    }
+  }
+
+  &__checkbox {
+    height: 13px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    width: 13px;
+
+    &-label {
+      display: block;
+      padding-left: 15px;
+      text-indent: -15px;
+      text-transform: capitalize;
+    }
+  }
+
   &__input {
     background: transparent;
     border: 0;
@@ -12,14 +35,6 @@
     &:focus {
       border-bottom-color: $tertiary-color;
       outline-width: 0;
-    }
-  }
-
-  &__button {
-    @include palette-light;
-
-    &:hover {
-      @include palette-light-shade;
     }
   }
 
@@ -41,5 +56,9 @@
     &::placeholder {
       color: $red-dark;
     }
+  }
+
+  &--no-border {
+    border: 0;
   }
 }

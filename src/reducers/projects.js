@@ -22,6 +22,8 @@ export default (state = initialState, action = {}) => {
       return {...state, featured: { dismissed: true } }
     case types.toggleFold:
       return toggleFold(state, action)
+    case types.reset:
+      return initialState
     default:
       return state
   }

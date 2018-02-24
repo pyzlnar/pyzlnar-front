@@ -3,6 +3,7 @@ import deepMerge from 'deepmerge'
 import fetchMock from 'fetch-mock'
 import {
   defaultOptions,
+  formatError,
   request
 } from '../../src/api/ApiHelper'
 
@@ -89,6 +90,36 @@ describe('ApiHelper', () => {
         expect(result.json).to.deep.equal({})
         done()
       })
+    })
+  })
+
+  describe('formatError(result)', () => {
+    it('returns the proper error with status 401', () => {
+      const result   = { status: 401 }
+      const expected = { _error: 'Your session has expired!' }
+
+      expect(formatError(result)).to.deep.equal(expected)
+    })
+
+    it('returns the proper error with status 403', () => {
+      const result   = { status: 403 }
+      const expected = { _error: `You're not authorized to complete this request!` }
+
+      expect(formatError(result)).to.deep.equal(expected)
+    })
+
+    it('returns the proper error with status 422', () => {
+      const result   = { status: 422, json: { errors: 'several' } }
+      const expected = { errors: 'several' }
+
+      expect(formatError(result)).to.deep.equal(expected)
+    })
+
+    it('returns the proper error with status 500', () => {
+      const result   = { status: 500 }
+      const expected = { _error: 'There was an issue!' }
+
+      expect(formatError(result)).to.deep.equal(expected)
     })
   })
 

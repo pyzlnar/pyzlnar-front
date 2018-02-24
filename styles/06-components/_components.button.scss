@@ -1,0 +1,42 @@
+.c-btn {
+  @include clickable;
+  background: $white;
+  border: 1px solid $black;
+  color: $black;
+  padding: 2px 3px;
+
+  &:focus {
+    outline-width: 0;
+  }
+
+  &:hover {
+    background: $grey-color;
+  }
+
+  &--info {
+    background: $blue;
+    border-color: $blue-dark;
+
+    &:hover {
+      background: $blue-dark;
+    }
+  }
+
+  &--warning {
+    background: $orange;
+    border-color: $orange-dark;
+
+    &:hover {
+      background: $orange-dark;
+    }
+  }
+
+  &--danger {
+    background: $red;
+    border-color: $red-dark;
+
+    &:hover {
+      background: $red-dark;
+    }
+  }
+}

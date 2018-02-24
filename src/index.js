@@ -8,7 +8,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'
 import 'font-awesome/css/font-awesome.css'
 
 // Local Imports

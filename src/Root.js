@@ -4,7 +4,7 @@ import { bindActionCreators }        from 'redux'
 import { connect }                   from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 
-import { authenticate } from './api/auth'
+import { authenticate, authorize } from './api/auth'
 
 // Pages
 import { App }      from './components/App'
@@ -17,6 +17,15 @@ import { Me }       from './components/Me'
 import { MeEdit }   from './components/MeEdit'
 import { Rem }      from './components/Rem'
 import { NotFound } from './components/NotFound'
+
+// Admin Pages
+import {
+  Admin,
+  AdminProjectList,
+  AdminProjectNew,
+  AdminProjectShow,
+  AdminProjectEdit
+} from './components/admin'
 
 class Routes extends React.Component {
   render() {
@@ -32,7 +41,8 @@ class Routes extends React.Component {
           <Route component={ Projects } path='/projects(/:project)' />
           <Route component={ Rem }      path='/rem'                 />
           { this.renderAuthenticatedRoutes() }
-          <Route component={ NotFound } path='*'                    />
+          { this.renderAuthorizedRoutes() }
+          <Route component={ NotFound } path='*' />
         </Route>
       </Router>
     )
@@ -47,11 +57,26 @@ class Routes extends React.Component {
       </Route>
     )
   }
+
+  renderAuthorizedRoutes() {
+    const { authorize } = this.props
+    return (
+      <Route onEnter={authorize}>
+        <Route component={ Admin }            path='/admin' />
+        <Route component={ AdminProjectList } path='/admin/projects' />
+        <Route component={ AdminProjectNew }  path='/admin/projects/new' />
+        <Route component={ AdminProjectShow } path='/admin/projects/:code' />
+        <Route component={ AdminProjectEdit } path='/admin/projects/:code/edit' />
+        <Route component={ Admin }            path='/admin/sites' />
+      </Route>
+    )
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    authenticate
+    authenticate,
+    authorize
   }, dispatch)
 }
 
