@@ -82,9 +82,9 @@ export const fetchProjects = selected => (
   }
 )
 
-export const reloadProjects = selected => (
+export const reloadProjects = () => (
   (dispatch, getState) => {
     dispatch(resetProjects())
-    fetchProjects(selected)(dispatch, getState)
+    fetchProjects()(dispatch, getState)
   }
 )

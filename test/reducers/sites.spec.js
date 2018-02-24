@@ -165,6 +165,26 @@ describe('Reducer: sites', () => {
     })
   })
 
+  describe(`when receiving action ${types.reset}`, () => {
+    it('resets the state to the initial state', () => {
+      const action = { type: types.reset }
+      const state  = { foldedSites: { mysite: true, other: true } }
+      deepFreeze(state)
+
+      const expected  = {
+        isFetching:  false,
+        fetchFailed: false,
+        sites:       [],
+        display:     'grid',
+        featured:    { dismissed: false }
+      }
+
+      const result = reducer(state, action)
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
   describe(`when receiving an unknown action`, () => {
     it('returns the state as received', () => {
       const action = { type: 'WTF' }
