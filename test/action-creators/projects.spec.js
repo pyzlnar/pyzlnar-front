@@ -6,7 +6,7 @@ import {
   toggleFold,
   setFeatured,
   dismissFeatured,
-  resetProjects,
+  resetProjects
 } from '../../src/action-creators/projects'
 
 describe('ActionCreator: projects', () => {

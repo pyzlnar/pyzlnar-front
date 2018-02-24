@@ -7,7 +7,8 @@ export const types = {
   setFeatured:     'sites/SET_FEATURED',
   dismissFeatured: 'sites/DISMISS_FEATURED',
   toggleDisplay:   'sites/TOGGLE_DISPLAY',
-  toggleFold:      'sites/TOGGLE_FOLD'
+  toggleFold:      'sites/TOGGLE_FOLD',
+  reset:           'sites/RESET'
 }
 
 export const fetchingSites = () => {
@@ -36,4 +37,8 @@ export const toggleDisplay = display => {
 
 export const toggleFold = code => {
   return { type: types.toggleFold, code }
+}
+
+export const resetSites = () => {
+  return { type: types.reset }
 }

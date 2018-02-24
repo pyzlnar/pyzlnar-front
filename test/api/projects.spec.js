@@ -1,6 +1,6 @@
 import { push }            from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
-import * as helper       from '../../src/api/ApiHelper'
+import * as helper from '../../src/api/ApiHelper'
 import {
   newProject,
   createProject,
@@ -218,4 +218,3 @@ describe('Api: projects', () => {
     })
   })
 })
-

@@ -6,7 +6,8 @@ import {
   setFeatured,
   dismissFeatured,
   toggleDisplay,
-  toggleFold
+  toggleFold,
+  resetSites
 } from '../../src/action-creators/sites'
 
 describe('ActionCreator: sites', () => {
@@ -72,6 +73,15 @@ describe('ActionCreator: sites', () => {
     it(`returns ${types.toggleFold} action with the received argument`, () => {
       const expected = { type: types.toggleFold, code: 'fold' }
       const result = toggleFold('fold')
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('resetSites()', () => {
+    it(`returns ${types.reset} action`, () => {
+      const expected = { type: types.reset }
+      const result = resetSites()
 
       expect(result).to.deep.equal(expected)
     })

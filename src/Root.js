@@ -24,7 +24,11 @@ import {
   AdminProjectList,
   AdminProjectNew,
   AdminProjectShow,
-  AdminProjectEdit
+  AdminProjectEdit,
+  AdminSiteList,
+  AdminSiteNew,
+  AdminSiteShow,
+  AdminSiteEdit
 } from './components/admin'
 
 class Routes extends React.Component {
@@ -62,12 +66,15 @@ class Routes extends React.Component {
     const { authorize } = this.props
     return (
       <Route onEnter={authorize}>
-        <Route component={ Admin }            path='/admin' />
-        <Route component={ AdminProjectList } path='/admin/projects' />
-        <Route component={ AdminProjectNew }  path='/admin/projects/new' />
-        <Route component={ AdminProjectShow } path='/admin/projects/:code' />
+        <Route component={ Admin }            path='/admin'                     />
+        <Route component={ AdminProjectList } path='/admin/projects'            />
+        <Route component={ AdminProjectNew }  path='/admin/projects/new'        />
+        <Route component={ AdminProjectShow } path='/admin/projects/:code'      />
         <Route component={ AdminProjectEdit } path='/admin/projects/:code/edit' />
-        <Route component={ Admin }            path='/admin/sites' />
+        <Route component={ AdminSiteList }    path='/admin/sites'               />
+        <Route component={ AdminSiteNew }     path='/admin/sites/new'           />
+        <Route component={ AdminSiteShow }    path='/admin/sites/:code'         />
+        <Route component={ AdminSiteEdit }    path='/admin/sites/:code/edit'    />
       </Route>
     )
   }
