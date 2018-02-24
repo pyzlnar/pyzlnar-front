@@ -28,8 +28,8 @@ class AdminTable extends React.Component {
     const { path, push, reload } = this.props
     return (
       <div className='o-layout__item u-margin-bottom-small text--right'>
-        <a className='c-btn c-btn--info'    onClick={() => reload() }> Refresh </a>
-        <a className='c-btn c-btn--warning' onClick={() => push(`${path}/new`)}> Add New </a>
+        <a className='c-btn c-btn--info'    onClick={() => reload() }>Refresh</a>
+        <a className='c-btn c-btn--warning' onClick={() => push(`${path}/new`)}>Add New</a>
       </div>
     )
   }

@@ -9,7 +9,7 @@ import {
   textareaField
 } from './inputs'
 
-let ProjectForm = props => {
+let SiteForm = props => {
   const { handleSubmit, pristine, submitting, error } = props
   const blocked = pristine || submitting
   return (
@@ -18,7 +18,7 @@ let ProjectForm = props => {
       <Field
         component={inputField}
         label='Code'
-        name='project[code]'
+        name='site[code]'
         placeholder='code'
         type='text'
       />
@@ -26,31 +26,15 @@ let ProjectForm = props => {
       <Field
         component={inputField}
         label='Name'
-        name='project[name]'
+        name='site[name]'
         placeholder='name'
         type='text'
       />
 
       <Field
         component={inputField}
-        label='Start Date'
-        name='project[start_date]'
-        placeholder='start_date'
-        type='date'
-      />
-
-      <Field
-        component={inputField}
-        label='End Date'
-        name='project[end_date]'
-        placeholder='end_date'
-        type='date'
-      />
-
-      <Field
-        component={inputField}
         label='Url'
-        name='project[url]'
+        name='site[url]'
         placeholder='url'
         type='text'
       />
@@ -58,31 +42,23 @@ let ProjectForm = props => {
       <Field
         component={selectField}
         label='Status'
-        name='project[status]'
-        options={['active', 'stalled', 'dead']}
+        name='site[status]'
+        options={['active', 'inactive']}
         placeholder='status'
       />
 
       <Field
         component={checkboxField}
         label='Topics'
-        name='project[topics]'
+        name='site[topics]'
         options={['anime', 'gaming', 'programming', 'personal']}
         placeholder='topics'
       />
 
       <Field
-        component={inputField}
-        label='Short'
-        name='project[short]'
-        placeholder='short'
-        type='text'
-      />
-
-      <Field
         component={textareaField}
         label='Description'
-        name='project[description]'
+        name='site[description]'
         placeholder='description'
       />
 
@@ -94,9 +70,9 @@ let ProjectForm = props => {
 }
 
 const mapStateToProps = (state, ownState) => (
-  { initialValues: { project: ownState.project } }
+  { initialValues: { site: ownState.site } }
 )
 
-ProjectForm = reduxForm({ form: 'project' })(ProjectForm)
-ProjectForm = connect(mapStateToProps)(ProjectForm)
-export default ProjectForm
+SiteForm = reduxForm({ form: 'site' })(SiteForm)
+SiteForm = connect(mapStateToProps)(SiteForm)
+export default SiteForm

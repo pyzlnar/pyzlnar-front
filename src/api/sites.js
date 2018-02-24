@@ -81,7 +81,7 @@ export const fetchSites = selected => {
 
 export const reloadSites = () => (
   (dispatch, getState) => {
-    dispatch(resetProjects())
+    dispatch(resetSites())
     fetchSites()(dispatch, getState)
   }
 )
