@@ -1,11 +1,22 @@
 body {
   @include palette-light;
+  font-family: sans-serif;
 }
 
 a {
-  text-decoration: none;
   color: $white;
+  text-decoration: none;
+
   &:hover {
     color: $secondary-color;
   }
+}
+
+input {
+  border-radius: 0;
+  font-family: sans-serif;
+}
+
+input:disabled {
+  opacity: 1;
 }

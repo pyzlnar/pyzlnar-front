@@ -5,7 +5,8 @@ import {
   fetchError,
   toggleFold,
   setFeatured,
-  dismissFeatured
+  dismissFeatured,
+  resetProjects
 } from '../../src/action-creators/projects'
 
 describe('ActionCreator: projects', () => {
@@ -18,7 +19,7 @@ describe('ActionCreator: projects', () => {
     })
   })
 
-  describe('fetchSuccess(json)', () => {
+  describe('fetchSuccess(projects)', () => {
     it(`returns ${types.fetched} action with the received argument`, () => {
       const arg = 'something'
       const expected = {
@@ -31,10 +32,10 @@ describe('ActionCreator: projects', () => {
     })
   })
 
-  describe('fetchError(response)', () => {
+  describe('fetchError()', () => {
     it(`returns ${types.fetchError} action`, () => {
-      const expected = { type: types.fetchError, response: 'irrelevant' }
-      const result = fetchError('irrelevant')
+      const expected = { type: types.fetchError }
+      const result = fetchError()
 
       expect(result).to.deep.equal(expected)
     })
@@ -50,7 +51,7 @@ describe('ActionCreator: projects', () => {
   })
 
   describe('setFeatured(selected)', () => {
-    it(`return ${types.setFeatured} action`, () => {
+    it(`returns ${types.setFeatured} action`, () => {
       const expected = { type: types.setFeatured, selected: 'this' }
       const result = setFeatured('this')
 
@@ -59,9 +60,18 @@ describe('ActionCreator: projects', () => {
   })
 
   describe('dismissFeatured()', () => {
-    it(`return ${types.dismissFeatured} action`, () => {
+    it(`returns ${types.dismissFeatured} action`, () => {
       const expected = { type: types.dismissFeatured }
       const result = dismissFeatured()
+
+      expect(result).to.deep.equal(expected)
+    })
+  })
+
+  describe('resetProjects()', () => {
+    it(`returns ${types.reset} action`, () => {
+      const expected = { type: types.reset }
+      const result = resetProjects()
 
       expect(result).to.deep.equal(expected)
     })

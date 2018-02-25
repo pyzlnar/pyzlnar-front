@@ -1,7 +1,16 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { getMe } from '../api/auth'
+
 import { Header } from './Header'
 
-export class App extends React.Component {
+class AppP extends React.Component {
+  componentDidMount() {
+    this.props.getMe()
+  }
+
   render() {
     return (
       <div>
@@ -15,3 +24,9 @@ export class App extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getMe }, dispatch)
+}
+
+export const App = connect(null, mapDispatchToProps)(AppP)

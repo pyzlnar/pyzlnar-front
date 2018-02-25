@@ -1,14 +1,13 @@
 const webpack = require('webpack');
 
 const webpackConfig = {
-  colors: true,
   devtool: 'inline-source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|jspm_packages)/,
-        loader: 'babel',
+        loader: 'babel-loader',
       }
     ],
     noParse: [
@@ -25,6 +24,15 @@ const webpackConfig = {
   }
 }
 
+let browser;
+switch(process.env.KARMA_BROWSER) {
+  case 'phantomjs':
+    browser = ['PhantomJS']
+    break;
+  default:
+    browser = ['Chrome']
+}
+
 module.exports = (config) => {
   config.set({
     basePath: './',
@@ -32,6 +40,9 @@ module.exports = (config) => {
     frameworks: ['mocha', 'chai-sinon'],
     keepAlive: true,
     reporters: ['mocha'],
+    mochaReporter: {
+      showDiff: true
+    },
     colors: true,
     preprocessors: {
       'src/**/*.js':  ['webpack', 'sourcemap'],
@@ -43,7 +54,7 @@ module.exports = (config) => {
       '/test/': './test/',
       '/node_modules/': './node_modules/'
     },
-    browsers: ['PhantomJS'],
+    browsers: browser,
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
       'node_modules/sinon-stub-promise/index.js',

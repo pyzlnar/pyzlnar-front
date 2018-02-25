@@ -7,8 +7,6 @@
  * Global...............Project-wide variables and settings.
  *
  * TOOLS
- * Rem..................Tools for converting pixel inputs into their rem
- *                      equivalents.
  * Font-size............A mixin which guarantees baseline-friendly line-heights.
  * Clearfix.............Micro clearfix mixin.
  * Hidden...............Mixin for hiding elements.
@@ -50,7 +48,7 @@
  * Clearfix.............Bind our clearfix onto a utility class.
  * Widths...............Simple width helper classes.
  * Headings.............Reassigning our heading styles to helper classes.
- * Spacing..............Nudge bits of the DOM around with these spacing
+ * Spacings..............Nudge bits of the DOM around with these spacings
  *                      classes.
  * Print................Reset-like styles taken from the HTML5 Boilerplate.
  * Hide.................Helper classes to hide content
@@ -63,7 +61,6 @@
 @import "01-settings/settings.media-queries";
 
 // TOOLS
-@import "~inuitcss/tools/tools.rem";
 @import "~inuitcss/tools/tools.font-size";
 @import "~inuitcss/tools/tools.clearfix";
 @import "~inuitcss/tools/tools.hidden";
@@ -108,8 +105,11 @@
 // COMPONENTS
 //
 // Build and include your project’s UI Compoments here.
+@import "06-components/components.button";
 @import "06-components/components.carrousel";
 @import "06-components/components.coolbox";
+@import "06-components/components.cool-input";
+@import "06-components/components.google";
 @import "06-components/components.header";
 @import "06-components/components.navbar";
 @import "06-components/components.sites-list";
@@ -121,7 +121,7 @@
 $inuit-offsets: true;
 @import "~inuitcss/utilities/utilities.widths";
 @import "~inuitcss/utilities/utilities.headings";
-@import "~inuitcss/utilities/utilities.spacing";
+@import "~inuitcss/utilities/utilities.spacings";
 @import "~inuitcss/utilities/utilities.print";
 @import "~inuitcss/utilities/utilities.hide";
 @import "07-utilities/utilities.clickable";

@@ -60,7 +60,7 @@ class SitesP extends React.Component {
     if (this.shouldRenderSites()) {
       return this.renderSites()
     } else if (this.shouldRenderError()) {
-      return <NetworkError retryAction={ fetchSites }/>
+      return <NetworkError retryAction={ this.props.fetchSites }/>
     } else {
       return <Loading />
     }

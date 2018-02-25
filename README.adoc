@@ -31,7 +31,7 @@ You will need the following installed to be able to run the front end:
 * git +
   Should go without saying. Get yourself git
   link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[installed].
-* node.js v5.4.1+ +
+* node.js v6.10.0+ +
   I recommend you install it via link:https://github.com/creationix/nvm[nvm].
 * yarn +
   Installation instructions can be found
@@ -139,7 +139,6 @@ image:https://i1.wp.com/pyzlnar.files.wordpress.com/2012/06/todo.jpg[Todo,200]
 
 Small list of features that may be coming in the future.
 
-* Update to Webpack 2
 * Better responsive design
 * Better way to load static content (Eg. text)
 

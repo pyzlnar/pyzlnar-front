@@ -1,17 +1,45 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { onItemClick, onMenuMouseEnter, onMenuMouseLeave } from '../action-creators/navbar'
+import { push } from 'react-router-redux'
 
-class NavbarP extends React.Component {
+import {
+  getUserItems,
+  initialState,
+  toggleHover
+} from '../action-creators/navbar'
+
+export class NavbarP extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = initialState
+  }
+
   render() {
-    const { items } = this.props
+    const { items } = this.state
+    const { loggedIn } = this.props
     return(
       <ul className="o-list-inline c-navbar">
         <div className="c-navbar__container">
           { items.map(item => this.renderItems(item)) }
+          { loggedIn && this.renderUserMenu() }
         </div>
       </ul>
+    )
+  }
+
+  renderUserMenu() {
+    const { showUserMenu } = this.state
+    const { user }         = this.props
+    const { thumbnail }    = user
+    return (
+      <div
+        onMouseEnter={()=> this.setState({showUserMenu: true}) }
+        onMouseLeave={()=> this.setState({showUserMenu: false}) }
+        className='o-list-inline__item c-navbar__user c-navbar__item--clickable c-navbar__item--menu'
+      >
+        <img src={thumbnail} className='c-navbar__user__thumb'/>
+        { showUserMenu && this.renderMenuDropdown(getUserItems(user), false) }
+      </div>
     )
   }
 
@@ -24,12 +52,11 @@ class NavbarP extends React.Component {
   }
 
   renderMenu(menu){
-    const { onMenuMouseEnter, onMenuMouseLeave } = this.props
     return (
       <li
         key={menu.name}
-        onMouseEnter={()=> onMenuMouseEnter(menu.name)}
-        onMouseLeave={()=> onMenuMouseLeave(menu.name)}
+        onMouseEnter={()=> this.setState(prevState => toggleHover(prevState, menu.name))}
+        onMouseLeave={()=> this.setState(prevState => toggleHover(prevState, menu.name))}
         className="o-list-inline__item c-navbar__item c-navbar__item--menu"
       >
         <div>{menu.name}</div>
@@ -38,20 +65,29 @@ class NavbarP extends React.Component {
     )
   }
 
-  renderMenuDropdown(items) {
+  renderMenuDropdown(items, alignLeft = true) {
+    const align = alignLeft ? '' : 'c-navbar__dropdown--right'
+    const className = `o-list-bare c-navbar__dropdown ${align}`
     return (
-      <ul className="o-list-bare c-navbar__dropdown">
+      <ul className={className}>
         {items.map(item => this.renderItem(item, 'c-navbar__dropdown__item'))}
       </ul>
     )
   }
 
   renderItem(item, className='o-list-inline__item c-navbar__item c-navbar__item--clickable'){
-    const { onItemClick } = this.props
+    const { dispatch } = this.props
+    let action = null
+    if (item.path) {
+      action = () => dispatch(push(item.path))
+    } else if (item.action) {
+      action = () => item.action()(dispatch)
+    }
+
     return (
       <li
         key={item.name}
-        onClick={() => onItemClick(item.path)}
+        onClick={action}
         className={className}
       >
       {item.name}
@@ -60,16 +96,8 @@ class NavbarP extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { items: state.navbar }
+const mapStateToProps = state => {
+  return { ...state.auth }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    onItemClick,
-    onMenuMouseEnter,
-    onMenuMouseLeave
-  }, dispatch)
-}
-
-export const Navbar = connect(mapStateToProps, mapDispatchToProps)(NavbarP)
+export const Navbar = connect(mapStateToProps)(NavbarP)

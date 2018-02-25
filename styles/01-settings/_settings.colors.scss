@@ -1,4 +1,4 @@
-/***** Primary Colors *****/
+// ***** Primary Colors ***** //
 $primary-color: #025777 !default;
 $primary-light-color: #136888 !default;
 $primary-dark-color: #014666 !default;
@@ -11,8 +11,18 @@ $tertiary-color: #75d3ee !default;
 $tertiary-light-color: #86e4ff !default;
 $tertiary-dark-color: #64c2dd !default;
 
-$grey-color: $tertiary-color !default;
-$grey-light-color: #eeeeee !default;
+$grey-color: #9f9f9f !default;
+$grey-light-color: #eee !default;
 $grey-dark-color: #4f4f4f !default;
-$black: black !default;
-$white: white !default;
+
+$red: #e00 !default;
+$red-dark: #500 !default;
+
+$blue: #3cd5ff !default;
+$blue-dark: #1b87a5 !default;
+
+$orange: #ffa500 !default;
+$orange-dark: #b77703 !default;
+
+$black: #000 !default;
+$white: #fff !default;

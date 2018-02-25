@@ -7,7 +7,7 @@ import {
   setFeatured,
   dismissFeatured
 } from '../action-creators/projects'
-import { fetchProjects }           from '../api/projects'
+import { fetchProjects } from '../api/projects'
 
 import { CoolBox }      from './CoolBox'
 import { Dismissable }  from './Dismissable'
@@ -21,7 +21,7 @@ class ProjectsP extends React.Component {
     this.props.setFeatured(this.props.selected)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchProjects(this.props.selected)
   }
 
@@ -61,7 +61,7 @@ class ProjectsP extends React.Component {
     if (this.shouldRenderProjects()) {
       return this.renderProjects()
     } else if (this.shouldRenderError()) {
-      return <NetworkError retryAction={ fetchProjects } />
+      return <NetworkError retryAction={ this.props.fetchProjects } />
     } else {
       return <Loading />
     }
