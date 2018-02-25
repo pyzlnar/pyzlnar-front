@@ -42,7 +42,9 @@ export const gmailLogin = response => {
     dispatch(loggingIn())
     request('/api/auth/login', getGmailOptions(id_token))
       .then(result => {
-        dispatch(loginSuccess(result.json))
+        const { json: { user, token } } = result
+        localStorage.setItem('token', token)
+        dispatch(loginSuccess(user))
         dispatch(push(loggedInRedirect))
       })
       .catch(() => dispatch(loginFailure()))
@@ -53,6 +55,7 @@ export const logOut = () => (
   dispatch => {
     request('/api/auth/logout', { method: 'DELETE' })
       .then(() => {
+        localStorage.removeItem('token')
         dispatch(enableLogin())
         dispatch(push(loggedOutRedirect))
       })

@@ -123,14 +123,28 @@ describe('ApiHelper', () => {
     })
   })
 
-  describe('defaultOptions()', () => {
-    it('returns the expected deafault options', () => {
+  describe('defaultOptions(options)', () => {
+    it('returns the expected default options when GET method', () => {
       const expected = {
         credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'content-type': 'application/json' }
       }
 
-      const result = defaultOptions()
+      const result = defaultOptions({ method: 'GET' })
+      expect(result).to.deep.equal(expected)
+    })
+
+    it('returns the expected default options when POST method', () => {
+      localStorage.setItem('token', 'csrftoken')
+      const expected = {
+        credentials: 'same-origin',
+        headers: {
+          'content-type': 'application/json',
+          'x-csrf-token': 'csrftoken'
+        }
+      }
+
+      const result = defaultOptions({ method: 'POST' })
       expect(result).to.deep.equal(expected)
     })
   })

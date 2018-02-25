@@ -107,15 +107,17 @@ describe('Api: auth', () => {
       })
 
       it('calls needed dispatches when request succeeds', () => {
-        const json = { response: 'body' }
+        const user = { name: 'someone' }
+        const json = { user, token: 'csrftoken' }
 
         request.resolves({ json })
         f(dispatch)
 
         expect(dispatch).calledWith(loggingIn())
         expect(request).calledWith('/api/auth/login', getGmailOptions('token'))
-        expect(dispatch).calledWith(loginSuccess(json))
+        expect(dispatch).calledWith(loginSuccess(user))
         expect(dispatch).calledWith(push(loggedInRedirect))
+        expect(localStorage.getItem('token')).to.equal('csrftoken')
       })
 
       it('calls needed dispatches when request fails', () => {
@@ -149,6 +151,7 @@ describe('Api: auth', () => {
 
       it('calls needed dispatches when request succeeds', () => {
         const json = { response: 'body' }
+        localStorage.setItem('token', 'myToken')
 
         request.resolves({ json })
         f(dispatch)
@@ -156,6 +159,7 @@ describe('Api: auth', () => {
         expect(request).calledWith('/api/auth/logout', { method: 'DELETE' })
         expect(dispatch).calledWith(enableLogin())
         expect(dispatch).calledWith(push(loggedOutRedirect))
+        expect(localStorage.getItem('token')).to.not.be
       })
 
       it('calls needed dispatches when request fails', () => {
