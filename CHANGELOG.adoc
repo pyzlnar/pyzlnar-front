@@ -9,6 +9,19 @@
 
 = Changelog
 
+== v1.1.0
+2018-02-24
+
+- :wrench: npm 6.10.0 upgrade
+- :wrench: webpack 2 upgrade
+- :wrench: Tests now use Headless Chrome
+- :dizzy: Promoted use of React state over Redux where necessary
+- :sparkles: Added login page
+- :sparkles: Added user navbar
+- :sparkles: Added logged user settings
+- :sparkles: Added admin projects pages
+- :sparkles: Added admin sites pages
+
 == v1.0.1
 2017-04-09
 
