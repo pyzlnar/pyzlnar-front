@@ -3,7 +3,7 @@ import deepMerge from 'deepmerge'
 import serialize from 'serialize-javascript'
 
 export const request = (path, opts = {}) => {
-  opts = deepMerge(defaultOptions(), opts)
+  opts = deepMerge(defaultOptions(opts), opts)
   if (opts.body) {
     // Disabled for now, will come back on a later version
     // deepEscapeHtml(opts.body)
@@ -41,11 +41,12 @@ export const formatError = result => {
 
 // Helpers
 
-export const defaultOptions = () => {
-  return {
-    credentials: 'same-origin',
-    headers: { 'Content-Type': 'application/json' }
+export const defaultOptions = opts => {
+  let headers = { 'content-type': 'application/json' }
+  if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(opts.method)) {
+    headers['x-csrf-token'] = localStorage.getItem('token')
   }
+  return { credentials: 'same-origin', headers }
 }
 
 const deepEscapeHtml = obj => {
